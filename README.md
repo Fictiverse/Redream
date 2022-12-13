@@ -41,8 +41,8 @@ Presets will start blinking
 - ![image](https://user-images.githubusercontent.com/111762798/207309847-1ef2322a-bee2-4c79-82bf-00f161f55746.png)   
 ```Click``` to save the current prompt into the selected slot number.
 
-Prompt:
-![image](https://user-images.githubusercontent.com/111762798/207310573-321321d8-d735-463b-8ec3-28a8bb53ffd8.png) ```Click``` to interrogate the last captured image
+Prompt:   
+- ![image](https://user-images.githubusercontent.com/111762798/207310573-321321d8-d735-463b-8ec3-28a8bb53ffd8.png) ```Click``` to interrogate the last captured image
 
 
 ## Contact

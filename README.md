@@ -11,7 +11,8 @@ example in your "webui-user.bat":
 set COMMANDLINE_ARGS=--api
 ```
 - [.NET 6.0 Framework](https://dotnet.microsoft.com/en-us/download/dotnet/6.0)
-- [Redream 1.0](https://github.com/Fictiverse/Redream/releases/download/1.0/Fictiverse_Redream_1.0.7z) Compiled execuable    
+- [Redream 1.0](https://github.com/Fictiverse/Redream/releases/download/1.0/Fictiverse_Redream_1.0.7z) Compiled execuable   
+```SHA-256``` : ```44f8af698164a0da4184aec17ec8c5505237b0bbf89b79904b4a745ad7137f91```   
 Or compile this ```c#``` repo with [Visual Studio](https://visualstudio.microsoft.com/en/downloads/)
 
 ## How to use

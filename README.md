@@ -16,6 +16,7 @@ Or compile this ```c#``` repo with [Visual Studio](https://visualstudio.microsof
 
 ![image](https://user-images.githubusercontent.com/111762798/207283950-3de127e8-575a-4012-98b9-73c9258f4fe7.png)
 
+- First, start **Automatic1111 stable-diffusion-webui** and wait until it is ready.
 - Start to press ![image](https://user-images.githubusercontent.com/111762798/207306165-315287c6-e337-46fa-9d80-19c4eb782226.png)   
 Place the ```Capture area``` where you want and lock the position with ```left click```.  
 

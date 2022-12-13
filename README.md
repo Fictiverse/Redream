@@ -5,6 +5,9 @@
 ## Requirement
 - Windows OS
 - [Automatic1111 stable-diffusion-webui](https://github.com/AUTOMATIC1111/stable-diffusion-webui)
+Make sure API is enabled
+To run web ui with --api commandline argument
+example in your "webui-user.bat": set COMMANDLINE_ARGS=--api
 - [.NET 6.0 Framework](https://dotnet.microsoft.com/en-us/download/dotnet/6.0)
 
 

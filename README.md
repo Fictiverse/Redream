@@ -44,5 +44,4 @@ Prompt:
 
 ## Contact
 
-[Discord](https://discord.gg/UYgRnhj8PR)
-[Twitter](https://twitter.com/Fictiverse)
+[Discord](https://discord.gg/UYgRnhj8PR) - [Twitter](https://twitter.com/Fictiverse)

@@ -1,4 +1,4 @@
-# Redream
+# Fictiverse : Redream
 
 (Kind of) Realtime Stable Diffusion from a screen area using [Automatic1111](https://github.com/AUTOMATIC1111/stable-diffusion-webui)'s API.
 

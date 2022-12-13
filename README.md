@@ -31,9 +31,19 @@ Changing options :
 - ![image](https://user-images.githubusercontent.com/111762798/207308818-78c084e5-f489-42c4-ab21-f2e7c56033b5.png) ```Click/MouseScroll``` to change the cfg scale
 
 Saving presets :
-- ![image](https://user-images.githubusercontent.com/111762798/207309228-04635108-dbd7-40af-8913-f6848a54d2be.png) ```Click``` to enable Fav mod   
-![image](https://user-images.githubusercontent.com/111762798/207309404-749e0a8d-0fde-40d8-892c-2ea928643cf8.png) Presets will start blinking
-![image](https://user-images.githubusercontent.com/111762798/207309847-1ef2322a-bee2-4c79-82bf-00f161f55746.png) ```Click``` to save the current prompt into the selected slot number.
+- ![image](https://user-images.githubusercontent.com/111762798/207309228-04635108-dbd7-40af-8913-f6848a54d2be.png)   
+```Click``` to enable Fav mod   
+- ![image](https://user-images.githubusercontent.com/111762798/207309404-749e0a8d-0fde-40d8-892c-2ea928643cf8.png)   
+Presets will start blinking
+- ![image](https://user-images.githubusercontent.com/111762798/207309847-1ef2322a-bee2-4c79-82bf-00f161f55746.png)   
+```Click``` to save the current prompt into the selected slot number.
+
+Prompt:
+![image](https://user-images.githubusercontent.com/111762798/207310573-321321d8-d735-463b-8ec3-28a8bb53ffd8.png) ```Click``` to interrogate the last captured image
+
+![Discord Shield](https://discordapp.com/api/guilds/[SERVER ID]/widget.png?style=shield)
 
 
 
+[Discord](https://discord.gg/UYgRnhj8PR)
+[Twitter](https://twitter.com/Fictiverse)

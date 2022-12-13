@@ -41,9 +41,8 @@ Presets will start blinking
 Prompt:
 ![image](https://user-images.githubusercontent.com/111762798/207310573-321321d8-d735-463b-8ec3-28a8bb53ffd8.png) ```Click``` to interrogate the last captured image
 
-![Discord Shield](https://discordapp.com/api/guilds/[SERVER ID]/widget.png?style=shield)
 
-
+## Contact
 
 [Discord](https://discord.gg/UYgRnhj8PR)
 [Twitter](https://twitter.com/Fictiverse)

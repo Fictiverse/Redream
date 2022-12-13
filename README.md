@@ -33,6 +33,7 @@ Changing options :
 Saving presets :
 - ![image](https://user-images.githubusercontent.com/111762798/207309228-04635108-dbd7-40af-8913-f6848a54d2be.png) ```Click``` to enable Fav mod   
 ![image](https://user-images.githubusercontent.com/111762798/207309404-749e0a8d-0fde-40d8-892c-2ea928643cf8.png) Presets will start blinking
+![image](https://user-images.githubusercontent.com/111762798/207309847-1ef2322a-bee2-4c79-82bf-00f161f55746.png) ```Click``` to save the current prompt into the selected slot number.
 
 
 

@@ -5,7 +5,7 @@
 ## Requirement
 - Windows OS
 - [Automatic1111 stable-diffusion-webui](https://github.com/AUTOMATIC1111/stable-diffusion-webui)   
-Make sure```--xformers``` and ```--api``` commandline argument are set in your "webui-user.bat":   
+Make sure```--xformers``` and ```--api``` commandline arguments are set in your "webui-user.bat":   
 ```set COMMANDLINE_ARGS=--xformers --api``` 
 - [.NET 6.0 Framework](https://dotnet.microsoft.com/en-us/download/dotnet/6.0)
 - [Redream 1.0](https://github.com/Fictiverse/Redream/releases/download/1.0/Fictiverse_Redream_1.0.7z) Compiled execuable   

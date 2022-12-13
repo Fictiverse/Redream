@@ -177,15 +177,18 @@ namespace Redream
 
             var automaticJson = new AutomaticJson
             {
-                init_images = init_images,
-                denoising_strength = strength.ToString("0.00").Replace(",","."),
-                steps = steps.ToString(),
                 prompt = textBoxPrompt.Text,
                 negative_prompt = negativePrompt,
+
+                init_images = init_images,
+                denoising_strength = strength.ToString("0.00").Replace(",","."),
+
                 seed = seed.ToString(),
+                steps = steps.ToString(),
+                cfg_scale = cfgScale.ToString("0.00").Replace(",", "."),
+
                 width = formSC.Width.ToString(),
                 height = formSC.Height.ToString(),
-                //sampler_index = dataSamplers.SelectedRows[0].Cells[0].Value.ToString()
             };
 
             string a = "{\"prompt\": \"maltese puppy\",\"steps\": 5}";

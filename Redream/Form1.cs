@@ -643,14 +643,6 @@ namespace Redream
 
         }
 
-        private void buttonDiscord_MouseClick(object sender, MouseEventArgs e)
-        {
-            if (e.Button == MouseButtons.Right )
-            {
-                MessageBox.Show("dd");
-            }
-        }
-
 
         public Point downPoint = Point.Empty;
         private void buttonResize_MouseDown(object sender, MouseEventArgs e)
@@ -670,6 +662,15 @@ namespace Redream
         {
             if (e.Button == MouseButtons.Left)
                 downPoint = Point.Empty;
+        }
+
+        private void buttonDiscord_Click(object sender, EventArgs e)
+        {
+            Process pr = new Process();
+            pr.StartInfo.UseShellExecute = true;
+            pr.StartInfo.FileName = "https://discord.gg/faje9TJM";
+            pr.Start();
+
         }
     }
 }

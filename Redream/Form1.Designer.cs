@@ -591,7 +591,7 @@
             this.buttonDiscord.TabIndex = 109;
             this.toolTip1.SetToolTip(this.buttonDiscord, "Start / Stop");
             this.buttonDiscord.UseVisualStyleBackColor = false;
-            this.buttonDiscord.MouseClick += new System.Windows.Forms.MouseEventHandler(this.buttonDiscord_MouseClick);
+            this.buttonDiscord.Click += new System.EventHandler(this.buttonDiscord_Click);
             // 
             // buttonFav
             // 

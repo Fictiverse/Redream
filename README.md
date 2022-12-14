@@ -13,6 +13,7 @@ Make sure```--xformers``` and ```--api``` commandline arguments are set in your 
 Or compile this ```c#``` repo with [Visual Studio](https://visualstudio.microsoft.com/en/downloads/)
 
 ## How to use
+![image](https://user-images.githubusercontent.com/111762798/207682985-39ae0ce5-d2bf-4067-b136-5a2dd5fdaf6b.png)
 
 - First, start **Automatic1111 stable-diffusion-webui** and wait until it is ready.
 

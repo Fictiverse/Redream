@@ -14,8 +14,6 @@ Or compile this ```c#``` repo with [Visual Studio](https://visualstudio.microsof
 
 ## How to use
 
-![image](https://user-images.githubusercontent.com/111762798/207283950-3de127e8-575a-4012-98b9-73c9258f4fe7.png)
-
 - First, start **Automatic1111 stable-diffusion-webui** and wait until it is ready.
 
 Starting with Redream :

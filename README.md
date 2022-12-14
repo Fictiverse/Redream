@@ -13,9 +13,9 @@ Make sure```--xformers``` and ```--api``` commandline arguments are set in your 
 Or compile this ```c#``` repo with [Visual Studio](https://visualstudio.microsoft.com/en/downloads/)
 
 ## How to use
-- First, start **Automatic1111 stable-diffusion-webui** and wait until it is ready.
+- First, start **Automatic1111 stable-diffusion-webui** and wait until it is ready.   
 
-Starting with Redream :
+Starting with Redream :   
 ![image](https://user-images.githubusercontent.com/111762798/207682985-39ae0ce5-d2bf-4067-b136-5a2dd5fdaf6b.png)
 
 - Start to press ![image](https://user-images.githubusercontent.com/111762798/207306165-315287c6-e337-46fa-9d80-19c4eb782226.png)   

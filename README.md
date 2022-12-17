@@ -12,6 +12,8 @@ Make sure```--xformers``` and ```--api``` commandline arguments are set in your 
 - ```SHA-256``` : ```44f8af698164a0da4184aec17ec8c5505237b0bbf89b79904b4a745ad7137f91```   
 Or compile this ```c#``` repo with [Visual Studio](https://visualstudio.microsoft.com/en/downloads/)
 
+https://user-images.githubusercontent.com/111762798/208230322-dfa222d1-ca15-4732-8fea-37840934ac0c.mp4
+
 ## How to use
 - First, start **Automatic1111 stable-diffusion-webui** and wait until it is ready.   
 

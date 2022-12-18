@@ -32,8 +32,6 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.buttonStart = new System.Windows.Forms.Button();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.textBoxPrompt = new System.Windows.Forms.TextBox();
             this.panelImage = new System.Windows.Forms.Panel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.panelMenu = new System.Windows.Forms.FlowLayoutPanel();
@@ -60,15 +58,24 @@
             this.buttonDiscord = new System.Windows.Forms.Button();
             this.buttonFav = new System.Windows.Forms.Button();
             this.buttonResize = new System.Windows.Forms.Button();
+            this.tableLayoutPanelPrompts = new System.Windows.Forms.TableLayoutPanel();
+            this.buttonClearPromptN = new System.Windows.Forms.Button();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.textBoxPromptN = new System.Windows.Forms.TextBox();
+            this.panelPrompt = new System.Windows.Forms.Panel();
+            this.textBoxPrompt = new System.Windows.Forms.TextBox();
+            this.buttonClearPrompt = new System.Windows.Forms.Button();
             this.timerFadeOut = new System.Windows.Forms.Timer(this.components);
             this.timerBlink = new System.Windows.Forms.Timer(this.components);
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.tableLayoutPanel1.SuspendLayout();
-            this.panel1.SuspendLayout();
             this.panelImage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panelMenu.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
+            this.tableLayoutPanelPrompts.SuspendLayout();
+            this.panel1.SuspendLayout();
+            this.panelPrompt.SuspendLayout();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -79,7 +86,6 @@
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 40F));
             this.tableLayoutPanel1.Controls.Add(this.buttonStart, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.panel1, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.panelImage, 1, 1);
             this.tableLayoutPanel1.Controls.Add(this.panelMenu, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel2, 1, 2);
@@ -87,14 +93,15 @@
             this.tableLayoutPanel1.Controls.Add(this.buttonDiscord, 2, 2);
             this.tableLayoutPanel1.Controls.Add(this.buttonFav, 0, 2);
             this.tableLayoutPanel1.Controls.Add(this.buttonResize, 2, 1);
+            this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanelPrompts, 1, 0);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 3;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 60F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(599, 601);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(598, 618);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // buttonStart
@@ -109,46 +116,21 @@
             this.buttonStart.Location = new System.Drawing.Point(0, 0);
             this.buttonStart.Margin = new System.Windows.Forms.Padding(0);
             this.buttonStart.Name = "buttonStart";
-            this.buttonStart.Size = new System.Drawing.Size(40, 40);
+            this.buttonStart.Size = new System.Drawing.Size(40, 60);
             this.buttonStart.TabIndex = 3;
             this.toolTip1.SetToolTip(this.buttonStart, "Start / Stop");
             this.buttonStart.UseVisualStyleBackColor = false;
             this.buttonStart.Click += new System.EventHandler(this.buttonStart_Click);
             // 
-            // panel1
-            // 
-            this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(13)))), ((int)(((byte)(13)))), ((int)(((byte)(13)))));
-            this.panel1.Controls.Add(this.textBoxPrompt);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel1.Location = new System.Drawing.Point(43, 0);
-            this.panel1.Margin = new System.Windows.Forms.Padding(3, 0, 3, 0);
-            this.panel1.Name = "panel1";
-            this.panel1.Padding = new System.Windows.Forms.Padding(6, 11, 6, 0);
-            this.panel1.Size = new System.Drawing.Size(513, 40);
-            this.panel1.TabIndex = 4;
-            // 
-            // textBoxPrompt
-            // 
-            this.textBoxPrompt.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(13)))), ((int)(((byte)(13)))), ((int)(((byte)(13)))));
-            this.textBoxPrompt.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBoxPrompt.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textBoxPrompt.ForeColor = System.Drawing.Color.Silver;
-            this.textBoxPrompt.Location = new System.Drawing.Point(6, 11);
-            this.textBoxPrompt.Margin = new System.Windows.Forms.Padding(3, 0, 3, 3);
-            this.textBoxPrompt.Name = "textBoxPrompt";
-            this.textBoxPrompt.Size = new System.Drawing.Size(501, 16);
-            this.textBoxPrompt.TabIndex = 0;
-            this.textBoxPrompt.Text = "Visual Novel";
-            // 
             // panelImage
             // 
             this.panelImage.AutoScroll = true;
-            this.panelImage.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(15)))), ((int)(((byte)(15)))));
+            this.panelImage.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(35)))), ((int)(((byte)(35)))));
             this.panelImage.Controls.Add(this.pictureBox1);
             this.panelImage.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelImage.Location = new System.Drawing.Point(43, 43);
+            this.panelImage.Location = new System.Drawing.Point(43, 63);
             this.panelImage.Name = "panelImage";
-            this.panelImage.Size = new System.Drawing.Size(513, 515);
+            this.panelImage.Size = new System.Drawing.Size(512, 512);
             this.panelImage.TabIndex = 5;
             this.panelImage.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panelImage_MouseDown);
             // 
@@ -176,10 +158,10 @@
             this.panelMenu.Controls.Add(this.buttonStrength);
             this.panelMenu.Controls.Add(this.buttonCFGScale);
             this.panelMenu.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelMenu.Location = new System.Drawing.Point(0, 43);
+            this.panelMenu.Location = new System.Drawing.Point(0, 63);
             this.panelMenu.Margin = new System.Windows.Forms.Padding(0, 3, 0, 0);
             this.panelMenu.Name = "panelMenu";
-            this.panelMenu.Size = new System.Drawing.Size(40, 518);
+            this.panelMenu.Size = new System.Drawing.Size(40, 515);
             this.panelMenu.TabIndex = 7;
             // 
             // buttonScreenshot
@@ -197,7 +179,7 @@
             this.buttonScreenshot.Size = new System.Drawing.Size(40, 40);
             this.buttonScreenshot.TabIndex = 103;
             this.buttonScreenshot.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.toolTip1.SetToolTip(this.buttonScreenshot, "Zone Selector");
+            this.toolTip1.SetToolTip(this.buttonScreenshot, "Capture Selector");
             this.buttonScreenshot.UseVisualStyleBackColor = false;
             this.buttonScreenshot.Click += new System.EventHandler(this.buttonScreenshot_Click);
             // 
@@ -210,8 +192,8 @@
             this.buttonSave.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.buttonSave.ForeColor = System.Drawing.Color.Silver;
             this.buttonSave.Image = global::Redream.Properties.Resources.save1;
-            this.buttonSave.Location = new System.Drawing.Point(0, 49);
-            this.buttonSave.Margin = new System.Windows.Forms.Padding(0, 6, 0, 1);
+            this.buttonSave.Location = new System.Drawing.Point(0, 48);
+            this.buttonSave.Margin = new System.Windows.Forms.Padding(0, 5, 0, 1);
             this.buttonSave.Name = "buttonSave";
             this.buttonSave.Size = new System.Drawing.Size(40, 40);
             this.buttonSave.TabIndex = 105;
@@ -229,13 +211,13 @@
             this.buttonBrowse.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.buttonBrowse.ForeColor = System.Drawing.Color.Silver;
             this.buttonBrowse.Image = global::Redream.Properties.Resources.search;
-            this.buttonBrowse.Location = new System.Drawing.Point(0, 91);
+            this.buttonBrowse.Location = new System.Drawing.Point(0, 90);
             this.buttonBrowse.Margin = new System.Windows.Forms.Padding(0, 1, 0, 3);
             this.buttonBrowse.Name = "buttonBrowse";
             this.buttonBrowse.Size = new System.Drawing.Size(40, 40);
             this.buttonBrowse.TabIndex = 110;
             this.buttonBrowse.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.toolTip1.SetToolTip(this.buttonBrowse, "Aspect Ratio");
+            this.toolTip1.SetToolTip(this.buttonBrowse, "Open Frames Folder");
             this.buttonBrowse.UseVisualStyleBackColor = false;
             this.buttonBrowse.Click += new System.EventHandler(this.buttonBrowse_Click);
             // 
@@ -248,8 +230,8 @@
             this.buttonShape.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.buttonShape.ForeColor = System.Drawing.Color.Silver;
             this.buttonShape.Image = global::Redream.Properties.Resources.rounded_black_square_shapeS_;
-            this.buttonShape.Location = new System.Drawing.Point(0, 140);
-            this.buttonShape.Margin = new System.Windows.Forms.Padding(0, 6, 0, 3);
+            this.buttonShape.Location = new System.Drawing.Point(0, 138);
+            this.buttonShape.Margin = new System.Windows.Forms.Padding(0, 5, 0, 3);
             this.buttonShape.Name = "buttonShape";
             this.buttonShape.Size = new System.Drawing.Size(40, 40);
             this.buttonShape.TabIndex = 104;
@@ -268,8 +250,8 @@
             this.buttonSeed.ForeColor = System.Drawing.Color.Silver;
             this.buttonSeed.Image = global::Redream.Properties.Resources._16_dice;
             this.buttonSeed.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.buttonSeed.Location = new System.Drawing.Point(0, 189);
-            this.buttonSeed.Margin = new System.Windows.Forms.Padding(0, 6, 0, 1);
+            this.buttonSeed.Location = new System.Drawing.Point(0, 186);
+            this.buttonSeed.Margin = new System.Windows.Forms.Padding(0, 5, 0, 1);
             this.buttonSeed.Name = "buttonSeed";
             this.buttonSeed.Padding = new System.Windows.Forms.Padding(0, 6, 0, 6);
             this.buttonSeed.Size = new System.Drawing.Size(40, 80);
@@ -290,7 +272,7 @@
             this.buttonSteps.ForeColor = System.Drawing.Color.Silver;
             this.buttonSteps.Image = global::Redream.Properties.Resources.level2;
             this.buttonSteps.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.buttonSteps.Location = new System.Drawing.Point(0, 271);
+            this.buttonSteps.Location = new System.Drawing.Point(0, 268);
             this.buttonSteps.Margin = new System.Windows.Forms.Padding(0, 1, 0, 1);
             this.buttonSteps.Name = "buttonSteps";
             this.buttonSteps.Padding = new System.Windows.Forms.Padding(0, 6, 0, 6);
@@ -312,7 +294,7 @@
             this.buttonStrength.ForeColor = System.Drawing.Color.Silver;
             this.buttonStrength.Image = global::Redream.Properties.Resources._16_blur;
             this.buttonStrength.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.buttonStrength.Location = new System.Drawing.Point(0, 353);
+            this.buttonStrength.Location = new System.Drawing.Point(0, 350);
             this.buttonStrength.Margin = new System.Windows.Forms.Padding(0, 1, 0, 1);
             this.buttonStrength.Name = "buttonStrength";
             this.buttonStrength.Padding = new System.Windows.Forms.Padding(0, 6, 0, 6);
@@ -334,7 +316,7 @@
             this.buttonCFGScale.ForeColor = System.Drawing.Color.Silver;
             this.buttonCFGScale.Image = global::Redream.Properties.Resources._16_scale;
             this.buttonCFGScale.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.buttonCFGScale.Location = new System.Drawing.Point(0, 435);
+            this.buttonCFGScale.Location = new System.Drawing.Point(0, 432);
             this.buttonCFGScale.Margin = new System.Windows.Forms.Padding(0, 1, 0, 3);
             this.buttonCFGScale.Name = "buttonCFGScale";
             this.buttonCFGScale.Padding = new System.Windows.Forms.Padding(0, 6, 0, 6);
@@ -342,7 +324,7 @@
             this.buttonCFGScale.TabIndex = 109;
             this.buttonCFGScale.Text = "7.5";
             this.buttonCFGScale.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.toolTip1.SetToolTip(this.buttonCFGScale, "Denoising Strength");
+            this.toolTip1.SetToolTip(this.buttonCFGScale, "CFG Scale");
             this.buttonCFGScale.UseVisualStyleBackColor = false;
             this.buttonCFGScale.Click += new System.EventHandler(this.buttonCFGScale_Click);
             // 
@@ -370,12 +352,12 @@
             this.tableLayoutPanel2.Controls.Add(this.button2, 1, 0);
             this.tableLayoutPanel2.Controls.Add(this.button1, 0, 0);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel2.Location = new System.Drawing.Point(43, 561);
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(43, 578);
             this.tableLayoutPanel2.Margin = new System.Windows.Forms.Padding(3, 0, 3, 0);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 1;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(513, 40);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(512, 40);
             this.tableLayoutPanel2.TabIndex = 9;
             // 
             // button10
@@ -390,9 +372,10 @@
             this.button10.Location = new System.Drawing.Point(460, 0);
             this.button10.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
             this.button10.Name = "button10";
-            this.button10.Size = new System.Drawing.Size(52, 40);
+            this.button10.Size = new System.Drawing.Size(51, 40);
             this.button10.TabIndex = 114;
             this.button10.Text = "10";
+            this.toolTip1.SetToolTip(this.button10, "Slot 10");
             this.button10.UseVisualStyleBackColor = false;
             this.button10.Click += new System.EventHandler(this.buttonM_Click);
             // 
@@ -411,6 +394,7 @@
             this.button9.Size = new System.Drawing.Size(49, 40);
             this.button9.TabIndex = 113;
             this.button9.Text = "9";
+            this.toolTip1.SetToolTip(this.button9, "Slot 9");
             this.button9.UseVisualStyleBackColor = false;
             this.button9.Click += new System.EventHandler(this.buttonM_Click);
             // 
@@ -429,6 +413,7 @@
             this.button8.Size = new System.Drawing.Size(49, 40);
             this.button8.TabIndex = 112;
             this.button8.Text = "8";
+            this.toolTip1.SetToolTip(this.button8, "Slot 8");
             this.button8.UseVisualStyleBackColor = false;
             this.button8.Click += new System.EventHandler(this.buttonM_Click);
             // 
@@ -447,6 +432,7 @@
             this.button7.Size = new System.Drawing.Size(49, 40);
             this.button7.TabIndex = 111;
             this.button7.Text = "7";
+            this.toolTip1.SetToolTip(this.button7, "Slot 7");
             this.button7.UseVisualStyleBackColor = false;
             this.button7.Click += new System.EventHandler(this.buttonM_Click);
             // 
@@ -465,6 +451,7 @@
             this.button6.Size = new System.Drawing.Size(49, 40);
             this.button6.TabIndex = 110;
             this.button6.Text = "6";
+            this.toolTip1.SetToolTip(this.button6, "Slot 6");
             this.button6.UseVisualStyleBackColor = false;
             this.button6.Click += new System.EventHandler(this.buttonM_Click);
             // 
@@ -483,6 +470,7 @@
             this.button5.Size = new System.Drawing.Size(49, 40);
             this.button5.TabIndex = 109;
             this.button5.Text = "5";
+            this.toolTip1.SetToolTip(this.button5, "Slot 5");
             this.button5.UseVisualStyleBackColor = false;
             this.button5.Click += new System.EventHandler(this.buttonM_Click);
             // 
@@ -501,6 +489,7 @@
             this.button4.Size = new System.Drawing.Size(49, 40);
             this.button4.TabIndex = 108;
             this.button4.Text = "4";
+            this.toolTip1.SetToolTip(this.button4, "Slot 4");
             this.button4.UseVisualStyleBackColor = false;
             this.button4.Click += new System.EventHandler(this.buttonM_Click);
             // 
@@ -519,6 +508,7 @@
             this.button3.Size = new System.Drawing.Size(49, 40);
             this.button3.TabIndex = 107;
             this.button3.Text = "3";
+            this.toolTip1.SetToolTip(this.button3, "Slot 3");
             this.button3.UseVisualStyleBackColor = false;
             this.button3.Click += new System.EventHandler(this.buttonM_Click);
             // 
@@ -537,6 +527,7 @@
             this.button2.Size = new System.Drawing.Size(49, 40);
             this.button2.TabIndex = 106;
             this.button2.Text = "2";
+            this.toolTip1.SetToolTip(this.button2, "Slot 2");
             this.button2.UseVisualStyleBackColor = false;
             this.button2.Click += new System.EventHandler(this.buttonM_Click);
             // 
@@ -555,21 +546,23 @@
             this.button1.Size = new System.Drawing.Size(49, 40);
             this.button1.TabIndex = 105;
             this.button1.Text = "1";
+            this.toolTip1.SetToolTip(this.button1, "Slot 1");
             this.button1.UseVisualStyleBackColor = false;
             this.button1.Click += new System.EventHandler(this.buttonM_Click);
             // 
             // buttonInterrogate
             // 
-            this.buttonInterrogate.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(30)))), ((int)(((byte)(60)))));
+            this.buttonInterrogate.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(40)))), ((int)(((byte)(60)))));
+            this.buttonInterrogate.Dock = System.Windows.Forms.DockStyle.Fill;
             this.buttonInterrogate.FlatAppearance.BorderSize = 0;
             this.buttonInterrogate.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonInterrogate.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.buttonInterrogate.ForeColor = System.Drawing.Color.Silver;
             this.buttonInterrogate.Image = global::Redream.Properties.Resources.text;
-            this.buttonInterrogate.Location = new System.Drawing.Point(559, 0);
+            this.buttonInterrogate.Location = new System.Drawing.Point(558, 0);
             this.buttonInterrogate.Margin = new System.Windows.Forms.Padding(0);
             this.buttonInterrogate.Name = "buttonInterrogate";
-            this.buttonInterrogate.Size = new System.Drawing.Size(40, 40);
+            this.buttonInterrogate.Size = new System.Drawing.Size(40, 60);
             this.buttonInterrogate.TabIndex = 10;
             this.toolTip1.SetToolTip(this.buttonInterrogate, "Interrogate Image");
             this.buttonInterrogate.UseVisualStyleBackColor = false;
@@ -577,19 +570,19 @@
             // 
             // buttonDiscord
             // 
-            this.buttonDiscord.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(13)))), ((int)(((byte)(13)))), ((int)(((byte)(13)))));
+            this.buttonDiscord.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(15)))), ((int)(((byte)(50)))));
             this.buttonDiscord.Dock = System.Windows.Forms.DockStyle.Fill;
             this.buttonDiscord.FlatAppearance.BorderSize = 0;
             this.buttonDiscord.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonDiscord.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.buttonDiscord.ForeColor = System.Drawing.Color.Silver;
             this.buttonDiscord.Image = global::Redream.Properties.Resources.discord;
-            this.buttonDiscord.Location = new System.Drawing.Point(559, 561);
+            this.buttonDiscord.Location = new System.Drawing.Point(558, 578);
             this.buttonDiscord.Margin = new System.Windows.Forms.Padding(0);
             this.buttonDiscord.Name = "buttonDiscord";
             this.buttonDiscord.Size = new System.Drawing.Size(40, 40);
             this.buttonDiscord.TabIndex = 109;
-            this.toolTip1.SetToolTip(this.buttonDiscord, "Start / Stop");
+            this.toolTip1.SetToolTip(this.buttonDiscord, "Discord");
             this.buttonDiscord.UseVisualStyleBackColor = false;
             this.buttonDiscord.Click += new System.EventHandler(this.buttonDiscord_Click);
             // 
@@ -602,7 +595,7 @@
             this.buttonFav.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.buttonFav.ForeColor = System.Drawing.Color.Silver;
             this.buttonFav.Image = global::Redream.Properties.Resources.favourite;
-            this.buttonFav.Location = new System.Drawing.Point(0, 561);
+            this.buttonFav.Location = new System.Drawing.Point(0, 578);
             this.buttonFav.Margin = new System.Windows.Forms.Padding(0);
             this.buttonFav.Name = "buttonFav";
             this.buttonFav.Size = new System.Drawing.Size(40, 40);
@@ -620,17 +613,127 @@
             this.buttonResize.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.buttonResize.ForeColor = System.Drawing.Color.Silver;
             this.buttonResize.Image = global::Redream.Properties.Resources.flip;
-            this.buttonResize.Location = new System.Drawing.Point(559, 43);
+            this.buttonResize.Location = new System.Drawing.Point(558, 63);
             this.buttonResize.Margin = new System.Windows.Forms.Padding(0, 3, 0, 3);
             this.buttonResize.Name = "buttonResize";
-            this.buttonResize.Size = new System.Drawing.Size(40, 515);
+            this.buttonResize.Size = new System.Drawing.Size(40, 512);
             this.buttonResize.TabIndex = 11;
-            this.toolTip1.SetToolTip(this.buttonResize, "Start / Stop");
+            this.toolTip1.SetToolTip(this.buttonResize, "Resize");
             this.buttonResize.UseVisualStyleBackColor = false;
             this.buttonResize.Click += new System.EventHandler(this.buttonResize_Click);
             this.buttonResize.MouseDown += new System.Windows.Forms.MouseEventHandler(this.buttonResize_MouseDown);
             this.buttonResize.MouseMove += new System.Windows.Forms.MouseEventHandler(this.buttonResize_MouseMove);
             this.buttonResize.MouseUp += new System.Windows.Forms.MouseEventHandler(this.buttonResize_MouseUp);
+            // 
+            // tableLayoutPanelPrompts
+            // 
+            this.tableLayoutPanelPrompts.ColumnCount = 2;
+            this.tableLayoutPanelPrompts.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanelPrompts.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 30F));
+            this.tableLayoutPanelPrompts.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanelPrompts.Controls.Add(this.buttonClearPromptN, 1, 1);
+            this.tableLayoutPanelPrompts.Controls.Add(this.panel1, 0, 1);
+            this.tableLayoutPanelPrompts.Controls.Add(this.panelPrompt, 0, 0);
+            this.tableLayoutPanelPrompts.Controls.Add(this.buttonClearPrompt, 1, 0);
+            this.tableLayoutPanelPrompts.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanelPrompts.Location = new System.Drawing.Point(40, 0);
+            this.tableLayoutPanelPrompts.Margin = new System.Windows.Forms.Padding(0, 0, 3, 0);
+            this.tableLayoutPanelPrompts.Name = "tableLayoutPanelPrompts";
+            this.tableLayoutPanelPrompts.RowCount = 2;
+            this.tableLayoutPanelPrompts.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanelPrompts.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanelPrompts.Size = new System.Drawing.Size(515, 60);
+            this.tableLayoutPanelPrompts.TabIndex = 110;
+            // 
+            // buttonClearPromptN
+            // 
+            this.buttonClearPromptN.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(85)))), ((int)(((byte)(35)))), ((int)(((byte)(25)))));
+            this.buttonClearPromptN.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.buttonClearPromptN.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.buttonClearPromptN.FlatAppearance.BorderSize = 0;
+            this.buttonClearPromptN.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonClearPromptN.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.buttonClearPromptN.ForeColor = System.Drawing.Color.Silver;
+            this.buttonClearPromptN.Image = global::Redream.Properties.Resources.delete_cross;
+            this.buttonClearPromptN.Location = new System.Drawing.Point(485, 30);
+            this.buttonClearPromptN.Margin = new System.Windows.Forms.Padding(0);
+            this.buttonClearPromptN.Name = "buttonClearPromptN";
+            this.buttonClearPromptN.Size = new System.Drawing.Size(30, 30);
+            this.buttonClearPromptN.TabIndex = 107;
+            this.buttonClearPromptN.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.toolTip1.SetToolTip(this.buttonClearPromptN, "Clear Negative Prompt");
+            this.buttonClearPromptN.UseVisualStyleBackColor = false;
+            this.buttonClearPromptN.Click += new System.EventHandler(this.buttonClearPromptN_Click);
+            // 
+            // panel1
+            // 
+            this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(13)))), ((int)(((byte)(13)))));
+            this.panel1.Controls.Add(this.textBoxPromptN);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel1.Location = new System.Drawing.Point(3, 30);
+            this.panel1.Margin = new System.Windows.Forms.Padding(3, 0, 3, 0);
+            this.panel1.Name = "panel1";
+            this.panel1.Padding = new System.Windows.Forms.Padding(6, 7, 6, 0);
+            this.panel1.Size = new System.Drawing.Size(479, 30);
+            this.panel1.TabIndex = 6;
+            // 
+            // textBoxPromptN
+            // 
+            this.textBoxPromptN.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(13)))), ((int)(((byte)(13)))));
+            this.textBoxPromptN.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.textBoxPromptN.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.textBoxPromptN.ForeColor = System.Drawing.Color.Silver;
+            this.textBoxPromptN.Location = new System.Drawing.Point(6, 7);
+            this.textBoxPromptN.Margin = new System.Windows.Forms.Padding(3, 0, 3, 3);
+            this.textBoxPromptN.Name = "textBoxPromptN";
+            this.textBoxPromptN.Size = new System.Drawing.Size(467, 16);
+            this.textBoxPromptN.TabIndex = 0;
+            this.textBoxPromptN.Text = "Ugly";
+            // 
+            // panelPrompt
+            // 
+            this.panelPrompt.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(13)))), ((int)(((byte)(33)))), ((int)(((byte)(13)))));
+            this.panelPrompt.Controls.Add(this.textBoxPrompt);
+            this.panelPrompt.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelPrompt.Location = new System.Drawing.Point(3, 0);
+            this.panelPrompt.Margin = new System.Windows.Forms.Padding(3, 0, 3, 0);
+            this.panelPrompt.Name = "panelPrompt";
+            this.panelPrompt.Padding = new System.Windows.Forms.Padding(6, 7, 6, 0);
+            this.panelPrompt.Size = new System.Drawing.Size(479, 30);
+            this.panelPrompt.TabIndex = 5;
+            // 
+            // textBoxPrompt
+            // 
+            this.textBoxPrompt.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(13)))), ((int)(((byte)(33)))), ((int)(((byte)(13)))));
+            this.textBoxPrompt.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.textBoxPrompt.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.textBoxPrompt.ForeColor = System.Drawing.Color.Silver;
+            this.textBoxPrompt.Location = new System.Drawing.Point(6, 7);
+            this.textBoxPrompt.Margin = new System.Windows.Forms.Padding(3, 0, 3, 3);
+            this.textBoxPrompt.Name = "textBoxPrompt";
+            this.textBoxPrompt.Size = new System.Drawing.Size(467, 16);
+            this.textBoxPrompt.TabIndex = 0;
+            this.textBoxPrompt.Text = "Visual Novel";
+            // 
+            // buttonClearPrompt
+            // 
+            this.buttonClearPrompt.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(85)))), ((int)(((byte)(35)))), ((int)(((byte)(25)))));
+            this.buttonClearPrompt.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.buttonClearPrompt.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.buttonClearPrompt.FlatAppearance.BorderSize = 0;
+            this.buttonClearPrompt.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonClearPrompt.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.buttonClearPrompt.ForeColor = System.Drawing.Color.Silver;
+            this.buttonClearPrompt.Image = global::Redream.Properties.Resources.delete_cross;
+            this.buttonClearPrompt.Location = new System.Drawing.Point(485, 0);
+            this.buttonClearPrompt.Margin = new System.Windows.Forms.Padding(0);
+            this.buttonClearPrompt.Name = "buttonClearPrompt";
+            this.buttonClearPrompt.Size = new System.Drawing.Size(30, 30);
+            this.buttonClearPrompt.TabIndex = 105;
+            this.buttonClearPrompt.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.toolTip1.SetToolTip(this.buttonClearPrompt, "Clear Positive Prompt");
+            this.buttonClearPrompt.UseVisualStyleBackColor = false;
+            this.buttonClearPrompt.Click += new System.EventHandler(this.buttonClearPrompt_Click);
             // 
             // timerFadeOut
             // 
@@ -647,22 +750,25 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(15)))), ((int)(((byte)(35)))));
-            this.ClientSize = new System.Drawing.Size(599, 601);
+            this.ClientSize = new System.Drawing.Size(598, 618);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.MinimumSize = new System.Drawing.Size(615, 640);
+            this.MinimumSize = new System.Drawing.Size(614, 657);
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Fictiverse : Redream";
             this.TopMost = true;
             this.tableLayoutPanel1.ResumeLayout(false);
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
             this.panelImage.ResumeLayout(false);
             this.panelImage.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.panelMenu.ResumeLayout(false);
             this.tableLayoutPanel2.ResumeLayout(false);
+            this.tableLayoutPanelPrompts.ResumeLayout(false);
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
+            this.panelPrompt.ResumeLayout(false);
+            this.panelPrompt.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -671,8 +777,6 @@
 
         private TableLayoutPanel tableLayoutPanel1;
         private Button buttonStart;
-        private Panel panel1;
-        private TextBox textBoxPrompt;
         private Panel panelImage;
         private PictureBox pictureBox1;
         private System.Windows.Forms.Timer timerFadeOut;
@@ -702,5 +806,12 @@
         private Button buttonDiscord;
         private Button buttonCFGScale;
         private Button buttonBrowse;
+        private TableLayoutPanel tableLayoutPanelPrompts;
+        private Panel panel1;
+        private TextBox textBoxPromptN;
+        private Panel panelPrompt;
+        private TextBox textBoxPrompt;
+        private Button buttonClearPromptN;
+        private Button buttonClearPrompt;
     }
 }

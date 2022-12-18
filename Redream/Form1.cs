@@ -7,6 +7,8 @@ using System.Reflection.Emit;
 using System.Resources;
 using System.Text;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using Button = System.Windows.Forms.Button;
 
 namespace Redream
 {
@@ -17,7 +19,6 @@ namespace Redream
         List<string> favNPromptList = new List<string>();
         string FramesPath = Application.StartupPath + "Frames";
 
-        string negativePrompt = "";
         public Form1()
         {
             InitializeComponent();
@@ -48,6 +49,9 @@ namespace Redream
             favPromptList.Add(iniFile.Read("P9"));
             favPromptList.Add(iniFile.Read("P10"));
 
+
+
+
             favNPromptList.Add(iniFile.Read("N1"));
             favNPromptList.Add(iniFile.Read("N2"));
             favNPromptList.Add(iniFile.Read("N3"));
@@ -58,6 +62,15 @@ namespace Redream
             favNPromptList.Add(iniFile.Read("N8"));
             favNPromptList.Add(iniFile.Read("N9"));
             favNPromptList.Add(iniFile.Read("N10"));
+
+
+            for (int i = 0; i < buttonList.Count; i++) 
+            {
+                if(favPromptList[i] != "")
+                    toolTip1.SetToolTip(buttonList[i], favPromptList[i]);
+                else
+                    toolTip1.SetToolTip(buttonList[i], "Slot " + (i + 1));
+            }
 
             InitFavColor();
 
@@ -178,7 +191,7 @@ namespace Redream
             var automaticJson = new AutomaticJson
             {
                 prompt = textBoxPrompt.Text,
-                negative_prompt = negativePrompt,
+                negative_prompt = textBoxPromptN.Text,
 
                 init_images = init_images,
                 denoising_strength = strength.ToString("0.00").Replace(",","."),
@@ -468,13 +481,14 @@ namespace Redream
                 IniFile iniFile = new IniFile("fav.ini");
                 iniFile.Write("P" + btn.Text, textBoxPrompt.Text);
                 favPromptList[int.Parse(btn.Text)-1] = textBoxPrompt.Text;
-
+                favNPromptList[int.Parse(btn.Text) - 1] = textBoxPromptN.Text;
+                toolTip1.SetToolTip(btn, textBoxPrompt.Text);
                 InitFavColor();
             }
             else
             {
                 textBoxPrompt.Text = favPromptList[int.Parse(btn.Text) - 1];
-                negativePrompt = favNPromptList[int.Parse(btn.Text) - 1];
+                textBoxPromptN.Text = favNPromptList[int.Parse(btn.Text) - 1];
             }
 
         }
@@ -576,7 +590,7 @@ namespace Redream
         private void buttonResize_Click(object sender, EventArgs e)
         {
             pictureBox1.Location = new Point(0, 0);
-            this.Size = new Size(pictureBox1.Width + 103, pictureBox1.Height + 128);
+            this.Size = new Size(pictureBox1.Width + 100, pictureBox1.Height + 145);
         }
 
         private async void buttonInterrogate_Click(object sender, EventArgs e)
@@ -674,6 +688,16 @@ namespace Redream
             pr.StartInfo.FileName = "https://discord.gg/faje9TJM";
             pr.Start();
 
+        }
+
+        private void buttonClearPrompt_Click(object sender, EventArgs e)
+        {
+            textBoxPrompt.Text = "";
+        }
+
+        private void buttonClearPromptN_Click(object sender, EventArgs e)
+        {
+            textBoxPromptN.Text = "";
         }
     }
 }

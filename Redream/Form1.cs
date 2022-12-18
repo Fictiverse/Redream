@@ -73,7 +73,7 @@ namespace Redream
             }
 
             InitFavColor();
-
+            buttonShape.MouseWheel += new MouseEventHandler(buttonShape_MouseWheel);
             buttonSeed.MouseWheel += new MouseEventHandler(buttonSeed_MouseWheel);
             buttonSteps.MouseWheel += new MouseEventHandler(buttonSteps_MouseWheel);
             buttonStrength.MouseWheel += new MouseEventHandler(buttonStrength_MouseWheel);
@@ -287,33 +287,62 @@ namespace Redream
         int ratioY = 16;
         private void buttonShape_Click(object sender, EventArgs e)
         {
-            shape++;
+            SwitchShape(1);
+        }
 
-            if (shape == 1)
-            {
-                ratioX = 16;
-                ratioY = 9;
-                buttonShape.Image = Resources.rounded_rectangleV;
+        private void buttonShape_MouseWheel(object? sender, MouseEventArgs e)
+        {
+            if (e.Delta > 0)
+                SwitchShape(1);
+            else if (e.Delta < 0)
+                SwitchShape(-1);
+        }
 
-            }
-            else if (shape == 2)
+        private void SwitchShape(int value)
+        {
+            shape = shape + value;
+            if (shape < 0)
+                shape = 4;
+
+            switch (shape)
             {
-                ratioX = 9;
-                ratioY = 16;
-                buttonShape.Image = Resources.rounded_rectangleH;
-            }
-            else
-            {
-                shape = 0;
-                ratioX = 16;
-                ratioY = 16;
-                buttonShape.Image = Resources.rounded_black_square_shapeS_;
+                case 1:
+                    ratioX = 16;
+                    ratioY = 12;
+                    buttonShape.Image = Resources.shape_4_3;
+                    toolTip1.SetToolTip(buttonShape, "4 / 3");
+                    break;
+                case 2:
+                    ratioX = 16;
+                    ratioY = 9;
+                    buttonShape.Image = Resources.rounded_rectangleV;
+                    toolTip1.SetToolTip(buttonShape, "16 / 9");
+                    break;
+                case 3:
+                    ratioX = 12;
+                    ratioY = 16;
+                    buttonShape.Image = Resources.shape_3_4;
+                    toolTip1.SetToolTip(buttonShape, "3 / 4");
+                    break;
+                case 4:
+                    ratioX = 9;
+                    ratioY = 16;
+                    buttonShape.Image = Resources.rounded_rectangleH;
+                    toolTip1.SetToolTip(buttonShape, "9 / 16");
+                    break;
+                default:
+                    shape = 0;
+                    ratioX = 16;
+                    ratioY = 16;
+                    buttonShape.Image = Resources.rounded_black_square_shapeS_;
+                    toolTip1.SetToolTip(buttonShape, "1 / 1");
+                    break;
             }
             if (formSC != null)
                 formSC.ChangeRatio(ratioX, ratioY);
-
-
         }
+
+
         bool dragging;
         private Point startPoint;
 

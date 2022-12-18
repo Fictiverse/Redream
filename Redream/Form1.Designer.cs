@@ -229,7 +229,7 @@
             this.buttonShape.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonShape.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.buttonShape.ForeColor = System.Drawing.Color.Silver;
-            this.buttonShape.Image = global::Redream.Properties.Resources.rounded_black_square_shapeS_;
+            this.buttonShape.Image = global::Redream.Properties.Resources.rounded_black_square_shapeS_1;
             this.buttonShape.Location = new System.Drawing.Point(0, 138);
             this.buttonShape.Margin = new System.Windows.Forms.Padding(0, 5, 0, 3);
             this.buttonShape.Name = "buttonShape";

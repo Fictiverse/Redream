@@ -243,6 +243,16 @@ namespace Redream.Properties {
         /// <summary>
         ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap rounded_black_square_shapeS_1 {
+            get {
+                object obj = ResourceManager.GetObject("rounded-black-square-shapeS 1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap rounded_rectangleH {
             get {
                 object obj = ResourceManager.GetObject("rounded-rectangleH", resourceCulture);
@@ -286,6 +296,26 @@ namespace Redream.Properties {
         internal static System.Drawing.Bitmap selection {
             get {
                 object obj = ResourceManager.GetObject("selection", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap shape_3_4 {
+            get {
+                object obj = ResourceManager.GetObject("shape_3_4", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap shape_4_3 {
+            get {
+                object obj = ResourceManager.GetObject("shape_4_3", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

@@ -828,7 +828,7 @@ namespace Redream
         {
             Process pr = new Process();
             pr.StartInfo.UseShellExecute = true;
-            pr.StartInfo.FileName = "https://discord.gg/faje9TJM";
+            pr.StartInfo.FileName = "https://discord.gg/d5WzbctxuP";
             pr.Start();
 
         }

@@ -1,4 +1,5 @@
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using Redream.Properties;
 using System.Diagnostics;
 using System.Drawing.Drawing2D;
@@ -14,11 +15,15 @@ namespace Redream
 {
     public partial class Form1 : Form
     {
+        public string url_API = "127.0.0.1:7860";
+
+
         List<Button> buttonList = new List<Button>();
         List<string> favPromptList = new List<string>();
         List<string> favNPromptList = new List<string>();
         string FramesPath = Application.StartupPath + "Frames";
 
+        userControl_Settings control_Settings = new userControl_Settings();
         public Form1()
         {
             InitializeComponent();
@@ -64,9 +69,9 @@ namespace Redream
             favNPromptList.Add(iniFile.Read("N10"));
 
 
-            for (int i = 0; i < buttonList.Count; i++) 
+            for (int i = 0; i < buttonList.Count; i++)
             {
-                if(favPromptList[i] != "")
+                if (favPromptList[i] != "")
                     toolTip1.SetToolTip(buttonList[i], favPromptList[i]);
                 else
                     toolTip1.SetToolTip(buttonList[i], "Slot " + (i + 1));
@@ -78,13 +83,22 @@ namespace Redream
             buttonSteps.MouseWheel += new MouseEventHandler(buttonSteps_MouseWheel);
             buttonStrength.MouseWheel += new MouseEventHandler(buttonStrength_MouseWheel);
             buttonCFGScale.MouseWheel += new MouseEventHandler(buttonCFGScale_MouseWheel);
+            buttonSampler.MouseWheel += new MouseEventHandler(buttonSampler_MouseWheel);
+
+
+            control_Settings.MainForm = this;
+            control_Settings.Visible = false;
+            control_Settings.Dock = DockStyle.Fill;
+            panelImage.Controls.Add(control_Settings);
+
+
         }
 
 
 
         public void SetInitImage(Bitmap img)
         {
-           //img.Save(applicationPath + "Data\\initimage.png");
+            //img.Save(applicationPath + "Data\\initimage.png");
             //tabImage.LoadInitImage();
         }
 
@@ -114,7 +128,7 @@ namespace Redream
         }
 
         bool isStarted;
-        Bitmap CurrentCapture = new Bitmap(512,512);
+        Bitmap CurrentCapture = new Bitmap(512, 512);
         private async void buttonStart_Click(object sender, EventArgs e)
         {
             if (!isStarted)
@@ -162,9 +176,6 @@ namespace Redream
         {
             public List<string> init_images = new List<string>();
             public string denoising_strength = "0.6";
-            public string inpainting_fill = "0";
-            public string mask_blur = "4";
-            public string mask = null;
             public string prompt = "";
             public string negative_prompt = "";
             public string seed = "-1";
@@ -174,7 +185,7 @@ namespace Redream
             public string cfg_scale = "7.5";
             public string width = "512";
             public string height = "512";
-            public string restore_faces = "false";
+            //public string restore_faces = "false";
             public string sampler_index = "Euler"; // Euler a, Euler, LMS, Heun, DPM2, DPM2 a, DPM++ 2S a, DPM++ 2M, DPM fast, DPM adaptive, LMS Karras, DPM2 Karras, DPM2 a Karras, DMP++ 2S a Karras, DMP++ 2M Karras, DDIM, PLMS
         }
 
@@ -194,18 +205,20 @@ namespace Redream
                 negative_prompt = textBoxPromptN.Text,
 
                 init_images = init_images,
-                denoising_strength = strength.ToString("0.00").Replace(",","."),
+                denoising_strength = strength.ToString("0.00").Replace(",", "."),
 
-                seed = seed.ToString(),
+                seed = buttonSeed.Text,
                 steps = steps.ToString(),
                 cfg_scale = cfgScale.ToString("0.00").Replace(",", "."),
 
                 width = formSC.Width.ToString(),
                 height = formSC.Height.ToString(),
-            };
 
-            string a = "{\"prompt\": \"maltese puppy\",\"steps\": 5}";
+                sampler_index = samplers[samplerIndex]
+            };
             string json = JsonConvert.SerializeObject(automaticJson);
+
+
             var client = new HttpClient();
             var content = new System.Net.Http.StringContent(json, Encoding.UTF8, "application/json");
             var request = new HttpRequestMessage
@@ -242,7 +255,7 @@ namespace Redream
             }
             catch
             {
-               // SetConsoleMessage("Cannot catch the API : Image");
+                // SetConsoleMessage("Cannot catch the API : Image");
             }
 
 
@@ -270,6 +283,29 @@ namespace Redream
 
         }
 
+
+        private async Task AutomaticModels()
+        {
+            var client = new HttpClient();
+            var content = new System.Net.Http.StringContent("", Encoding.UTF8, "application/json");
+            var request = new HttpRequestMessage
+            {
+                RequestUri = new Uri("http://127.0.0.1:7860/sdapi/v1/sd-models"),
+                Method = HttpMethod.Get,
+                Content = content
+            };
+
+            try
+            {
+                var response = await client.SendAsync(request);
+                dynamic responseD = JsonConvert.DeserializeObject(await response.Content.ReadAsStringAsync());
+                MessageBox.Show(responseD.toString());
+            }
+            catch
+            {
+                //SetConsoleMessage("Waiting for automatic : Models");
+            }
+        }
         private Bitmap MergeImages(Image image1, Image image2, int space)
         {
             Bitmap bitmap = new Bitmap(image1.Width + image2.Width + space, Math.Max(image1.Height, image2.Height));
@@ -298,7 +334,7 @@ namespace Redream
                 SwitchShape(-1);
         }
 
-        private void SwitchShape(int value)
+        public void SwitchShape(int value)
         {
             shape = shape + value;
             if (shape < 0)
@@ -311,24 +347,28 @@ namespace Redream
                     ratioY = 12;
                     buttonShape.Image = Resources.shape_4_3;
                     toolTip1.SetToolTip(buttonShape, "4 / 3");
+                    control_Settings.Shape = "4 / 3";
                     break;
                 case 2:
                     ratioX = 16;
                     ratioY = 9;
                     buttonShape.Image = Resources.rounded_rectangleV;
                     toolTip1.SetToolTip(buttonShape, "16 / 9");
+                    control_Settings.Shape = "16 / 9";
                     break;
                 case 3:
                     ratioX = 12;
                     ratioY = 16;
                     buttonShape.Image = Resources.shape_3_4;
                     toolTip1.SetToolTip(buttonShape, "3 / 4");
+                    control_Settings.Shape = "3 / 4";
                     break;
                 case 4:
                     ratioX = 9;
                     ratioY = 16;
                     buttonShape.Image = Resources.rounded_rectangleH;
                     toolTip1.SetToolTip(buttonShape, "9 / 16");
+                    control_Settings.Shape = "9 / 16";
                     break;
                 default:
                     shape = 0;
@@ -336,6 +376,7 @@ namespace Redream
                     ratioY = 16;
                     buttonShape.Image = Resources.rounded_black_square_shapeS_;
                     toolTip1.SetToolTip(buttonShape, "1 / 1");
+                    control_Settings.Shape = "1 / 1";
                     break;
             }
             if (formSC != null)
@@ -355,7 +396,7 @@ namespace Redream
             }
             else if (e.Button == MouseButtons.Right)
             {
-                pictureBox1.Location = new Point(0,0);
+                pictureBox1.Location = new Point(0, 0);
             }
         }
 
@@ -384,8 +425,8 @@ namespace Redream
 
 
         float opacity = 0;
-        Bitmap oldimage = new Bitmap(512,512);
-        Bitmap newImage = new Bitmap(512,512);
+        Bitmap oldimage = new Bitmap(512, 512);
+        Bitmap newImage = new Bitmap(512, 512);
 
         private void timerFadeOut_Tick(object sender, EventArgs e)
         {
@@ -444,10 +485,6 @@ namespace Redream
             }
         }
 
-        private void buttonBrowse_Click(object sender, EventArgs e)
-        {
-            Process.Start("explorer.exe", FramesPath);
-        }
 
 
 
@@ -469,7 +506,7 @@ namespace Redream
 
             Color c = Color.FromArgb(30, 50, 60);
             if (blinkUp)
-               c = Color.FromArgb(25, 65, 85);
+                c = Color.FromArgb(25, 65, 85);
 
             foreach (Button btn in buttonList)
                 btn.BackColor = c;
@@ -509,7 +546,7 @@ namespace Redream
             {
                 IniFile iniFile = new IniFile("fav.ini");
                 iniFile.Write("P" + btn.Text, textBoxPrompt.Text);
-                favPromptList[int.Parse(btn.Text)-1] = textBoxPrompt.Text;
+                favPromptList[int.Parse(btn.Text) - 1] = textBoxPrompt.Text;
                 favNPromptList[int.Parse(btn.Text) - 1] = textBoxPromptN.Text;
                 toolTip1.SetToolTip(btn, textBoxPrompt.Text);
                 InitFavColor();
@@ -526,31 +563,29 @@ namespace Redream
         int steps = 16;
         private void buttonSteps_Click(object sender, EventArgs e)
         {
-            steps = steps + 8;
-            if (steps > 48)
-                steps = 8;
-
-            steps = Math.Clamp(steps, 8, 48);
-
-            if (steps < 16)
-                buttonSteps.Image = Resources.level1;
-            else if (steps < 32)
-                buttonSteps.Image = Resources.level2;
-            else
-                buttonSteps.Image = Resources.level3;
-
-            buttonSteps.Text = steps.ToString();
-
+            SwitchSteps(5, true);
         }
 
         private void buttonSteps_MouseWheel(object? sender, MouseEventArgs e)
         {
             if (e.Delta > 0)
-                steps = steps + 4;
+                SwitchSteps(1);
             else if (e.Delta < 0)
-                steps = steps - 4;
+                SwitchSteps(-1);
+        }
 
-            steps = Math.Clamp(steps, 4, 48);
+        public void SwitchSteps(int value, bool loop = false)
+        {
+            steps = steps + value;
+
+            if (loop)
+            {
+                if (steps > 50)
+                    steps = 1;
+                if (steps < 1)
+                    steps = 50;
+            }
+            steps = Math.Clamp(steps, 1, 50);
 
             if (steps < 16)
                 buttonSteps.Image = Resources.level1;
@@ -560,59 +595,104 @@ namespace Redream
                 buttonSteps.Image = Resources.level3;
 
             buttonSteps.Text = steps.ToString();
-
+            control_Settings.Steps = steps.ToString();
         }
-
 
         float strength = 0.5f;
         private void buttonStrength_Click(object sender, EventArgs e)
         {
-
-            strength = strength + 0.1f;
-            if (strength > 1)
-                strength = 0.1f;
-
-            strength = Math.Clamp(strength, 0.05f, 0.95f);
-            buttonStrength.Text = strength.ToString("0.00");
+            SwitchStrength(0.1f, true);
         }
 
         private void buttonStrength_MouseWheel(object? sender, MouseEventArgs e)
         {
             if (e.Delta > 0)
-                strength = strength + 0.05f;
+                SwitchStrength(0.02f);
             else if (e.Delta < 0)
-                strength = strength - 0.05f;
-
-            strength = Math.Clamp(strength, 0.05f, 0.95f);
-            buttonStrength.Text = strength.ToString("0.00");
-
+                SwitchStrength(-0.02f);
         }
 
+        public void SwitchStrength(float value, bool loop = false)
+        {
+            strength = strength + value;
+
+            if (loop)
+            {
+                if (strength > 0.98f)
+                    strength = 0.02f;
+                else if (strength < 0.02f)
+                    strength = 0.98f;
+            }
+            strength = Math.Clamp(strength, 0.02f, 0.98f);
+            buttonStrength.Text = strength.ToString("0.00");
+            control_Settings.Strength = strength.ToString("0.00");
+        }
+
+        float cfgScale = 7.5f;
+        private void buttonCFGScale_Click(object sender, EventArgs e)
+        {
+            SwitchCFGScale(4.0f, true);
+        }
+
+        private void buttonCFGScale_MouseWheel(object? sender, MouseEventArgs e)
+        {
+            if (e.Delta > 0)
+                SwitchCFGScale(0.5f);
+            else if (e.Delta < 0)
+                SwitchCFGScale(-0.5f);
+        }
+
+        public void SwitchCFGScale(float value, bool loop = false)
+        {
+            cfgScale = cfgScale + value;
+
+            if (loop)
+            {
+                if (cfgScale > 32.0f)
+                    cfgScale = 0.5f;
+                else if (cfgScale < 0.5f)
+                    cfgScale = 32.0f;
+            }
+
+
+            cfgScale = Math.Clamp(cfgScale, 0.5f, 32.0f);
+            buttonCFGScale.Text = cfgScale.ToString("0.0");
+            control_Settings.CFGScale = cfgScale.ToString("0.0");
+        }
+
+
+        string[] primeNumbers = new string[] { "2", "3", "5", "7", "11", "13", "17", "19", "23", "29", "31", "37", "41", "43", "47", "53", "59", "61", "67", "71", "73", "79", "83", "89", "97", "101", "103", "107", "109", "113", "127", "131", "137", "139", "149", "151", "157", "163", "167", "173", "179", "181", "191", "193", "197", "199", "211", "223", "227", "229", "233", "239", "241", "251", "257", "263", "269", "271", "277", "281", "283", "293", "307", "311", "313", "317", "331", "337", "347", "349", "353", "359", "367", "373", "379", "383", "389", "397", "401", "409", "419", "421", "431", "433", "439", "443", "449", "457", "461", "463", "467", "479", "487", "491", "499", "503", "509", "521", "523", "541", "547", "557", "563", "569", "571", "577", "587", "593", "599", "601", "607", "613", "617", "619", "631", "641", "643", "647", "653", "659", "661", "673", "677", "683", "691", "701", "709", "733", "739", "743", "751", "757", "761", "769", "773", "787", "797", "809", "811", "821", "823", "827", "829", "839", "853", "857", "859", "863", "877", "881", "883", "887", "907", "911", "919", "929", "937", "941", "947", "953", "967", "971", "977", "983", "991", "997" };
         int seed = -1;
         private void buttonSeed_Click(object sender, EventArgs e)
         {
-            Random r = new Random();
-
-
             if (seed == -1)
-                seed = r.Next(999);
+                SwitchSeed(true);
             else
-                seed = -1;
+                SwitchSeed(false);
 
-            buttonSeed.Text = seed.ToString();
         }
 
         private void buttonSeed_MouseWheel(object? sender, MouseEventArgs e)
         {
-            if (e.Delta > 0)
-                seed = seed + 9;
-            else if (e.Delta < 0)
-                seed = seed - 9;
+            SwitchSeed(true);
 
-            seed = Math.Clamp(seed, -1, 999);
+        }
 
-
-            buttonSeed.Text = seed.ToString();
+        public void SwitchSeed(bool isRandom)
+        {
+            seed = -1;
+            if (isRandom)
+            {
+                Random r = new Random();
+                seed = r.Next(primeNumbers.Length);
+                buttonSeed.Text = primeNumbers[seed];
+                control_Settings.Seed = primeNumbers[seed];
+            }
+            else
+            {
+                buttonSeed.Text = "-1";
+                control_Settings.Seed = "-1";
+            }
 
         }
 
@@ -661,33 +741,67 @@ namespace Redream
                 var response = await client.SendAsync(request);
                 dynamic responseD = JsonConvert.DeserializeObject(await response.Content.ReadAsStringAsync());
                 textBoxPrompt.Text = responseD.caption.ToString();
-            } catch{}
+            }
+            catch { }
 
 
         }
 
-        float cfgScale = 7.5f;
-        private void buttonCFGScale_Click(object sender, EventArgs e)
+
+
+        int samplerIndex = 0;
+
+        string[] samplers = new string[] {
+          "Euler a",
+          "Euler",
+          "LMS",
+          "Heun",
+          "DPM2",
+          "DPM2 a",
+          "DPM++ 2S a",
+          "DPM++ 2M",
+          "DPM++ SDE",
+          "DPM fast",
+          "DPM adaptive",
+          "LMS Karras",
+          "DPM2 Karras",
+          "DPM2 a Karras",
+          "DPM++ 2S a Karras",
+          "DPM++ 2M Karras",
+          "DPM++ SDE Karras",
+          "DDIM",
+          "PLMS"
+        };
+        private void buttonSampler_Click(object sender, EventArgs e)
         {
-            cfgScale = cfgScale + 4;
-            if (cfgScale > 16)
-                cfgScale = 4;
-
-            cfgScale = Math.Clamp(cfgScale, 1, 16);
-            buttonCFGScale.Text = cfgScale.ToString("0.0");
+            SwitchSampler(false);
         }
 
-        private void buttonCFGScale_MouseWheel(object? sender, MouseEventArgs e)
+        private void buttonSampler_MouseWheel(object? sender, MouseEventArgs e)
         {
             if (e.Delta > 0)
-                cfgScale = cfgScale + 0.5f;
+                SwitchSampler(false);
             else if (e.Delta < 0)
-                cfgScale = cfgScale - 0.5f;
-
-            cfgScale = Math.Clamp(cfgScale, 0.5f, 16);
-            buttonCFGScale.Text = cfgScale.ToString("0.0");
-
+                SwitchSampler(true);
         }
+
+        public void SwitchSampler(bool previous)
+        {
+            if (previous)
+                samplerIndex--;
+            else
+                samplerIndex++;
+
+
+            if (samplerIndex >= samplers.Length)
+                samplerIndex = 0;
+            if (samplerIndex < 0)
+                samplerIndex = samplers.Length - 1;
+
+            toolTip1.SetToolTip(buttonSampler, "Sampler : " + samplers[samplerIndex]);
+            control_Settings.Sampler = samplers[samplerIndex];
+        }
+
 
 
         public Point downPoint = Point.Empty;
@@ -701,7 +815,7 @@ namespace Redream
         private void buttonResize_MouseMove(object sender, MouseEventArgs e)
         {
             if (downPoint != Point.Empty)
-                Location = new Point(Left + e.X - downPoint.X, Top + e.Y -downPoint.Y);
+                Location = new Point(Left + e.X - downPoint.X, Top + e.Y - downPoint.Y);
         }
 
         private void buttonResize_MouseUp(object sender, MouseEventArgs e)
@@ -727,6 +841,58 @@ namespace Redream
         private void buttonClearPromptN_Click(object sender, EventArgs e)
         {
             textBoxPromptN.Text = "";
+        }
+
+
+        bool isDefaultSettings = false;
+        private void buttonDefaultSettings_Click(object sender, EventArgs e)
+        {
+            isDefaultSettings = !isDefaultSettings;
+
+            Color disabledColor = Color.FromArgb(40, 20, 40);
+            if (isDefaultSettings)
+            {
+                buttonDefaultSettings.BackColor = Color.FromArgb(25, 85, 35);
+                buttonSeed.Enabled = false;
+                buttonSteps.Enabled = false;
+                buttonStrength.Enabled = false;
+                buttonCFGScale.Enabled = false;
+
+                buttonSeed.BackColor = disabledColor;
+                buttonSteps.BackColor = disabledColor;
+                buttonStrength.BackColor = disabledColor;
+                buttonCFGScale.BackColor = disabledColor;
+            }
+            else
+            {
+                buttonDefaultSettings.BackColor = Color.FromArgb(85, 35, 25);
+                buttonSeed.Enabled = true;
+                buttonSteps.Enabled = true;
+                buttonStrength.Enabled = true;
+                buttonCFGScale.Enabled = true;
+
+                buttonSeed.BackColor = Color.FromArgb(60, 30, 60);
+                buttonSteps.BackColor = Color.FromArgb(60, 30, 60);
+                buttonStrength.BackColor = Color.FromArgb(60, 30, 60);
+                buttonCFGScale.BackColor = Color.FromArgb(60, 30, 60);
+            }
+        }
+        bool isMenuSettingsOpen = false;
+
+        private void buttonSettings_Click(object sender, EventArgs e)
+        {
+            isMenuSettingsOpen = !isMenuSettingsOpen;
+            //pictureBox1.Visible = !isMenuSettingsOpen;
+            control_Settings.Visible = isMenuSettingsOpen;
+            control_Settings.BringToFront();
+            if (isMenuSettingsOpen)
+            {
+                buttonSettings.BackColor = Color.FromArgb(25, 85, 35);
+            }
+            else
+            {
+                buttonSettings.BackColor = Color.FromArgb(13, 13, 13);
+            }
         }
     }
 }

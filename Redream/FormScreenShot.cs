@@ -152,6 +152,8 @@ namespace Redream
             Bitmap bmpScreenshot = new Bitmap(this.Width, this.Height);
 
             Graphics g = Graphics.FromImage(bmpScreenshot);
+            using (Brush brush = new SolidBrush(Color.Black))
+                g.FillRectangle(brush, 0, 0, bmpScreenshot.Width, bmpScreenshot.Height);
 
             this.Opacity = 0;
             g.CopyFromScreen(this.Location.X, this.Location.Y, 0, 0, new Size(this.Width, this.Height));

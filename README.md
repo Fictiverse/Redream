@@ -9,6 +9,7 @@
 - [Automatic1111 stable-diffusion-webui](https://github.com/AUTOMATIC1111/stable-diffusion-webui)   
 Make sure```--xformers``` and ```--api``` commandline arguments are set in your "webui-user.bat":   
 ```set COMMANDLINE_ARGS=--xformers --api``` 
+- [ControlNet Extension](https://github.com/Mikubill/sd-webui-controlnet)
 - [.NET 6.0 Framework](https://dotnet.microsoft.com/en-us/download/dotnet/6.0)
 - [Redream 1.1](https://github.com/Fictiverse/Redream/releases)   
 Or compile this repo with [Visual Studio](https://visualstudio.microsoft.com/en/downloads/)

@@ -536,7 +536,7 @@ namespace Redream
             {
                 Image img = LerpImages(oldimage, newImage, opacity);
                 pictureBox1.Image = img;
-                opacity += 0.03f;
+                opacity += 0.05f;
             }
             else
             {
@@ -548,30 +548,9 @@ namespace Redream
         }
 
 
-        private Image LerpImages(Image img1, Image img2, float opacity)
-        {
-            Bitmap bmp = new Bitmap(img2.Width, img2.Height);
-            using (Graphics g = Graphics.FromImage(bmp))
-            {
-                ColorMatrix matrix = new ColorMatrix();
-                matrix.Matrix33 = opacity;
-                ImageAttributes attributes = new ImageAttributes();
-                attributes.SetColorMatrix(matrix, ColorMatrixFlag.Default, ColorAdjustType.Bitmap);
 
-                g.DrawImage(img2, new Rectangle(0, 0, img2.Width, img2.Height), 0, 0, img2.Width, img2.Height, GraphicsUnit.Pixel, attributes);
-            }
 
-            using (Graphics g = Graphics.FromImage(img1))
-            {
-                g.DrawImage(bmp, 0, 0, img2.Width, img2.Height);
-            }
-
-            bmp.Dispose(); // Dispose the Bitmap object
-
-            return img1;
-        }
-
-        private Image LerpImages2(Image image1, Image image2, float t)
+        private Image LerpImages(Image image1, Image image2, float t)
         {
             int width = image1.Width;
             int height = image1.Height;

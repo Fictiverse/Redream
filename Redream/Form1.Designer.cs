@@ -106,7 +106,7 @@
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 60F));
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 40F));
-            tableLayoutPanel1.Size = new Size(1083, 682);
+            tableLayoutPanel1.Size = new Size(598, 618);
             tableLayoutPanel1.TabIndex = 0;
             // 
             // buttonStart
@@ -135,7 +135,7 @@
             panelImage.Dock = DockStyle.Fill;
             panelImage.Location = new Point(43, 63);
             panelImage.Name = "panelImage";
-            panelImage.Size = new Size(997, 576);
+            panelImage.Size = new Size(512, 512);
             panelImage.TabIndex = 5;
             panelImage.MouseDown += panelImage_MouseDown;
             // 
@@ -167,7 +167,7 @@
             panelMenu.Location = new Point(0, 63);
             panelMenu.Margin = new Padding(0, 3, 0, 0);
             panelMenu.Name = "panelMenu";
-            panelMenu.Size = new Size(40, 579);
+            panelMenu.Size = new Size(40, 515);
             panelMenu.TabIndex = 7;
             // 
             // buttonScreenshot
@@ -377,12 +377,12 @@
             tableLayoutPanel2.Controls.Add(button2, 1, 0);
             tableLayoutPanel2.Controls.Add(button1, 0, 0);
             tableLayoutPanel2.Dock = DockStyle.Fill;
-            tableLayoutPanel2.Location = new Point(43, 642);
+            tableLayoutPanel2.Location = new Point(43, 578);
             tableLayoutPanel2.Margin = new Padding(3, 0, 3, 0);
             tableLayoutPanel2.Name = "tableLayoutPanel2";
             tableLayoutPanel2.RowCount = 1;
             tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
-            tableLayoutPanel2.Size = new Size(997, 40);
+            tableLayoutPanel2.Size = new Size(512, 40);
             tableLayoutPanel2.TabIndex = 9;
             // 
             // button10
@@ -394,10 +394,10 @@
             button10.FlatStyle = FlatStyle.Flat;
             button10.Font = new Font("Segoe UI", 11F, FontStyle.Bold, GraphicsUnit.Point);
             button10.ForeColor = Color.Silver;
-            button10.Location = new Point(892, 0);
+            button10.Location = new Point(460, 0);
             button10.Margin = new Padding(1, 0, 1, 0);
             button10.Name = "button10";
-            button10.Size = new Size(104, 40);
+            button10.Size = new Size(51, 40);
             button10.TabIndex = 114;
             button10.Text = "10";
             toolTip1.SetToolTip(button10, "Slot 10");
@@ -413,10 +413,10 @@
             button9.FlatStyle = FlatStyle.Flat;
             button9.Font = new Font("Segoe UI", 11F, FontStyle.Bold, GraphicsUnit.Point);
             button9.ForeColor = Color.Silver;
-            button9.Location = new Point(793, 0);
+            button9.Location = new Point(409, 0);
             button9.Margin = new Padding(1, 0, 1, 0);
             button9.Name = "button9";
-            button9.Size = new Size(97, 40);
+            button9.Size = new Size(49, 40);
             button9.TabIndex = 113;
             button9.Text = "9";
             toolTip1.SetToolTip(button9, "Slot 9");
@@ -432,10 +432,10 @@
             button8.FlatStyle = FlatStyle.Flat;
             button8.Font = new Font("Segoe UI", 11F, FontStyle.Bold, GraphicsUnit.Point);
             button8.ForeColor = Color.Silver;
-            button8.Location = new Point(694, 0);
+            button8.Location = new Point(358, 0);
             button8.Margin = new Padding(1, 0, 1, 0);
             button8.Name = "button8";
-            button8.Size = new Size(97, 40);
+            button8.Size = new Size(49, 40);
             button8.TabIndex = 112;
             button8.Text = "8";
             toolTip1.SetToolTip(button8, "Slot 8");
@@ -451,10 +451,10 @@
             button7.FlatStyle = FlatStyle.Flat;
             button7.Font = new Font("Segoe UI", 11F, FontStyle.Bold, GraphicsUnit.Point);
             button7.ForeColor = Color.Silver;
-            button7.Location = new Point(595, 0);
+            button7.Location = new Point(307, 0);
             button7.Margin = new Padding(1, 0, 1, 0);
             button7.Name = "button7";
-            button7.Size = new Size(97, 40);
+            button7.Size = new Size(49, 40);
             button7.TabIndex = 111;
             button7.Text = "7";
             toolTip1.SetToolTip(button7, "Slot 7");
@@ -470,10 +470,10 @@
             button6.FlatStyle = FlatStyle.Flat;
             button6.Font = new Font("Segoe UI", 11F, FontStyle.Bold, GraphicsUnit.Point);
             button6.ForeColor = Color.Silver;
-            button6.Location = new Point(496, 0);
+            button6.Location = new Point(256, 0);
             button6.Margin = new Padding(1, 0, 1, 0);
             button6.Name = "button6";
-            button6.Size = new Size(97, 40);
+            button6.Size = new Size(49, 40);
             button6.TabIndex = 110;
             button6.Text = "6";
             toolTip1.SetToolTip(button6, "Slot 6");
@@ -489,10 +489,10 @@
             button5.FlatStyle = FlatStyle.Flat;
             button5.Font = new Font("Segoe UI", 11F, FontStyle.Bold, GraphicsUnit.Point);
             button5.ForeColor = Color.Silver;
-            button5.Location = new Point(397, 0);
+            button5.Location = new Point(205, 0);
             button5.Margin = new Padding(1, 0, 1, 0);
             button5.Name = "button5";
-            button5.Size = new Size(97, 40);
+            button5.Size = new Size(49, 40);
             button5.TabIndex = 109;
             button5.Text = "5";
             toolTip1.SetToolTip(button5, "Slot 5");
@@ -508,10 +508,10 @@
             button4.FlatStyle = FlatStyle.Flat;
             button4.Font = new Font("Segoe UI", 11F, FontStyle.Bold, GraphicsUnit.Point);
             button4.ForeColor = Color.Silver;
-            button4.Location = new Point(298, 0);
+            button4.Location = new Point(154, 0);
             button4.Margin = new Padding(1, 0, 1, 0);
             button4.Name = "button4";
-            button4.Size = new Size(97, 40);
+            button4.Size = new Size(49, 40);
             button4.TabIndex = 108;
             button4.Text = "4";
             toolTip1.SetToolTip(button4, "Slot 4");
@@ -527,10 +527,10 @@
             button3.FlatStyle = FlatStyle.Flat;
             button3.Font = new Font("Segoe UI", 11F, FontStyle.Bold, GraphicsUnit.Point);
             button3.ForeColor = Color.Silver;
-            button3.Location = new Point(199, 0);
+            button3.Location = new Point(103, 0);
             button3.Margin = new Padding(1, 0, 1, 0);
             button3.Name = "button3";
-            button3.Size = new Size(97, 40);
+            button3.Size = new Size(49, 40);
             button3.TabIndex = 107;
             button3.Text = "3";
             toolTip1.SetToolTip(button3, "Slot 3");
@@ -546,10 +546,10 @@
             button2.FlatStyle = FlatStyle.Flat;
             button2.Font = new Font("Segoe UI", 11F, FontStyle.Bold, GraphicsUnit.Point);
             button2.ForeColor = Color.Silver;
-            button2.Location = new Point(100, 0);
+            button2.Location = new Point(52, 0);
             button2.Margin = new Padding(1, 0, 1, 0);
             button2.Name = "button2";
-            button2.Size = new Size(97, 40);
+            button2.Size = new Size(49, 40);
             button2.TabIndex = 106;
             button2.Text = "2";
             toolTip1.SetToolTip(button2, "Slot 2");
@@ -568,7 +568,7 @@
             button1.Location = new Point(1, 0);
             button1.Margin = new Padding(1, 0, 1, 0);
             button1.Name = "button1";
-            button1.Size = new Size(97, 40);
+            button1.Size = new Size(49, 40);
             button1.TabIndex = 105;
             button1.Text = "1";
             toolTip1.SetToolTip(button1, "Slot 1");
@@ -584,7 +584,7 @@
             buttonInterrogate.Font = new Font("Segoe UI", 11F, FontStyle.Bold, GraphicsUnit.Point);
             buttonInterrogate.ForeColor = Color.Silver;
             buttonInterrogate.Image = Properties.Resources.text;
-            buttonInterrogate.Location = new Point(1043, 0);
+            buttonInterrogate.Location = new Point(558, 0);
             buttonInterrogate.Margin = new Padding(0);
             buttonInterrogate.Name = "buttonInterrogate";
             buttonInterrogate.Size = new Size(40, 60);
@@ -602,7 +602,7 @@
             buttonDiscord.Font = new Font("Segoe UI", 11F, FontStyle.Bold, GraphicsUnit.Point);
             buttonDiscord.ForeColor = Color.Silver;
             buttonDiscord.Image = Properties.Resources.discord;
-            buttonDiscord.Location = new Point(1043, 642);
+            buttonDiscord.Location = new Point(558, 578);
             buttonDiscord.Margin = new Padding(0);
             buttonDiscord.Name = "buttonDiscord";
             buttonDiscord.Size = new Size(40, 40);
@@ -620,7 +620,7 @@
             buttonFav.Font = new Font("Segoe UI", 11F, FontStyle.Bold, GraphicsUnit.Point);
             buttonFav.ForeColor = Color.Silver;
             buttonFav.Image = Properties.Resources.favourite;
-            buttonFav.Location = new Point(0, 642);
+            buttonFav.Location = new Point(0, 578);
             buttonFav.Margin = new Padding(0);
             buttonFav.Name = "buttonFav";
             buttonFav.Size = new Size(40, 40);
@@ -646,7 +646,7 @@
             tableLayoutPanelPrompts.RowCount = 2;
             tableLayoutPanelPrompts.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
             tableLayoutPanelPrompts.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
-            tableLayoutPanelPrompts.Size = new Size(1000, 60);
+            tableLayoutPanelPrompts.Size = new Size(515, 60);
             tableLayoutPanelPrompts.TabIndex = 110;
             // 
             // buttonClearPromptN
@@ -659,7 +659,7 @@
             buttonClearPromptN.Font = new Font("Segoe UI", 11F, FontStyle.Bold, GraphicsUnit.Point);
             buttonClearPromptN.ForeColor = Color.Silver;
             buttonClearPromptN.Image = Properties.Resources.delete_cross;
-            buttonClearPromptN.Location = new Point(970, 30);
+            buttonClearPromptN.Location = new Point(485, 30);
             buttonClearPromptN.Margin = new Padding(0);
             buttonClearPromptN.Name = "buttonClearPromptN";
             buttonClearPromptN.Size = new Size(30, 30);
@@ -678,7 +678,7 @@
             panel1.Margin = new Padding(3, 0, 3, 0);
             panel1.Name = "panel1";
             panel1.Padding = new Padding(6, 7, 6, 0);
-            panel1.Size = new Size(964, 30);
+            panel1.Size = new Size(479, 30);
             panel1.TabIndex = 6;
             // 
             // textBoxPromptN
@@ -690,7 +690,7 @@
             textBoxPromptN.Location = new Point(6, 7);
             textBoxPromptN.Margin = new Padding(3, 0, 3, 3);
             textBoxPromptN.Name = "textBoxPromptN";
-            textBoxPromptN.Size = new Size(952, 16);
+            textBoxPromptN.Size = new Size(467, 16);
             textBoxPromptN.TabIndex = 0;
             textBoxPromptN.Text = "Ugly";
             // 
@@ -703,7 +703,7 @@
             panelPrompt.Margin = new Padding(3, 0, 3, 0);
             panelPrompt.Name = "panelPrompt";
             panelPrompt.Padding = new Padding(6, 7, 6, 0);
-            panelPrompt.Size = new Size(964, 30);
+            panelPrompt.Size = new Size(479, 30);
             panelPrompt.TabIndex = 5;
             // 
             // textBoxPrompt
@@ -715,7 +715,7 @@
             textBoxPrompt.Location = new Point(6, 7);
             textBoxPrompt.Margin = new Padding(3, 0, 3, 3);
             textBoxPrompt.Name = "textBoxPrompt";
-            textBoxPrompt.Size = new Size(952, 16);
+            textBoxPrompt.Size = new Size(467, 16);
             textBoxPrompt.TabIndex = 0;
             textBoxPrompt.Text = "Visual Novel";
             // 
@@ -729,7 +729,7 @@
             buttonClearPrompt.Font = new Font("Segoe UI", 11F, FontStyle.Bold, GraphicsUnit.Point);
             buttonClearPrompt.ForeColor = Color.Silver;
             buttonClearPrompt.Image = Properties.Resources.delete_cross;
-            buttonClearPrompt.Location = new Point(970, 0);
+            buttonClearPrompt.Location = new Point(485, 0);
             buttonClearPrompt.Margin = new Padding(0);
             buttonClearPrompt.Name = "buttonClearPrompt";
             buttonClearPrompt.Size = new Size(30, 30);
@@ -747,14 +747,14 @@
             tableLayoutPanelRightMenu.Controls.Add(buttonSettings, 0, 2);
             tableLayoutPanelRightMenu.Controls.Add(buttonDefaultSettings, 0, 1);
             tableLayoutPanelRightMenu.Dock = DockStyle.Fill;
-            tableLayoutPanelRightMenu.Location = new Point(1043, 60);
+            tableLayoutPanelRightMenu.Location = new Point(558, 60);
             tableLayoutPanelRightMenu.Margin = new Padding(0);
             tableLayoutPanelRightMenu.Name = "tableLayoutPanelRightMenu";
             tableLayoutPanelRightMenu.RowCount = 3;
             tableLayoutPanelRightMenu.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
             tableLayoutPanelRightMenu.RowStyles.Add(new RowStyle(SizeType.Absolute, 43F));
             tableLayoutPanelRightMenu.RowStyles.Add(new RowStyle(SizeType.Absolute, 43F));
-            tableLayoutPanelRightMenu.Size = new Size(40, 582);
+            tableLayoutPanelRightMenu.Size = new Size(40, 518);
             tableLayoutPanelRightMenu.TabIndex = 111;
             // 
             // buttonResize
@@ -769,7 +769,7 @@
             buttonResize.Location = new Point(0, 3);
             buttonResize.Margin = new Padding(0, 3, 0, 3);
             buttonResize.Name = "buttonResize";
-            buttonResize.Size = new Size(40, 490);
+            buttonResize.Size = new Size(40, 426);
             buttonResize.TabIndex = 12;
             toolTip1.SetToolTip(buttonResize, "Resize");
             buttonResize.UseVisualStyleBackColor = false;
@@ -786,7 +786,7 @@
             buttonSettings.Font = new Font("Segoe UI", 11F, FontStyle.Bold, GraphicsUnit.Point);
             buttonSettings.ForeColor = Color.Silver;
             buttonSettings.Image = Properties.Resources._16_menu;
-            buttonSettings.Location = new Point(0, 539);
+            buttonSettings.Location = new Point(0, 475);
             buttonSettings.Margin = new Padding(0, 0, 0, 3);
             buttonSettings.Name = "buttonSettings";
             buttonSettings.Size = new Size(40, 40);
@@ -805,7 +805,7 @@
             buttonDefaultSettings.Font = new Font("Segoe UI", 11F, FontStyle.Bold, GraphicsUnit.Point);
             buttonDefaultSettings.ForeColor = Color.Silver;
             buttonDefaultSettings.Image = Properties.Resources._16_process;
-            buttonDefaultSettings.Location = new Point(0, 499);
+            buttonDefaultSettings.Location = new Point(0, 435);
             buttonDefaultSettings.Margin = new Padding(0, 3, 0, 0);
             buttonDefaultSettings.Name = "buttonDefaultSettings";
             buttonDefaultSettings.Size = new Size(40, 40);
@@ -830,7 +830,7 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(25, 15, 35);
-            ClientSize = new Size(1083, 682);
+            ClientSize = new Size(598, 618);
             Controls.Add(tableLayoutPanel1);
             Icon = (Icon)resources.GetObject("$this.Icon");
             MinimumSize = new Size(614, 657);

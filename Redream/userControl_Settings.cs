@@ -55,10 +55,54 @@ namespace Redream
             set { buttonSampler.Text = value; }
         }
 
+        private string selectedControlNetModel;
+
+        public string SelectedControlNetModel
+        {
+            get { return selectedControlNetModel; }
+            set { selectedControlNetModel = value; }
+        }
+
+        private string selectedControlNetPreprossessor;
+
+        public string SelectedControlNetPreprossessor
+        {
+            get { return selectedControlNetPreprossessor; }
+            set { selectedControlNetPreprossessor = value; }
+        }
 
 
 
-
+        List<(string, string, string)> ControlNetList = new List<(string, string, string)>
+            {
+                ("none", "none", "None"),
+                ("control_v11p_sd15_canny", "canny","Canny"),
+                ("control_v11p_sd15_mlsd", "mlsd", "mlsd"),
+                //("control_v11f1p_sd15_depth", "depth_midas"),
+                //("control_v11f1p_sd15_depth", "depth_leres"),
+                ("control_v11f1p_sd15_depth", "depth_zoe", "Depth"),
+                ("control_v11p_sd15_normalbae", "normal_bae", "Normal"),
+                //("control_v11p_sd15_seg", "seg_ofade20k"),
+                //("control_v11p_sd15_seg", "seg_ofcoco"),
+                ("control_v11p_sd15_seg", "seg_ufade20k", "Segmentation"),
+                //("control_v11p_sd15_inpaint", "inpaint_global_harmonious"),
+                ("control_v11p_sd15_lineart", "lineart_standard", "Linerart"),
+                //("control_v11p_sd15_lineart", "lineart_realistic"),
+                //("control_v11p_sd15_lineart", "lineart_coarse"),
+                //("control_v11p_sd15s2_lineart_anime", "lineart_anime"),
+                //("control_v11p_sd15_openpose", "openpose"),
+                //("control_v11p_sd15_openpose", "openpose_face"),
+               // ("control_v11p_sd15_openpose", "openpose_faceonly"),
+                ("control_v11p_sd15_openpose", "openpose_full", "OpenPose"),
+                //("control_v11p_sd15_openpose", "openpose_hand"),
+                ("control_v11p_sd15_scribble", "scribble_hed", "Scribble"),
+                //("control_v11p_sd15_scribble", "scribble_pidinet"),
+                //("control_v11p_sd15_softedge", "softedge_pidinet"),
+                //("control_v11p_sd15_softedge", "softedge_pidisafe"),
+                ("control_v11p_sd15_softedge", "softedge_hed", "SoftEdge"),
+                //("control_v11p_sd15_softedge", "softedge_hed_safe")
+            };
+        string[] ControlNetModels = new string[] { };
 
 
 
@@ -70,11 +114,31 @@ namespace Redream
             buttonStrength.MouseWheel += new MouseEventHandler(buttonStrength_MouseWheel);
             buttonCFGScale.MouseWheel += new MouseEventHandler(buttonCFGScale_MouseWheel);
             buttonSampler.MouseWheel += new MouseEventHandler(buttonSampler_MouseWheel);
+
+            foreach (var item in ControlNetList)
+            {
+                string model = item.Item1;
+                string pre = item.Item2;
+                string name = item.Item3;
+                dataControlNet.Rows.Add(name, null, pre, model);
+            }
+
+
+            SelectedControlNetModel = "None";
+            SelectedControlNetPreprossessor = "None";
+
+
+
+            InitModel();
+            GetControletModels();
+
+
+
         }
 
 
 
-        private async void InitModel()
+        internal async void InitModel()
         {
 
             await API_RefreshModels(MainForm.url_API);
@@ -187,12 +251,12 @@ namespace Redream
 
                 using (Bitmap bm = (Bitmap)FixedSize(OpenImage(fd.FileName), 64, 64))
                 {
-                    bm.Save(iconsPath + dataModels.Rows[index].Cells[0].Value.ToString().Replace(" ", "_") + ".png");
+                    bm.Save(iconsPath + dataModels.Rows[index].Cells[1].Value.ToString().Replace(" ", "_") + ".png");
                     //dataPresets.Rows[index].Cells[1].Value = bm;
                 }
 
-                Bitmap bmp = OpenImage(iconsPath + dataModels.Rows[index].Cells[0].Value.ToString().Replace(" ", "_") + ".png");
-                dataModels.Rows[index].Cells[1].Value = bmp;
+                Bitmap bmp = OpenImage(iconsPath + dataModels.Rows[index].Cells[1].Value.ToString().Replace(" ", "_") + ".png");
+                dataModels.Rows[index].Cells[2].Value = bmp;
 
 
             }
@@ -369,6 +433,43 @@ namespace Redream
                 currentModelName = dataModels.Rows[index].Cells[3].Value.ToString();
                 dataModels.Rows[index].Selected = true;
                 dataModels.FirstDisplayedScrollingRowIndex = index;
+            }
+        }
+
+        private void buttonControlNet_Click(object sender, EventArgs e)
+        {
+            GetControletModels();
+
+        }
+
+        internal async void GetControletModels()
+        {
+            string IP = MainForm.url_API;
+            ControlNetModels = await Get_ControlNet_ModelList(IP);
+        }
+
+
+
+
+        private void dataControlNet_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0 && e.RowIndex < dataControlNet.Rows.Count)
+            {
+                DataGridViewRow selectedRow = dataControlNet.Rows[e.RowIndex];
+
+                if (selectedRow.Cells.Count >= 3 && selectedRow.Index > 0)
+                {
+                    string model = selectedRow.Cells[3].Value?.ToString();  // Get the value from the third cell
+
+                    SelectedControlNetModel = FindBestMatch(model, ControlNetModels);
+                    SelectedControlNetPreprossessor = selectedRow.Cells[2].Value.ToString();
+                }
+                else
+                {
+                    SelectedControlNetModel = "None";
+                    SelectedControlNetPreprossessor = "None";
+                }
+
             }
         }
     }

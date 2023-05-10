@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static Redream.MyFunctions;
 
 namespace Redream
 {
@@ -108,6 +109,34 @@ namespace Redream
             }
             catch { }
         }
+
+
+        public static async Task<string[]> Get_ControlNet_ModelList(string IP)
+        {
+            var client = new HttpClient();
+            var content = new System.Net.Http.StringContent("", Encoding.UTF8, "application/json");
+            var request = new HttpRequestMessage
+            {
+                RequestUri = new Uri("http://" + IP + "/controlnet/model_list"),
+                Method = HttpMethod.Get,
+                Content = content
+            };
+
+            try
+            {
+                var response = await client.SendAsync(request);
+
+                var json = await response.Content.ReadAsStringAsync();
+                var responseObject = JsonConvert.DeserializeObject<Dictionary<string, List<string>>>(json);
+                List<string> modelList = responseObject["model_list"];
+
+                return modelList.ToArray();
+            }
+            catch { return null; }
+        }
+
+
+
 
 
     }

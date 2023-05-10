@@ -34,9 +34,13 @@
             DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle6 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle9 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle10 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle11 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle12 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle13 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle7 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle8 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle9 = new DataGridViewCellStyle();
             panelMenu = new FlowLayoutPanel();
             buttonScreenshot = new Button();
             button564 = new Button();
@@ -58,6 +62,9 @@
             panelHeaderModels = new TableLayoutPanel();
             buttonUndo = new Button();
             buttonRefreshModels = new Button();
+            tableLayoutPanel5 = new TableLayoutPanel();
+            dataControlNet = new DataGridView();
+            buttonControlNet = new Button();
             tableLayoutPanel2 = new TableLayoutPanel();
             buttonModel = new Button();
             dataGridViewTextBoxColumn3 = new DataGridViewTextBoxColumn();
@@ -68,11 +75,17 @@
             dataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
             dataGridViewImageColumn1 = new DataGridViewImageColumn();
             dataGridViewTextBoxColumn2 = new DataGridViewTextBoxColumn();
+            dataGridViewTextBoxColumn7 = new DataGridViewTextBoxColumn();
+            dataGridViewImageColumn3 = new DataGridViewImageColumn();
+            Pre = new DataGridViewTextBoxColumn();
+            dataGridViewTextBoxColumn8 = new DataGridViewTextBoxColumn();
             panelMenu.SuspendLayout();
             tableLayoutPanel1.SuspendLayout();
             tableLayoutPanel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataModels).BeginInit();
             panelHeaderModels.SuspendLayout();
+            tableLayoutPanel5.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dataControlNet).BeginInit();
             tableLayoutPanel2.SuspendLayout();
             tableLayoutPanel3.SuspendLayout();
             SuspendLayout();
@@ -258,12 +271,14 @@
             // 
             // tableLayoutPanel1
             // 
-            tableLayoutPanel1.ColumnCount = 3;
+            tableLayoutPanel1.ColumnCount = 4;
             tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 100F));
             tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 6F));
             tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
+            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 120F));
             tableLayoutPanel1.Controls.Add(panelMenu, 0, 0);
             tableLayoutPanel1.Controls.Add(tableLayoutPanel4, 2, 0);
+            tableLayoutPanel1.Controls.Add(tableLayoutPanel5, 3, 0);
             tableLayoutPanel1.Dock = DockStyle.Fill;
             tableLayoutPanel1.Location = new Point(0, 0);
             tableLayoutPanel1.Margin = new Padding(0);
@@ -285,7 +300,7 @@
             tableLayoutPanel4.RowCount = 2;
             tableLayoutPanel4.RowStyles.Add(new RowStyle(SizeType.Absolute, 40F));
             tableLayoutPanel4.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
-            tableLayoutPanel4.Size = new Size(856, 609);
+            tableLayoutPanel4.Size = new Size(736, 609);
             tableLayoutPanel4.TabIndex = 9;
             // 
             // dataModels
@@ -325,7 +340,7 @@
             dataModels.RowTemplate.Height = 72;
             dataModels.ScrollBars = ScrollBars.Vertical;
             dataModels.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dataModels.Size = new Size(856, 560);
+            dataModels.Size = new Size(736, 560);
             dataModels.TabIndex = 88;
             dataModels.CellClick += dataModels_CellClick;
             // 
@@ -405,7 +420,7 @@
             panelHeaderModels.Name = "panelHeaderModels";
             panelHeaderModels.RowCount = 1;
             panelHeaderModels.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
-            panelHeaderModels.Size = new Size(856, 40);
+            panelHeaderModels.Size = new Size(736, 40);
             panelHeaderModels.TabIndex = 87;
             // 
             // buttonUndo
@@ -417,7 +432,7 @@
             buttonUndo.FlatStyle = FlatStyle.Flat;
             buttonUndo.Font = new Font("Segoe UI", 11F, FontStyle.Bold, GraphicsUnit.Point);
             buttonUndo.ForeColor = Color.Silver;
-            buttonUndo.Location = new Point(816, 0);
+            buttonUndo.Location = new Point(696, 0);
             buttonUndo.Margin = new Padding(0);
             buttonUndo.Name = "buttonUndo";
             buttonUndo.Size = new Size(40, 40);
@@ -440,12 +455,90 @@
             buttonRefreshModels.Margin = new Padding(0, 0, 3, 0);
             buttonRefreshModels.Name = "buttonRefreshModels";
             buttonRefreshModels.Padding = new Padding(6, 0, 6, 0);
-            buttonRefreshModels.Size = new Size(813, 40);
+            buttonRefreshModels.Size = new Size(693, 40);
             buttonRefreshModels.TabIndex = 83;
             buttonRefreshModels.Text = "Models";
             buttonRefreshModels.TextAlign = ContentAlignment.MiddleLeft;
             buttonRefreshModels.UseVisualStyleBackColor = false;
             buttonRefreshModels.Click += buttonRefreshModels_Click;
+            // 
+            // tableLayoutPanel5
+            // 
+            tableLayoutPanel5.ColumnCount = 1;
+            tableLayoutPanel5.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
+            tableLayoutPanel5.Controls.Add(dataControlNet, 0, 1);
+            tableLayoutPanel5.Controls.Add(buttonControlNet, 0, 0);
+            tableLayoutPanel5.Dock = DockStyle.Fill;
+            tableLayoutPanel5.Location = new Point(851, 3);
+            tableLayoutPanel5.Name = "tableLayoutPanel5";
+            tableLayoutPanel5.RowCount = 2;
+            tableLayoutPanel5.RowStyles.Add(new RowStyle(SizeType.Absolute, 40F));
+            tableLayoutPanel5.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
+            tableLayoutPanel5.Size = new Size(114, 609);
+            tableLayoutPanel5.TabIndex = 10;
+            // 
+            // dataControlNet
+            // 
+            dataControlNet.AllowUserToAddRows = false;
+            dataControlNet.AllowUserToDeleteRows = false;
+            dataControlNet.AllowUserToResizeColumns = false;
+            dataControlNet.AllowUserToResizeRows = false;
+            dataControlNet.BackgroundColor = Color.FromArgb(15, 20, 35);
+            dataControlNet.BorderStyle = BorderStyle.None;
+            dataControlNet.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
+            dataGridViewCellStyle6.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = Color.FromArgb(15, 10, 15);
+            dataGridViewCellStyle6.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            dataGridViewCellStyle6.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle6.Padding = new Padding(6, 0, 0, 0);
+            dataGridViewCellStyle6.SelectionBackColor = Color.FromArgb(30, 60, 40);
+            dataGridViewCellStyle6.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle6.WrapMode = DataGridViewTriState.True;
+            dataControlNet.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle6;
+            dataControlNet.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            dataControlNet.ColumnHeadersVisible = false;
+            dataControlNet.Columns.AddRange(new DataGridViewColumn[] { dataGridViewTextBoxColumn7, dataGridViewImageColumn3, Pre, dataGridViewTextBoxColumn8 });
+            dataControlNet.Cursor = Cursors.Hand;
+            dataControlNet.Dock = DockStyle.Fill;
+            dataControlNet.EditMode = DataGridViewEditMode.EditProgrammatically;
+            dataControlNet.GridColor = Color.FromArgb(10, 10, 10);
+            dataControlNet.Location = new Point(0, 46);
+            dataControlNet.Margin = new Padding(0, 6, 0, 3);
+            dataControlNet.Name = "dataControlNet";
+            dataControlNet.ReadOnly = true;
+            dataGridViewCellStyle9.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle9.WrapMode = DataGridViewTriState.True;
+            dataControlNet.RowHeadersDefaultCellStyle = dataGridViewCellStyle9;
+            dataControlNet.RowHeadersVisible = false;
+            dataControlNet.RowTemplate.DividerHeight = 3;
+            dataControlNet.RowTemplate.Height = 40;
+            dataControlNet.ScrollBars = ScrollBars.Vertical;
+            dataControlNet.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dataControlNet.Size = new Size(144, 560);
+            dataControlNet.TabIndex = 89;
+            dataControlNet.CellClick += dataControlNet_CellClick;
+            // 
+            // buttonControlNet
+            // 
+            buttonControlNet.AllowDrop = true;
+            buttonControlNet.BackColor = Color.FromArgb(35, 65, 65);
+            buttonControlNet.Cursor = Cursors.Hand;
+            buttonControlNet.Dock = DockStyle.Fill;
+            buttonControlNet.FlatAppearance.BorderSize = 0;
+            buttonControlNet.FlatStyle = FlatStyle.Flat;
+            buttonControlNet.Font = new Font("Segoe UI", 11F, FontStyle.Bold, GraphicsUnit.Point);
+            buttonControlNet.ForeColor = Color.Silver;
+            buttonControlNet.ImageAlign = ContentAlignment.MiddleRight;
+            buttonControlNet.Location = new Point(0, 0);
+            buttonControlNet.Margin = new Padding(0, 0, 3, 0);
+            buttonControlNet.Name = "buttonControlNet";
+            buttonControlNet.Padding = new Padding(6, 0, 6, 0);
+            buttonControlNet.Size = new Size(141, 40);
+            buttonControlNet.TabIndex = 83;
+            buttonControlNet.Text = "ControlNet";
+            buttonControlNet.TextAlign = ContentAlignment.MiddleLeft;
+            buttonControlNet.UseVisualStyleBackColor = false;
+            buttonControlNet.Click += buttonControlNet_Click;
             // 
             // tableLayoutPanel2
             // 
@@ -482,12 +575,12 @@
             // dataGridViewTextBoxColumn3
             // 
             dataGridViewTextBoxColumn3.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            dataGridViewCellStyle6.BackColor = Color.FromArgb(24, 30, 44);
-            dataGridViewCellStyle6.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
-            dataGridViewCellStyle6.ForeColor = SystemColors.ScrollBar;
-            dataGridViewCellStyle6.Padding = new Padding(6, 0, 0, 0);
-            dataGridViewCellStyle6.SelectionBackColor = Color.FromArgb(30, 60, 40);
-            dataGridViewTextBoxColumn3.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle10.BackColor = Color.FromArgb(24, 30, 44);
+            dataGridViewCellStyle10.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            dataGridViewCellStyle10.ForeColor = SystemColors.ScrollBar;
+            dataGridViewCellStyle10.Padding = new Padding(6, 0, 0, 0);
+            dataGridViewCellStyle10.SelectionBackColor = Color.FromArgb(30, 60, 40);
+            dataGridViewTextBoxColumn3.DefaultCellStyle = dataGridViewCellStyle10;
             dataGridViewTextBoxColumn3.FillWeight = 400F;
             dataGridViewTextBoxColumn3.HeaderText = "Presets";
             dataGridViewTextBoxColumn3.MinimumWidth = 100;
@@ -497,13 +590,13 @@
             // 
             // dataGridViewTextBoxColumn4
             // 
-            dataGridViewCellStyle7.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle7.BackColor = Color.FromArgb(21, 26, 38);
-            dataGridViewCellStyle7.ForeColor = SystemColors.ScrollBar;
-            dataGridViewCellStyle7.NullValue = null;
-            dataGridViewCellStyle7.SelectionBackColor = Color.FromArgb(25, 55, 35);
-            dataGridViewCellStyle7.SelectionForeColor = SystemColors.ScrollBar;
-            dataGridViewTextBoxColumn4.DefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle11.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle11.BackColor = Color.FromArgb(21, 26, 38);
+            dataGridViewCellStyle11.ForeColor = SystemColors.ScrollBar;
+            dataGridViewCellStyle11.NullValue = null;
+            dataGridViewCellStyle11.SelectionBackColor = Color.FromArgb(25, 55, 35);
+            dataGridViewCellStyle11.SelectionForeColor = SystemColors.ScrollBar;
+            dataGridViewTextBoxColumn4.DefaultCellStyle = dataGridViewCellStyle11;
             dataGridViewTextBoxColumn4.FillWeight = 72F;
             dataGridViewTextBoxColumn4.HeaderText = "Icon";
             dataGridViewTextBoxColumn4.MinimumWidth = 72;
@@ -558,12 +651,12 @@
             // dataGridViewTextBoxColumn1
             // 
             dataGridViewTextBoxColumn1.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            dataGridViewCellStyle8.BackColor = Color.FromArgb(24, 30, 44);
-            dataGridViewCellStyle8.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
-            dataGridViewCellStyle8.ForeColor = SystemColors.ScrollBar;
-            dataGridViewCellStyle8.Padding = new Padding(6, 0, 0, 0);
-            dataGridViewCellStyle8.SelectionBackColor = Color.FromArgb(30, 60, 40);
-            dataGridViewTextBoxColumn1.DefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle12.BackColor = Color.FromArgb(24, 30, 44);
+            dataGridViewCellStyle12.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            dataGridViewCellStyle12.ForeColor = SystemColors.ScrollBar;
+            dataGridViewCellStyle12.Padding = new Padding(6, 0, 0, 0);
+            dataGridViewCellStyle12.SelectionBackColor = Color.FromArgb(30, 60, 40);
+            dataGridViewTextBoxColumn1.DefaultCellStyle = dataGridViewCellStyle12;
             dataGridViewTextBoxColumn1.FillWeight = 400F;
             dataGridViewTextBoxColumn1.HeaderText = "Presets";
             dataGridViewTextBoxColumn1.MinimumWidth = 100;
@@ -573,13 +666,13 @@
             // 
             // dataGridViewImageColumn1
             // 
-            dataGridViewCellStyle9.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle9.BackColor = Color.FromArgb(21, 26, 38);
-            dataGridViewCellStyle9.ForeColor = SystemColors.ScrollBar;
-            dataGridViewCellStyle9.NullValue = null;
-            dataGridViewCellStyle9.SelectionBackColor = Color.FromArgb(25, 55, 35);
-            dataGridViewCellStyle9.SelectionForeColor = SystemColors.ScrollBar;
-            dataGridViewImageColumn1.DefaultCellStyle = dataGridViewCellStyle9;
+            dataGridViewCellStyle13.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle13.BackColor = Color.FromArgb(21, 26, 38);
+            dataGridViewCellStyle13.ForeColor = SystemColors.ScrollBar;
+            dataGridViewCellStyle13.NullValue = null;
+            dataGridViewCellStyle13.SelectionBackColor = Color.FromArgb(25, 55, 35);
+            dataGridViewCellStyle13.SelectionForeColor = SystemColors.ScrollBar;
+            dataGridViewImageColumn1.DefaultCellStyle = dataGridViewCellStyle13;
             dataGridViewImageColumn1.FillWeight = 72F;
             dataGridViewImageColumn1.HeaderText = "Icon";
             dataGridViewImageColumn1.MinimumWidth = 72;
@@ -597,6 +690,56 @@
             dataGridViewTextBoxColumn2.ReadOnly = true;
             dataGridViewTextBoxColumn2.Visible = false;
             // 
+            // dataGridViewTextBoxColumn7
+            // 
+            dataGridViewTextBoxColumn7.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dataGridViewCellStyle7.BackColor = Color.FromArgb(24, 30, 44);
+            dataGridViewCellStyle7.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            dataGridViewCellStyle7.ForeColor = SystemColors.ScrollBar;
+            dataGridViewCellStyle7.Padding = new Padding(6, 0, 0, 0);
+            dataGridViewCellStyle7.SelectionBackColor = Color.FromArgb(30, 60, 40);
+            dataGridViewTextBoxColumn7.DefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewTextBoxColumn7.FillWeight = 400F;
+            dataGridViewTextBoxColumn7.HeaderText = "Name";
+            dataGridViewTextBoxColumn7.MinimumWidth = 100;
+            dataGridViewTextBoxColumn7.Name = "dataGridViewTextBoxColumn7";
+            dataGridViewTextBoxColumn7.ReadOnly = true;
+            dataGridViewTextBoxColumn7.Resizable = DataGridViewTriState.False;
+            // 
+            // dataGridViewImageColumn3
+            // 
+            dataGridViewCellStyle8.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle8.BackColor = Color.FromArgb(21, 26, 38);
+            dataGridViewCellStyle8.ForeColor = SystemColors.ScrollBar;
+            dataGridViewCellStyle8.NullValue = null;
+            dataGridViewCellStyle8.SelectionBackColor = Color.FromArgb(25, 55, 35);
+            dataGridViewCellStyle8.SelectionForeColor = SystemColors.ScrollBar;
+            dataGridViewImageColumn3.DefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewImageColumn3.FillWeight = 72F;
+            dataGridViewImageColumn3.HeaderText = "Icon";
+            dataGridViewImageColumn3.MinimumWidth = 72;
+            dataGridViewImageColumn3.Name = "dataGridViewImageColumn3";
+            dataGridViewImageColumn3.ReadOnly = true;
+            dataGridViewImageColumn3.Resizable = DataGridViewTriState.False;
+            dataGridViewImageColumn3.SortMode = DataGridViewColumnSortMode.Automatic;
+            dataGridViewImageColumn3.ToolTipText = "Icon";
+            dataGridViewImageColumn3.Visible = false;
+            dataGridViewImageColumn3.Width = 72;
+            // 
+            // Pre
+            // 
+            Pre.HeaderText = "PreProcessor";
+            Pre.Name = "Pre";
+            Pre.ReadOnly = true;
+            Pre.Visible = false;
+            // 
+            // dataGridViewTextBoxColumn8
+            // 
+            dataGridViewTextBoxColumn8.HeaderText = "Model";
+            dataGridViewTextBoxColumn8.Name = "dataGridViewTextBoxColumn8";
+            dataGridViewTextBoxColumn8.ReadOnly = true;
+            dataGridViewTextBoxColumn8.Visible = false;
+            // 
             // userControl_Settings
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -611,6 +754,8 @@
             tableLayoutPanel4.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)dataModels).EndInit();
             panelHeaderModels.ResumeLayout(false);
+            tableLayoutPanel5.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)dataControlNet).EndInit();
             tableLayoutPanel2.ResumeLayout(false);
             tableLayoutPanel3.ResumeLayout(false);
             ResumeLayout(false);
@@ -649,5 +794,12 @@
         private DataGridViewImageColumn dataGridViewImageColumn2;
         private DataGridViewTextBoxColumn model;
         private DataGridViewTextBoxColumn Tokens;
+        private TableLayoutPanel tableLayoutPanel5;
+        private Button buttonControlNet;
+        private DataGridView dataControlNet;
+        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn7;
+        private DataGridViewImageColumn dataGridViewImageColumn3;
+        private DataGridViewTextBoxColumn Pre;
+        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn8;
     }
 }

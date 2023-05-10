@@ -13,6 +13,8 @@ using Button = System.Windows.Forms.Button;
 
 namespace Redream
 {
+
+
     public partial class Form1 : Form
     {
         public string url_API = "127.0.0.1:7860";
@@ -144,7 +146,8 @@ namespace Redream
                     {
                         Bitmap bmp = formSC.TakeScreeenShot();
                         CurrentCapture = bmp;
-                        await AutomaticAsync(seed, bmp);
+                        await ControlNet_Txt2Img(url_API, bmp, control_Settings.SelectedControlNetPreprossessor, control_Settings.SelectedControlNetModel);
+                        // await AutomaticAsync(seed, bmp);
                     }
 
                 }
@@ -239,17 +242,7 @@ namespace Redream
                 using (var ms = new MemoryStream(imgB64))
                     bmp = new Bitmap(Bitmap.FromStream(ms));
 
-                string imagename = DateTime.Now.ToFileTime().ToString().Substring(0, 12) + ".png";
-
-                oldimage = newImage;
-                newImage = bmp;
-                opacity = 0;
-
-                if (isSaveFramesEnabled)
-                {
-                    string name = DateTime.Now.ToFileTime().ToString() + ".png";
-                    bmp.Save(FramesPath + "\\" + name);
-                }
+                ProcessResult(bmp);
                 //pictureBox1.Image = MergeImages(initimage, bmp, 5);
 
             }
@@ -260,6 +253,115 @@ namespace Redream
 
 
         }
+
+
+        public void ProcessResult(Bitmap bmp)
+        {
+            string imagename = DateTime.Now.ToFileTime().ToString().Substring(0, 12) + ".png";
+
+            oldimage = newImage;
+            newImage = bmp;
+            opacity = 0;
+
+            if (isSaveFramesEnabled)
+            {
+                string name = DateTime.Now.ToFileTime().ToString() + ".png";
+                bmp.Save(FramesPath + "\\" + name);
+            }
+        }
+
+
+
+
+        public class json_ControlNet
+        {
+            public List<string> images { get; set; }
+            public string info { get; set; }
+        }
+
+
+        private async Task ControlNet_Txt2Img(string IP, Bitmap initimage, string module, string model, float guidanceStart = 0, float guidanceEnd = 1)
+        {
+            using var client = new HttpClient();
+            var url = $"http://{IP}/controlnet/img2img";
+            string base64Image = "data:image/png;base64," + Convert.ToBase64String(ImageToBytes(initimage));
+
+            List<string> init_images = new List<string> { base64Image };
+            string mask = null;
+            // Set request body
+
+
+            if (module == null)
+                module = "none";
+            if (model == null)
+                model = "none";
+
+            var requestBody = new
+            {
+                enable_hr = false,
+                init_images = init_images,
+                mask = mask,
+                denoising_strength = strength.ToString("0.00").Replace(",", "."),
+                hr_scale = 2,
+                prompt = textBoxPrompt.Text,
+                negative_prompt = textBoxPromptN.Text,
+                seed = buttonSeed.Text,
+                steps = steps.ToString(),
+                cfg_scale = cfgScale.ToString("0.00").Replace(",", "."),
+                batch_size = 1,
+                n_iter = 1,
+                width = formSC.Width.ToString(),
+                height = formSC.Height.ToString(),
+                sampler_index = samplers[samplerIndex],
+                tiling = false,
+                controlnet_units = new[] {
+                    new {
+                        input_image = init_images[0],
+                        module = module,
+                        model = model,
+                        weight = 1,
+                        //resize_mode = "Scale to Fit (Inner Fit)",
+                        guidance_start = guidanceStart,
+                        guidance_end = guidanceEnd,
+                        resize_mode = "Envelope (Outer Fit)",
+                        lowvram = false,
+                        processor_res = 512,
+                        threshold_a = 64,
+                        threshold_b = 64,
+                        guessmode = false
+                    }
+                }
+            };
+            var requestBodyString = Newtonsoft.Json.JsonConvert.SerializeObject(requestBody);
+
+
+            var content = new StringContent(requestBodyString, System.Text.Encoding.UTF8, "application/json");
+            var response = await client.PostAsync(url, content);
+
+
+            if (response.IsSuccessStatusCode)
+            {
+                var responseContent = await response.Content.ReadAsStringAsync();
+                var json_ControlNet = JsonConvert.DeserializeObject<json_ControlNet>(responseContent);
+
+                var bitmapList = new List<Bitmap>();
+                foreach (var imageString in json_ControlNet.images)
+                {
+                    var imageData = Convert.FromBase64String(imageString);
+                    using (var memoryStream = new MemoryStream(imageData))
+                        bitmapList.Add((Bitmap)Image.FromStream(memoryStream));
+                }
+
+                if (bitmapList.Count > 0)
+                    ProcessResult(bitmapList[0]);
+            }
+            else
+            {
+                MessageBox.Show("Error: " + response.ReasonPhrase);
+            }
+
+        }
+
 
 
 
@@ -434,15 +536,14 @@ namespace Redream
             {
                 Image img = LerpImages(oldimage, newImage, opacity);
                 pictureBox1.Image = img;
-                opacity = opacity + 0.03f;
+                opacity += 0.03f;
             }
             else
             {
                 opacity = 0;
-                oldimage = new Bitmap(newImage.Width, newImage.Height);
+                oldimage?.Dispose();
                 oldimage = (Bitmap)newImage.Clone();
                 pictureBox1.Image = oldimage;
-
             }
         }
 
@@ -461,10 +562,49 @@ namespace Redream
             }
 
             using (Graphics g = Graphics.FromImage(img1))
+            {
                 g.DrawImage(bmp, 0, 0, img2.Width, img2.Height);
+            }
+
+            bmp.Dispose(); // Dispose the Bitmap object
+
             return img1;
         }
 
+        private Image LerpImages2(Image image1, Image image2, float t)
+        {
+            int width = image1.Width;
+            int height = image1.Height;
+
+            Bitmap bmp = new Bitmap(width, height);
+
+            using (Graphics g = Graphics.FromImage(bmp))
+            {
+                g.CompositingMode = System.Drawing.Drawing2D.CompositingMode.SourceOver;
+
+                // Calculate the opacity values for each image
+                int opacity1 = (int)Math.Round(255 * (1 - t));
+                int opacity2 = (int)Math.Round(255 * t);
+
+                // Create image attributes for applying opacity
+                ColorMatrix matrix1 = new ColorMatrix { Matrix33 = opacity1 / 255f };
+                ColorMatrix matrix2 = new ColorMatrix { Matrix33 = opacity2 / 255f };
+                ImageAttributes attributes1 = new ImageAttributes();
+                ImageAttributes attributes2 = new ImageAttributes();
+                attributes1.SetColorMatrix(matrix1, ColorMatrixFlag.Default, ColorAdjustType.Bitmap);
+                attributes2.SetColorMatrix(matrix2, ColorMatrixFlag.Default, ColorAdjustType.Bitmap);
+
+                // Draw the first image with the adjusted opacity
+                Rectangle rect1 = new Rectangle(0, 0, width, height);
+                g.DrawImage(image1, rect1, 0, 0, width, height, GraphicsUnit.Pixel, attributes1);
+
+                // Draw the second image with the adjusted opacity
+                Rectangle rect2 = new Rectangle(0, 0, width, height);
+                g.DrawImage(image2, rect2, 0, 0, width, height, GraphicsUnit.Pixel, attributes2);
+            }
+
+            return bmp;
+        }
 
 
 
@@ -885,6 +1025,8 @@ namespace Redream
             //pictureBox1.Visible = !isMenuSettingsOpen;
             control_Settings.Visible = isMenuSettingsOpen;
             control_Settings.BringToFront();
+            control_Settings.InitModel();
+            control_Settings.GetControletModels();
             if (isMenuSettingsOpen)
             {
                 buttonSettings.BackColor = Color.FromArgb(25, 85, 35);
@@ -894,5 +1036,48 @@ namespace Redream
                 buttonSettings.BackColor = Color.FromArgb(13, 13, 13);
             }
         }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     }
 }

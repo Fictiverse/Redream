@@ -79,7 +79,6 @@
             dataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
             dataGridViewImageColumn1 = new DataGridViewImageColumn();
             dataGridViewTextBoxColumn2 = new DataGridViewTextBoxColumn();
-            textBoxControlNetModel = new TextBox();
             panelMenu.SuspendLayout();
             tableLayoutPanel1.SuspendLayout();
             tableLayoutPanel4.SuspendLayout();
@@ -469,14 +468,13 @@
             tableLayoutPanel5.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
             tableLayoutPanel5.Controls.Add(dataControlNet, 0, 1);
             tableLayoutPanel5.Controls.Add(buttonControlNet, 0, 0);
-            tableLayoutPanel5.Controls.Add(textBoxControlNetModel, 0, 2);
             tableLayoutPanel5.Dock = DockStyle.Fill;
             tableLayoutPanel5.Location = new Point(851, 3);
             tableLayoutPanel5.Name = "tableLayoutPanel5";
-            tableLayoutPanel5.RowCount = 3;
+            tableLayoutPanel5.RowCount = 2;
             tableLayoutPanel5.RowStyles.Add(new RowStyle(SizeType.Absolute, 40F));
             tableLayoutPanel5.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
-            tableLayoutPanel5.RowStyles.Add(new RowStyle(SizeType.Absolute, 40F));
+            tableLayoutPanel5.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
             tableLayoutPanel5.Size = new Size(114, 609);
             tableLayoutPanel5.TabIndex = 10;
             // 
@@ -517,7 +515,7 @@
             dataControlNet.RowTemplate.Height = 40;
             dataControlNet.ScrollBars = ScrollBars.Vertical;
             dataControlNet.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dataControlNet.Size = new Size(114, 520);
+            dataControlNet.Size = new Size(114, 560);
             dataControlNet.TabIndex = 89;
             dataControlNet.CellClick += dataControlNet_CellClick;
             // 
@@ -743,13 +741,6 @@
             dataGridViewTextBoxColumn2.ReadOnly = true;
             dataGridViewTextBoxColumn2.Visible = false;
             // 
-            // textBoxControlNetModel
-            // 
-            textBoxControlNetModel.Location = new Point(3, 572);
-            textBoxControlNetModel.Name = "textBoxControlNetModel";
-            textBoxControlNetModel.Size = new Size(108, 23);
-            textBoxControlNetModel.TabIndex = 90;
-            // 
             // userControl_Settings
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -765,7 +756,6 @@
             ((System.ComponentModel.ISupportInitialize)dataModels).EndInit();
             panelHeaderModels.ResumeLayout(false);
             tableLayoutPanel5.ResumeLayout(false);
-            tableLayoutPanel5.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dataControlNet).EndInit();
             tableLayoutPanel2.ResumeLayout(false);
             tableLayoutPanel3.ResumeLayout(false);
@@ -812,6 +802,5 @@
         private DataGridViewImageColumn dataGridViewImageColumn3;
         private DataGridViewTextBoxColumn Pre;
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn8;
-        private TextBox textBoxControlNetModel;
     }
 }

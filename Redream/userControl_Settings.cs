@@ -464,7 +464,6 @@ namespace Redream
                     {
                         SelectedControlNetModel = FindBestMatch(model, ControlNetModels);
                         SelectedControlNetPreprossessor = selectedRow.Cells[2].Value.ToString();
-                        textBoxControlNetModel.Text = SelectedControlNetModel;
                     }
                     else
                     {

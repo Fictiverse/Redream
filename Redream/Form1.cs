@@ -146,8 +146,13 @@ namespace Redream
                     {
                         Bitmap bmp = formSC.TakeScreeenShot();
                         CurrentCapture = bmp;
-                        await ControlNet_Txt2Img(url_API, bmp, control_Settings.SelectedControlNetPreprossessor, control_Settings.SelectedControlNetModel);
-                        // await AutomaticAsync(seed, bmp);
+                        string pre = control_Settings.SelectedControlNetPreprossessor;
+                        string post = control_Settings.SelectedControlNetModel;
+
+                        if (pre.ToLower() != "none" && post.ToLower() != "none")
+                            await ControlNet_Txt2Img(url_API, bmp, pre, post);
+                        else
+                            await AutomaticAsync(seed, bmp);
                     }
 
                 }
@@ -298,11 +303,8 @@ namespace Redream
 
             var requestBody = new
             {
-                enable_hr = false,
                 init_images = init_images,
-                mask = mask,
                 denoising_strength = strength.ToString("0.00").Replace(",", "."),
-                hr_scale = 2,
                 prompt = textBoxPrompt.Text,
                 negative_prompt = textBoxPromptN.Text,
                 seed = buttonSeed.Text,
@@ -313,7 +315,6 @@ namespace Redream
                 width = formSC.Width.ToString(),
                 height = formSC.Height.ToString(),
                 sampler_index = samplers[samplerIndex],
-                tiling = false,
                 controlnet_units = new[] {
                     new {
                         input_image = init_images[0],
@@ -325,7 +326,7 @@ namespace Redream
                         guidance_end = guidanceEnd,
                         resize_mode = "Envelope (Outer Fit)",
                         lowvram = false,
-                        processor_res = 512,
+                        processor_res = 320,
                         threshold_a = 64,
                         threshold_b = 64,
                         guessmode = false
@@ -357,7 +358,7 @@ namespace Redream
             }
             else
             {
-                MessageBox.Show("Error: " + response.ReasonPhrase);
+                MessageBox.Show("Error: " + response.Content);
             }
 
         }
@@ -532,11 +533,12 @@ namespace Redream
 
         private void timerFadeOut_Tick(object sender, EventArgs e)
         {
+
             if (opacity < 1)
             {
                 Image img = LerpImages(oldimage, newImage, opacity);
                 pictureBox1.Image = img;
-                opacity += 0.05f;
+                opacity += 0.25f;
             }
             else
             {
@@ -545,12 +547,13 @@ namespace Redream
                 oldimage = (Bitmap)newImage.Clone();
                 pictureBox1.Image = oldimage;
             }
+
         }
 
 
 
 
-        private Image LerpImages(Image image1, Image image2, float t)
+        private Image LerpImages2(Image image1, Image image2, float t)
         {
             int width = image1.Width;
             int height = image1.Height;
@@ -585,7 +588,23 @@ namespace Redream
             return bmp;
         }
 
+        private Image LerpImages(Image img1, Image img2, float opacity)
+        {
+            Bitmap bmp = new Bitmap(img2.Width, img2.Height);
+            using (Graphics g = Graphics.FromImage(bmp))
+            {
+                ColorMatrix matrix = new ColorMatrix();
+                matrix.Matrix33 = opacity;
+                ImageAttributes attributes = new ImageAttributes();
+                attributes.SetColorMatrix(matrix, ColorMatrixFlag.Default, ColorAdjustType.Bitmap);
 
+                g.DrawImage(img2, new Rectangle(0, 0, img2.Width, img2.Height), 0, 0, img2.Width, img2.Height, GraphicsUnit.Pixel, attributes);
+            }
+
+            using (Graphics g = Graphics.FromImage(img1))
+                g.DrawImage(bmp, 0, 0, img2.Width, img2.Height);
+            return img1;
+        }
 
 
 

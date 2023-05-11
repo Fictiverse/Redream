@@ -35,12 +35,12 @@
             DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle6 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle9 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle7 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle8 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle10 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle11 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle12 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle13 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle7 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle8 = new DataGridViewCellStyle();
             panelMenu = new FlowLayoutPanel();
             buttonScreenshot = new Button();
             button564 = new Button();
@@ -64,6 +64,10 @@
             buttonRefreshModels = new Button();
             tableLayoutPanel5 = new TableLayoutPanel();
             dataControlNet = new DataGridView();
+            dataGridViewTextBoxColumn7 = new DataGridViewTextBoxColumn();
+            dataGridViewImageColumn3 = new DataGridViewImageColumn();
+            Pre = new DataGridViewTextBoxColumn();
+            dataGridViewTextBoxColumn8 = new DataGridViewTextBoxColumn();
             buttonControlNet = new Button();
             tableLayoutPanel2 = new TableLayoutPanel();
             buttonModel = new Button();
@@ -75,10 +79,7 @@
             dataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
             dataGridViewImageColumn1 = new DataGridViewImageColumn();
             dataGridViewTextBoxColumn2 = new DataGridViewTextBoxColumn();
-            dataGridViewTextBoxColumn7 = new DataGridViewTextBoxColumn();
-            dataGridViewImageColumn3 = new DataGridViewImageColumn();
-            Pre = new DataGridViewTextBoxColumn();
-            dataGridViewTextBoxColumn8 = new DataGridViewTextBoxColumn();
+            textBoxControlNetModel = new TextBox();
             panelMenu.SuspendLayout();
             tableLayoutPanel1.SuspendLayout();
             tableLayoutPanel4.SuspendLayout();
@@ -468,12 +469,14 @@
             tableLayoutPanel5.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
             tableLayoutPanel5.Controls.Add(dataControlNet, 0, 1);
             tableLayoutPanel5.Controls.Add(buttonControlNet, 0, 0);
+            tableLayoutPanel5.Controls.Add(textBoxControlNetModel, 0, 2);
             tableLayoutPanel5.Dock = DockStyle.Fill;
             tableLayoutPanel5.Location = new Point(851, 3);
             tableLayoutPanel5.Name = "tableLayoutPanel5";
-            tableLayoutPanel5.RowCount = 2;
+            tableLayoutPanel5.RowCount = 3;
             tableLayoutPanel5.RowStyles.Add(new RowStyle(SizeType.Absolute, 40F));
             tableLayoutPanel5.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
+            tableLayoutPanel5.RowStyles.Add(new RowStyle(SizeType.Absolute, 40F));
             tableLayoutPanel5.Size = new Size(114, 609);
             tableLayoutPanel5.TabIndex = 10;
             // 
@@ -514,9 +517,59 @@
             dataControlNet.RowTemplate.Height = 40;
             dataControlNet.ScrollBars = ScrollBars.Vertical;
             dataControlNet.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dataControlNet.Size = new Size(144, 560);
+            dataControlNet.Size = new Size(114, 520);
             dataControlNet.TabIndex = 89;
             dataControlNet.CellClick += dataControlNet_CellClick;
+            // 
+            // dataGridViewTextBoxColumn7
+            // 
+            dataGridViewTextBoxColumn7.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dataGridViewCellStyle7.BackColor = Color.FromArgb(24, 30, 44);
+            dataGridViewCellStyle7.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            dataGridViewCellStyle7.ForeColor = SystemColors.ScrollBar;
+            dataGridViewCellStyle7.Padding = new Padding(6, 0, 0, 0);
+            dataGridViewCellStyle7.SelectionBackColor = Color.FromArgb(30, 60, 40);
+            dataGridViewTextBoxColumn7.DefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewTextBoxColumn7.FillWeight = 400F;
+            dataGridViewTextBoxColumn7.HeaderText = "Name";
+            dataGridViewTextBoxColumn7.MinimumWidth = 100;
+            dataGridViewTextBoxColumn7.Name = "dataGridViewTextBoxColumn7";
+            dataGridViewTextBoxColumn7.ReadOnly = true;
+            dataGridViewTextBoxColumn7.Resizable = DataGridViewTriState.False;
+            // 
+            // dataGridViewImageColumn3
+            // 
+            dataGridViewCellStyle8.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle8.BackColor = Color.FromArgb(21, 26, 38);
+            dataGridViewCellStyle8.ForeColor = SystemColors.ScrollBar;
+            dataGridViewCellStyle8.NullValue = null;
+            dataGridViewCellStyle8.SelectionBackColor = Color.FromArgb(25, 55, 35);
+            dataGridViewCellStyle8.SelectionForeColor = SystemColors.ScrollBar;
+            dataGridViewImageColumn3.DefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewImageColumn3.FillWeight = 72F;
+            dataGridViewImageColumn3.HeaderText = "Icon";
+            dataGridViewImageColumn3.MinimumWidth = 72;
+            dataGridViewImageColumn3.Name = "dataGridViewImageColumn3";
+            dataGridViewImageColumn3.ReadOnly = true;
+            dataGridViewImageColumn3.Resizable = DataGridViewTriState.False;
+            dataGridViewImageColumn3.SortMode = DataGridViewColumnSortMode.Automatic;
+            dataGridViewImageColumn3.ToolTipText = "Icon";
+            dataGridViewImageColumn3.Visible = false;
+            dataGridViewImageColumn3.Width = 72;
+            // 
+            // Pre
+            // 
+            Pre.HeaderText = "PreProcessor";
+            Pre.Name = "Pre";
+            Pre.ReadOnly = true;
+            Pre.Visible = false;
+            // 
+            // dataGridViewTextBoxColumn8
+            // 
+            dataGridViewTextBoxColumn8.HeaderText = "Model";
+            dataGridViewTextBoxColumn8.Name = "dataGridViewTextBoxColumn8";
+            dataGridViewTextBoxColumn8.ReadOnly = true;
+            dataGridViewTextBoxColumn8.Visible = false;
             // 
             // buttonControlNet
             // 
@@ -533,7 +586,7 @@
             buttonControlNet.Margin = new Padding(0, 0, 3, 0);
             buttonControlNet.Name = "buttonControlNet";
             buttonControlNet.Padding = new Padding(6, 0, 6, 0);
-            buttonControlNet.Size = new Size(141, 40);
+            buttonControlNet.Size = new Size(111, 40);
             buttonControlNet.TabIndex = 83;
             buttonControlNet.Text = "ControlNet";
             buttonControlNet.TextAlign = ContentAlignment.MiddleLeft;
@@ -690,55 +743,12 @@
             dataGridViewTextBoxColumn2.ReadOnly = true;
             dataGridViewTextBoxColumn2.Visible = false;
             // 
-            // dataGridViewTextBoxColumn7
+            // textBoxControlNetModel
             // 
-            dataGridViewTextBoxColumn7.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            dataGridViewCellStyle7.BackColor = Color.FromArgb(24, 30, 44);
-            dataGridViewCellStyle7.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
-            dataGridViewCellStyle7.ForeColor = SystemColors.ScrollBar;
-            dataGridViewCellStyle7.Padding = new Padding(6, 0, 0, 0);
-            dataGridViewCellStyle7.SelectionBackColor = Color.FromArgb(30, 60, 40);
-            dataGridViewTextBoxColumn7.DefaultCellStyle = dataGridViewCellStyle7;
-            dataGridViewTextBoxColumn7.FillWeight = 400F;
-            dataGridViewTextBoxColumn7.HeaderText = "Name";
-            dataGridViewTextBoxColumn7.MinimumWidth = 100;
-            dataGridViewTextBoxColumn7.Name = "dataGridViewTextBoxColumn7";
-            dataGridViewTextBoxColumn7.ReadOnly = true;
-            dataGridViewTextBoxColumn7.Resizable = DataGridViewTriState.False;
-            // 
-            // dataGridViewImageColumn3
-            // 
-            dataGridViewCellStyle8.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle8.BackColor = Color.FromArgb(21, 26, 38);
-            dataGridViewCellStyle8.ForeColor = SystemColors.ScrollBar;
-            dataGridViewCellStyle8.NullValue = null;
-            dataGridViewCellStyle8.SelectionBackColor = Color.FromArgb(25, 55, 35);
-            dataGridViewCellStyle8.SelectionForeColor = SystemColors.ScrollBar;
-            dataGridViewImageColumn3.DefaultCellStyle = dataGridViewCellStyle8;
-            dataGridViewImageColumn3.FillWeight = 72F;
-            dataGridViewImageColumn3.HeaderText = "Icon";
-            dataGridViewImageColumn3.MinimumWidth = 72;
-            dataGridViewImageColumn3.Name = "dataGridViewImageColumn3";
-            dataGridViewImageColumn3.ReadOnly = true;
-            dataGridViewImageColumn3.Resizable = DataGridViewTriState.False;
-            dataGridViewImageColumn3.SortMode = DataGridViewColumnSortMode.Automatic;
-            dataGridViewImageColumn3.ToolTipText = "Icon";
-            dataGridViewImageColumn3.Visible = false;
-            dataGridViewImageColumn3.Width = 72;
-            // 
-            // Pre
-            // 
-            Pre.HeaderText = "PreProcessor";
-            Pre.Name = "Pre";
-            Pre.ReadOnly = true;
-            Pre.Visible = false;
-            // 
-            // dataGridViewTextBoxColumn8
-            // 
-            dataGridViewTextBoxColumn8.HeaderText = "Model";
-            dataGridViewTextBoxColumn8.Name = "dataGridViewTextBoxColumn8";
-            dataGridViewTextBoxColumn8.ReadOnly = true;
-            dataGridViewTextBoxColumn8.Visible = false;
+            textBoxControlNetModel.Location = new Point(3, 572);
+            textBoxControlNetModel.Name = "textBoxControlNetModel";
+            textBoxControlNetModel.Size = new Size(108, 23);
+            textBoxControlNetModel.TabIndex = 90;
             // 
             // userControl_Settings
             // 
@@ -755,6 +765,7 @@
             ((System.ComponentModel.ISupportInitialize)dataModels).EndInit();
             panelHeaderModels.ResumeLayout(false);
             tableLayoutPanel5.ResumeLayout(false);
+            tableLayoutPanel5.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dataControlNet).EndInit();
             tableLayoutPanel2.ResumeLayout(false);
             tableLayoutPanel3.ResumeLayout(false);
@@ -801,5 +812,6 @@
         private DataGridViewImageColumn dataGridViewImageColumn3;
         private DataGridViewTextBoxColumn Pre;
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn8;
+        private TextBox textBoxControlNetModel;
     }
 }

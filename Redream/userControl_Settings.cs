@@ -55,7 +55,7 @@ namespace Redream
             set { buttonSampler.Text = value; }
         }
 
-        private string selectedControlNetModel;
+        private string selectedControlNetModel = "None";
 
         public string SelectedControlNetModel
         {
@@ -63,7 +63,7 @@ namespace Redream
             set { selectedControlNetModel = value; }
         }
 
-        private string selectedControlNetPreprossessor;
+        private string selectedControlNetPreprossessor = "None";
 
         public string SelectedControlNetPreprossessor
         {
@@ -86,9 +86,9 @@ namespace Redream
                 //("control_v11p_sd15_seg", "seg_ofcoco"),
                 ("control_v11p_sd15_seg", "seg_ufade20k", "Segmentation"),
                 //("control_v11p_sd15_inpaint", "inpaint_global_harmonious"),
-                ("control_v11p_sd15_lineart", "lineart_standard", "Linerart"),
+                //("control_v11p_sd15_lineart", "lineart_standard", "Linerart"),
                 //("control_v11p_sd15_lineart", "lineart_realistic"),
-                //("control_v11p_sd15_lineart", "lineart_coarse"),
+                ("control_v11p_sd15_lineart", "lineart_coarse", "Linerart"),
                 //("control_v11p_sd15s2_lineart_anime", "lineart_anime"),
                 //("control_v11p_sd15_openpose", "openpose"),
                 //("control_v11p_sd15_openpose", "openpose_face"),
@@ -124,8 +124,7 @@ namespace Redream
             }
 
 
-            SelectedControlNetModel = "None";
-            SelectedControlNetPreprossessor = "None";
+
 
 
 
@@ -461,8 +460,18 @@ namespace Redream
                 {
                     string model = selectedRow.Cells[3].Value?.ToString();  // Get the value from the third cell
 
-                    SelectedControlNetModel = FindBestMatch(model, ControlNetModels);
-                    SelectedControlNetPreprossessor = selectedRow.Cells[2].Value.ToString();
+                    if (model != null)
+                    {
+                        SelectedControlNetModel = FindBestMatch(model, ControlNetModels);
+                        SelectedControlNetPreprossessor = selectedRow.Cells[2].Value.ToString();
+                        textBoxControlNetModel.Text = SelectedControlNetModel;
+                    }
+                    else
+                    {
+                        SelectedControlNetModel = "None";
+                        SelectedControlNetPreprossessor = "None";
+                    }
+
                 }
                 else
                 {

@@ -1,88 +1,108 @@
 ﻿namespace Redream
 {
 
-        partial class FormScreenShot
+    partial class FormScreenShot
+    {
+
+        /// <summary>
+        /// Required designer variable.
+        /// </summary>
+        private System.ComponentModel.IContainer components = null;
+
+        /// <summary>
+        /// Clean up any resources being used.
+        /// </summary>
+        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        protected override void Dispose(bool disposing)
         {
-
-            /// <summary>
-            /// Required designer variable.
-            /// </summary>
-            private System.ComponentModel.IContainer components = null;
-
-            /// <summary>
-            /// Clean up any resources being used.
-            /// </summary>
-            /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-            protected override void Dispose(bool disposing)
+            if (disposing && (components != null))
             {
-                if (disposing && (components != null))
-                {
-                    components.Dispose();
-                }
-                base.Dispose(disposing);
+                components.Dispose();
             }
+            base.Dispose(disposing);
+        }
 
-            #region Windows Form Designer generated code
+        #region Windows Form Designer generated code
 
-            /// <summary>
-            /// Required method for Designer support - do not modify
-            /// the contents of this method with the code editor.
-            /// </summary>
-            private void InitializeComponent()
-            {
-            this.label1 = new System.Windows.Forms.Label();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.panel1.SuspendLayout();
-            this.SuspendLayout();
+        /// <summary>
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
+        /// </summary>
+        private void InitializeComponent()
+        {
+            label1 = new Label();
+            panel1 = new Panel();
+            panel2 = new Panel();
+            panel1.SuspendLayout();
+            panel2.SuspendLayout();
+            SuspendLayout();
             // 
             // label1
             // 
-            this.label1.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label1.ForeColor = System.Drawing.Color.White;
-            this.label1.Location = new System.Drawing.Point(0, 40);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(510, 470);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "512x512";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.label1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.FormScreenShot_MouseClick);
+            label1.Cursor = Cursors.Hand;
+            label1.Dock = DockStyle.Fill;
+            label1.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            label1.ForeColor = Color.White;
+            label1.Location = new Point(0, 40);
+            label1.Name = "label1";
+            label1.Size = new Size(510, 427);
+            label1.TabIndex = 0;
+            label1.Text = "512x512";
+            label1.TextAlign = ContentAlignment.MiddleCenter;
+            label1.MouseClick += FormScreenShot_MouseClick;
             // 
             // panel1
             // 
-            this.panel1.BackColor = System.Drawing.Color.Black;
-            this.panel1.Controls.Add(this.label1);
-            this.panel1.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel1.Location = new System.Drawing.Point(1, 1);
-            this.panel1.Name = "panel1";
-            this.panel1.Padding = new System.Windows.Forms.Padding(0, 40, 0, 0);
-            this.panel1.Size = new System.Drawing.Size(510, 510);
-            this.panel1.TabIndex = 1;
-            this.panel1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.FormScreenShot_MouseClick);
+            panel1.BackColor = Color.FromArgb(21, 21, 21);
+            panel1.Controls.Add(panel2);
+            panel1.Cursor = Cursors.Hand;
+            panel1.Dock = DockStyle.Fill;
+            panel1.Location = new Point(1, 1);
+            panel1.Name = "panel1";
+            panel1.Padding = new Padding(0, 40, 0, 0);
+            panel1.Size = new Size(510, 510);
+            panel1.TabIndex = 1;
+            panel1.MouseClick += FormScreenShot_MouseClick;
+            // 
+            // panel2
+            // 
+            panel2.BackColor = Color.Maroon;
+            panel2.Controls.Add(label1);
+            panel2.Cursor = Cursors.Hand;
+            panel2.Dock = DockStyle.Bottom;
+            panel2.ForeColor = Color.Orange;
+            panel2.Location = new Point(0, 43);
+            panel2.Margin = new Padding(0);
+            panel2.Name = "panel2";
+            panel2.Padding = new Padding(0, 40, 0, 0);
+            panel2.Size = new Size(510, 467);
+            panel2.TabIndex = 2;
+            panel2.Paint += panel2_Paint;
+            panel2.MouseClick += FormScreenShot_MouseClick;
             // 
             // FormScreenShot
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.Red;
-            this.ClientSize = new System.Drawing.Size(512, 512);
-            this.Controls.Add(this.panel1);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Name = "FormScreenShot";
-            this.Opacity = 0.2D;
-            this.Padding = new System.Windows.Forms.Padding(1);
-            this.Text = "FormScreenShot";
-            this.MouseClick += new System.Windows.Forms.MouseEventHandler(this.FormScreenShot_MouseClick);
-            this.panel1.ResumeLayout(false);
-            this.ResumeLayout(false);
-
-            }
-
-            #endregion
-
-            private Label label1;
-            private Panel panel1;
+            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleMode = AutoScaleMode.Font;
+            BackColor = Color.Red;
+            ClientSize = new Size(512, 512);
+            Controls.Add(panel1);
+            FormBorderStyle = FormBorderStyle.None;
+            Name = "FormScreenShot";
+            Opacity = 0.3D;
+            Padding = new Padding(1);
+            Text = "FormScreenShot";
+            SizeChanged += FormScreenShot_SizeChanged;
+            MouseClick += FormScreenShot_MouseClick;
+            panel1.ResumeLayout(false);
+            panel2.ResumeLayout(false);
+            ResumeLayout(false);
         }
+
+        #endregion
+
+        private Label label1;
+        private Panel panel1;
+        private Panel panel2;
     }
+}

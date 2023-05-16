@@ -43,9 +43,9 @@
             DataGridViewCellStyle dataGridViewCellStyle13 = new DataGridViewCellStyle();
             panelMenu = new FlowLayoutPanel();
             buttonScreenshot = new Button();
-            button564 = new Button();
             buttonBrowse = new Button();
             buttonShape = new Button();
+            buttonFitSize = new Button();
             buttonSeed = new Button();
             buttonSteps = new Button();
             buttonStrength = new Button();
@@ -93,9 +93,9 @@
             // panelMenu
             // 
             panelMenu.Controls.Add(buttonScreenshot);
-            panelMenu.Controls.Add(button564);
             panelMenu.Controls.Add(buttonBrowse);
             panelMenu.Controls.Add(buttonShape);
+            panelMenu.Controls.Add(buttonFitSize);
             panelMenu.Controls.Add(buttonSeed);
             panelMenu.Controls.Add(buttonSteps);
             panelMenu.Controls.Add(buttonStrength);
@@ -117,29 +117,12 @@
             buttonScreenshot.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
             buttonScreenshot.ForeColor = Color.Silver;
             buttonScreenshot.Location = new Point(0, 0);
-            buttonScreenshot.Margin = new Padding(0, 0, 0, 1);
+            buttonScreenshot.Margin = new Padding(0, 0, 0, 3);
             buttonScreenshot.Name = "buttonScreenshot";
             buttonScreenshot.Size = new Size(100, 40);
             buttonScreenshot.TabIndex = 103;
             buttonScreenshot.Text = "From Screen";
             buttonScreenshot.UseVisualStyleBackColor = false;
-            // 
-            // button564
-            // 
-            button564.BackColor = Color.FromArgb(85, 35, 25);
-            button564.Cursor = Cursors.Hand;
-            button564.FlatAppearance.BorderSize = 0;
-            button564.FlatStyle = FlatStyle.Flat;
-            button564.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            button564.ForeColor = Color.Silver;
-            button564.Location = new Point(0, 42);
-            button564.Margin = new Padding(0, 1, 0, 3);
-            button564.Name = "button564";
-            button564.Size = new Size(100, 40);
-            button564.TabIndex = 110;
-            button564.Text = "From Video";
-            button564.UseVisualStyleBackColor = false;
-            button564.Visible = false;
             // 
             // buttonBrowse
             // 
@@ -150,7 +133,7 @@
             buttonBrowse.Font = new Font("Segoe UI", 11F, FontStyle.Bold, GraphicsUnit.Point);
             buttonBrowse.ForeColor = Color.Silver;
             buttonBrowse.Image = Properties.Resources.search;
-            buttonBrowse.Location = new Point(0, 88);
+            buttonBrowse.Location = new Point(0, 46);
             buttonBrowse.Margin = new Padding(0, 3, 0, 3);
             buttonBrowse.Name = "buttonBrowse";
             buttonBrowse.Size = new Size(100, 40);
@@ -167,14 +150,30 @@
             buttonShape.FlatStyle = FlatStyle.Flat;
             buttonShape.Font = new Font("Segoe UI", 11F, FontStyle.Bold, GraphicsUnit.Point);
             buttonShape.ForeColor = Color.Silver;
-            buttonShape.Location = new Point(0, 134);
-            buttonShape.Margin = new Padding(0, 3, 0, 3);
+            buttonShape.Location = new Point(0, 92);
+            buttonShape.Margin = new Padding(0, 3, 0, 1);
             buttonShape.Name = "buttonShape";
             buttonShape.Size = new Size(100, 40);
             buttonShape.TabIndex = 104;
             buttonShape.Text = "1 / 1";
             buttonShape.UseVisualStyleBackColor = false;
             buttonShape.Click += buttonShape_Click;
+            // 
+            // buttonFitSize
+            // 
+            buttonFitSize.BackColor = Color.FromArgb(85, 35, 25);
+            buttonFitSize.Cursor = Cursors.Hand;
+            buttonFitSize.FlatAppearance.BorderSize = 0;
+            buttonFitSize.FlatStyle = FlatStyle.Flat;
+            buttonFitSize.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            buttonFitSize.ForeColor = Color.Silver;
+            buttonFitSize.Location = new Point(0, 134);
+            buttonFitSize.Margin = new Padding(0, 1, 0, 3);
+            buttonFitSize.Name = "buttonFitSize";
+            buttonFitSize.Size = new Size(100, 40);
+            buttonFitSize.TabIndex = 110;
+            buttonFitSize.Text = "Max = 512";
+            buttonFitSize.UseVisualStyleBackColor = false;
             // 
             // buttonSeed
             // 
@@ -243,7 +242,7 @@
             buttonCFGScale.ForeColor = Color.Silver;
             buttonCFGScale.ImageAlign = ContentAlignment.TopCenter;
             buttonCFGScale.Location = new Point(0, 396);
-            buttonCFGScale.Margin = new Padding(0, 1, 0, 1);
+            buttonCFGScale.Margin = new Padding(0, 1, 0, 3);
             buttonCFGScale.Name = "buttonCFGScale";
             buttonCFGScale.Padding = new Padding(0, 6, 0, 6);
             buttonCFGScale.Size = new Size(100, 70);
@@ -261,7 +260,7 @@
             buttonSampler.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
             buttonSampler.ForeColor = Color.Silver;
             buttonSampler.Location = new Point(0, 470);
-            buttonSampler.Margin = new Padding(0, 3, 0, 0);
+            buttonSampler.Margin = new Padding(0, 1, 0, 0);
             buttonSampler.Name = "buttonSampler";
             buttonSampler.Size = new Size(100, 40);
             buttonSampler.TabIndex = 112;
@@ -273,7 +272,7 @@
             // 
             tableLayoutPanel1.ColumnCount = 4;
             tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 100F));
-            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 6F));
+            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 3F));
             tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
             tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 120F));
             tableLayoutPanel1.Controls.Add(panelMenu, 0, 0);
@@ -295,12 +294,13 @@
             tableLayoutPanel4.Controls.Add(dataModels, 0, 1);
             tableLayoutPanel4.Controls.Add(panelHeaderModels, 0, 0);
             tableLayoutPanel4.Dock = DockStyle.Fill;
-            tableLayoutPanel4.Location = new Point(109, 3);
+            tableLayoutPanel4.Location = new Point(106, 0);
+            tableLayoutPanel4.Margin = new Padding(3, 0, 3, 0);
             tableLayoutPanel4.Name = "tableLayoutPanel4";
             tableLayoutPanel4.RowCount = 2;
             tableLayoutPanel4.RowStyles.Add(new RowStyle(SizeType.Absolute, 40F));
             tableLayoutPanel4.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
-            tableLayoutPanel4.Size = new Size(736, 609);
+            tableLayoutPanel4.Size = new Size(739, 615);
             tableLayoutPanel4.TabIndex = 9;
             // 
             // dataModels
@@ -330,6 +330,7 @@
             dataModels.GridColor = Color.FromArgb(10, 10, 10);
             dataModels.Location = new Point(0, 46);
             dataModels.Margin = new Padding(0, 6, 0, 3);
+            dataModels.MultiSelect = false;
             dataModels.Name = "dataModels";
             dataModels.ReadOnly = true;
             dataGridViewCellStyle5.Alignment = DataGridViewContentAlignment.MiddleLeft;
@@ -340,7 +341,7 @@
             dataModels.RowTemplate.Height = 72;
             dataModels.ScrollBars = ScrollBars.Vertical;
             dataModels.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dataModels.Size = new Size(736, 560);
+            dataModels.Size = new Size(739, 566);
             dataModels.TabIndex = 88;
             dataModels.CellClick += dataModels_CellClick;
             // 
@@ -420,7 +421,7 @@
             panelHeaderModels.Name = "panelHeaderModels";
             panelHeaderModels.RowCount = 1;
             panelHeaderModels.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
-            panelHeaderModels.Size = new Size(736, 40);
+            panelHeaderModels.Size = new Size(739, 40);
             panelHeaderModels.TabIndex = 87;
             // 
             // buttonUndo
@@ -432,7 +433,7 @@
             buttonUndo.FlatStyle = FlatStyle.Flat;
             buttonUndo.Font = new Font("Segoe UI", 11F, FontStyle.Bold, GraphicsUnit.Point);
             buttonUndo.ForeColor = Color.Silver;
-            buttonUndo.Location = new Point(696, 0);
+            buttonUndo.Location = new Point(699, 0);
             buttonUndo.Margin = new Padding(0);
             buttonUndo.Name = "buttonUndo";
             buttonUndo.Size = new Size(40, 40);
@@ -455,7 +456,7 @@
             buttonRefreshModels.Margin = new Padding(0, 0, 3, 0);
             buttonRefreshModels.Name = "buttonRefreshModels";
             buttonRefreshModels.Padding = new Padding(6, 0, 6, 0);
-            buttonRefreshModels.Size = new Size(693, 40);
+            buttonRefreshModels.Size = new Size(696, 40);
             buttonRefreshModels.TabIndex = 83;
             buttonRefreshModels.Text = "Models";
             buttonRefreshModels.TextAlign = ContentAlignment.MiddleLeft;
@@ -469,13 +470,14 @@
             tableLayoutPanel5.Controls.Add(dataControlNet, 0, 1);
             tableLayoutPanel5.Controls.Add(buttonControlNet, 0, 0);
             tableLayoutPanel5.Dock = DockStyle.Fill;
-            tableLayoutPanel5.Location = new Point(851, 3);
+            tableLayoutPanel5.Location = new Point(851, 0);
+            tableLayoutPanel5.Margin = new Padding(3, 0, 3, 0);
             tableLayoutPanel5.Name = "tableLayoutPanel5";
             tableLayoutPanel5.RowCount = 2;
             tableLayoutPanel5.RowStyles.Add(new RowStyle(SizeType.Absolute, 40F));
             tableLayoutPanel5.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
             tableLayoutPanel5.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
-            tableLayoutPanel5.Size = new Size(114, 609);
+            tableLayoutPanel5.Size = new Size(114, 615);
             tableLayoutPanel5.TabIndex = 10;
             // 
             // dataControlNet
@@ -505,6 +507,7 @@
             dataControlNet.GridColor = Color.FromArgb(10, 10, 10);
             dataControlNet.Location = new Point(0, 46);
             dataControlNet.Margin = new Padding(0, 6, 0, 3);
+            dataControlNet.MultiSelect = false;
             dataControlNet.Name = "dataControlNet";
             dataControlNet.ReadOnly = true;
             dataGridViewCellStyle9.Alignment = DataGridViewContentAlignment.MiddleLeft;
@@ -515,7 +518,7 @@
             dataControlNet.RowTemplate.Height = 40;
             dataControlNet.ScrollBars = ScrollBars.Vertical;
             dataControlNet.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dataControlNet.Size = new Size(114, 560);
+            dataControlNet.Size = new Size(114, 566);
             dataControlNet.TabIndex = 89;
             dataControlNet.CellClick += dataControlNet_CellClick;
             // 
@@ -581,10 +584,10 @@
             buttonControlNet.ForeColor = Color.Silver;
             buttonControlNet.ImageAlign = ContentAlignment.MiddleRight;
             buttonControlNet.Location = new Point(0, 0);
-            buttonControlNet.Margin = new Padding(0, 0, 3, 0);
+            buttonControlNet.Margin = new Padding(0);
             buttonControlNet.Name = "buttonControlNet";
             buttonControlNet.Padding = new Padding(6, 0, 6, 0);
-            buttonControlNet.Size = new Size(111, 40);
+            buttonControlNet.Size = new Size(114, 40);
             buttonControlNet.TabIndex = 83;
             buttonControlNet.Text = "ControlNet";
             buttonControlNet.TextAlign = ContentAlignment.MiddleLeft;
@@ -767,7 +770,7 @@
         private FlowLayoutPanel panelMenu;
         private Button buttonScreenshot;
         private Button buttonBrowse;
-        private Button button564;
+        private Button buttonFitSize;
         private Button buttonShape;
         private Button buttonSeed;
         private Button buttonSteps;

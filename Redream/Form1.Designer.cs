@@ -36,9 +36,9 @@
             pictureBox1 = new PictureBox();
             panelMenu = new FlowLayoutPanel();
             buttonScreenshot = new Button();
-            buttonBrowse = new Button();
             buttonSave = new Button();
             buttonShape = new Button();
+            buttonNormSize = new Button();
             buttonSeed = new Button();
             buttonSteps = new Button();
             buttonStrength = new Button();
@@ -155,9 +155,9 @@
             // panelMenu
             // 
             panelMenu.Controls.Add(buttonScreenshot);
-            panelMenu.Controls.Add(buttonBrowse);
             panelMenu.Controls.Add(buttonSave);
             panelMenu.Controls.Add(buttonShape);
+            panelMenu.Controls.Add(buttonNormSize);
             panelMenu.Controls.Add(buttonSeed);
             panelMenu.Controls.Add(buttonSteps);
             panelMenu.Controls.Add(buttonStrength);
@@ -180,7 +180,7 @@
             buttonScreenshot.ForeColor = Color.Silver;
             buttonScreenshot.Image = Properties.Resources.selection;
             buttonScreenshot.Location = new Point(0, 0);
-            buttonScreenshot.Margin = new Padding(0, 0, 0, 1);
+            buttonScreenshot.Margin = new Padding(0, 0, 0, 3);
             buttonScreenshot.Name = "buttonScreenshot";
             buttonScreenshot.Size = new Size(40, 40);
             buttonScreenshot.TabIndex = 103;
@@ -188,25 +188,6 @@
             toolTip1.SetToolTip(buttonScreenshot, "Capture Selector");
             buttonScreenshot.UseVisualStyleBackColor = false;
             buttonScreenshot.Click += buttonScreenshot_Click;
-            // 
-            // buttonBrowse
-            // 
-            buttonBrowse.BackColor = Color.FromArgb(85, 35, 25);
-            buttonBrowse.Cursor = Cursors.Hand;
-            buttonBrowse.FlatAppearance.BorderSize = 0;
-            buttonBrowse.FlatStyle = FlatStyle.Flat;
-            buttonBrowse.Font = new Font("Segoe UI", 11F, FontStyle.Bold, GraphicsUnit.Point);
-            buttonBrowse.ForeColor = Color.Silver;
-            buttonBrowse.Image = Properties.Resources.lecteur_video;
-            buttonBrowse.Location = new Point(0, 42);
-            buttonBrowse.Margin = new Padding(0, 1, 0, 3);
-            buttonBrowse.Name = "buttonBrowse";
-            buttonBrowse.Size = new Size(40, 40);
-            buttonBrowse.TabIndex = 110;
-            buttonBrowse.TextAlign = ContentAlignment.BottomCenter;
-            toolTip1.SetToolTip(buttonBrowse, "Open Frames Folder");
-            buttonBrowse.UseVisualStyleBackColor = false;
-            buttonBrowse.Visible = false;
             // 
             // buttonSave
             // 
@@ -217,7 +198,7 @@
             buttonSave.Font = new Font("Segoe UI", 11F, FontStyle.Bold, GraphicsUnit.Point);
             buttonSave.ForeColor = Color.Silver;
             buttonSave.Image = Properties.Resources.save1;
-            buttonSave.Location = new Point(0, 88);
+            buttonSave.Location = new Point(0, 46);
             buttonSave.Margin = new Padding(0, 3, 0, 3);
             buttonSave.Name = "buttonSave";
             buttonSave.Size = new Size(40, 40);
@@ -236,8 +217,8 @@
             buttonShape.Font = new Font("Segoe UI", 11F, FontStyle.Bold, GraphicsUnit.Point);
             buttonShape.ForeColor = Color.Silver;
             buttonShape.Image = Properties.Resources.rounded_black_square_shapeS_1;
-            buttonShape.Location = new Point(0, 134);
-            buttonShape.Margin = new Padding(0, 3, 0, 3);
+            buttonShape.Location = new Point(0, 92);
+            buttonShape.Margin = new Padding(0, 3, 0, 1);
             buttonShape.Name = "buttonShape";
             buttonShape.Size = new Size(40, 40);
             buttonShape.TabIndex = 104;
@@ -245,6 +226,25 @@
             toolTip1.SetToolTip(buttonShape, "Aspect Ratio");
             buttonShape.UseVisualStyleBackColor = false;
             buttonShape.Click += buttonShape_Click;
+            // 
+            // buttonNormSize
+            // 
+            buttonNormSize.BackColor = Color.FromArgb(85, 35, 25);
+            buttonNormSize.Cursor = Cursors.Hand;
+            buttonNormSize.FlatAppearance.BorderSize = 0;
+            buttonNormSize.FlatStyle = FlatStyle.Flat;
+            buttonNormSize.Font = new Font("Segoe UI", 11F, FontStyle.Bold, GraphicsUnit.Point);
+            buttonNormSize.ForeColor = Color.Silver;
+            buttonNormSize.Image = Properties.Resources._16_resize;
+            buttonNormSize.Location = new Point(0, 134);
+            buttonNormSize.Margin = new Padding(0, 1, 0, 3);
+            buttonNormSize.Name = "buttonNormSize";
+            buttonNormSize.Size = new Size(40, 40);
+            buttonNormSize.TabIndex = 110;
+            buttonNormSize.TextAlign = ContentAlignment.BottomCenter;
+            toolTip1.SetToolTip(buttonNormSize, "Normalize Size");
+            buttonNormSize.UseVisualStyleBackColor = false;
+            buttonNormSize.Click += buttonNormSize_Click;
             // 
             // buttonSeed
             // 
@@ -323,7 +323,7 @@
             buttonCFGScale.Image = Properties.Resources._16_scale;
             buttonCFGScale.ImageAlign = ContentAlignment.TopCenter;
             buttonCFGScale.Location = new Point(0, 396);
-            buttonCFGScale.Margin = new Padding(0, 1, 0, 1);
+            buttonCFGScale.Margin = new Padding(0, 1, 0, 3);
             buttonCFGScale.Name = "buttonCFGScale";
             buttonCFGScale.Padding = new Padding(0, 6, 0, 6);
             buttonCFGScale.Size = new Size(40, 70);
@@ -344,7 +344,7 @@
             buttonSampler.ForeColor = Color.Silver;
             buttonSampler.Image = Properties.Resources.network;
             buttonSampler.Location = new Point(0, 470);
-            buttonSampler.Margin = new Padding(0, 3, 0, 0);
+            buttonSampler.Margin = new Padding(0, 1, 0, 0);
             buttonSampler.Name = "buttonSampler";
             buttonSampler.Size = new Size(40, 40);
             buttonSampler.TabIndex = 112;
@@ -692,7 +692,7 @@
             textBoxPromptN.Name = "textBoxPromptN";
             textBoxPromptN.Size = new Size(467, 16);
             textBoxPromptN.TabIndex = 0;
-            textBoxPromptN.Text = "Ugly";
+            textBoxPromptN.Text = "cartoon,3d,((disfigured)),((bad art)),((deformed)),((poorly drawn)),((extra limbs)),((b&w)),weird colors,blurry";
             // 
             // panelPrompt
             // 
@@ -717,7 +717,7 @@
             textBoxPrompt.Name = "textBoxPrompt";
             textBoxPrompt.Size = new Size(467, 16);
             textBoxPrompt.TabIndex = 0;
-            textBoxPrompt.Text = "Visual Novel";
+            textBoxPrompt.Text = "natural lighting,(sharp focus),film grain,Masterpiece,award winning photo,extremely detailed,amazing,fine detail";
             // 
             // buttonClearPrompt
             // 
@@ -799,12 +799,11 @@
             // 
             buttonDefaultSettings.BackColor = Color.FromArgb(85, 35, 25);
             buttonDefaultSettings.Cursor = Cursors.Hand;
-            buttonDefaultSettings.Enabled = false;
             buttonDefaultSettings.FlatAppearance.BorderSize = 0;
             buttonDefaultSettings.FlatStyle = FlatStyle.Flat;
             buttonDefaultSettings.Font = new Font("Segoe UI", 11F, FontStyle.Bold, GraphicsUnit.Point);
             buttonDefaultSettings.ForeColor = Color.Silver;
-            buttonDefaultSettings.Image = Properties.Resources._16_process;
+            buttonDefaultSettings.Image = Properties.Resources.utilisateur;
             buttonDefaultSettings.Location = new Point(0, 435);
             buttonDefaultSettings.Margin = new Padding(0, 3, 0, 0);
             buttonDefaultSettings.Name = "buttonDefaultSettings";
@@ -884,7 +883,7 @@
         private Button buttonInterrogate;
         private Button buttonDiscord;
         private Button buttonCFGScale;
-        private Button buttonBrowse;
+        private Button buttonNormSize;
         private TableLayoutPanel tableLayoutPanelPrompts;
         private Panel panel1;
         private TextBox textBoxPromptN;

@@ -2,6 +2,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Redream.Properties;
 using System.Diagnostics;
+using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
 using System.Reflection.Emit;
@@ -133,11 +134,12 @@ namespace Redream
         Bitmap CurrentCapture = new Bitmap(512, 512);
         private async void buttonStart_Click(object sender, EventArgs e)
         {
+
             if (!isStarted)
             {
                 if (formSC != null && !formSC.IsDisposed)
                 {
-                    timerFadeOut.Enabled = true;
+                    //timerFadeOut.Enabled = true;
                     isStarted = true;
                     buttonStart.BackColor = Color.FromArgb(25, 85, 35);
                     buttonStart.Image = Resources.pause_button;
@@ -183,7 +185,9 @@ namespace Redream
         class AutomaticJson
         {
             public List<string> init_images = new List<string>();
+            public string mask = "";
             public string denoising_strength = "0.6";
+            public string mask_blur = "16";
             public string prompt = "";
             public string negative_prompt = "";
             public string seed = "-1";
@@ -191,8 +195,8 @@ namespace Redream
             public string batch_size = "1";
             public string steps = "20";
             public string cfg_scale = "7.5";
-            public string width = "512";
-            public string height = "512";
+            public int width = 512;
+            public int height = 512;
             //public string restore_faces = "false";
             public string sampler_index = "Euler"; // Euler a, Euler, LMS, Heun, DPM2, DPM2 a, DPM++ 2S a, DPM++ 2M, DPM fast, DPM adaptive, LMS Karras, DPM2 Karras, DPM2 a Karras, DMP++ 2S a Karras, DMP++ 2M Karras, DDIM, PLMS
         }
@@ -202,10 +206,39 @@ namespace Redream
 
             List<string> init_images = new List<string>();
 
+
             string script = "http://127.0.0.1:7860/sdapi/v1/img2img";
+
+            Size size = formSC.Size;
+
+            if (isNormSize)
+            {
+                size = NormalizeSize(size, 512);
+                initimage = ResizeImage((Bitmap)initimage.Clone(), size);
+            }
+
+
             string base64Image = "data:image/png;base64," + Convert.ToBase64String(ImageToBytes(initimage));
             init_images.Add(base64Image);
 
+            Bitmap msk = GenerateGradientMask(size, 40);
+            msk.Save("mask.jpg");
+
+            string denoising_strength = strength.ToString("0.00").Replace(",", ".");
+
+
+            string base64Mask = null;
+            if (isMaskEnabled)
+            {
+                base64Mask = "data:image/png;base64," + Convert.ToBase64String(ImageToBytes(msk));
+                denoising_strength = "1";
+            }
+
+
+
+
+
+            //MessageBox.Show(width.ToString());
 
             var automaticJson = new AutomaticJson
             {
@@ -213,14 +246,16 @@ namespace Redream
                 negative_prompt = textBoxPromptN.Text,
 
                 init_images = init_images,
-                denoising_strength = strength.ToString("0.00").Replace(",", "."),
+                mask = base64Mask,
+
+                denoising_strength = denoising_strength,
 
                 seed = buttonSeed.Text,
                 steps = steps.ToString(),
                 cfg_scale = cfgScale.ToString("0.00").Replace(",", "."),
 
-                width = formSC.Width.ToString(),
-                height = formSC.Height.ToString(),
+                width = size.Width,
+                height = size.Height,
 
                 sampler_index = samplers[samplerIndex]
             };
@@ -260,14 +295,62 @@ namespace Redream
         }
 
 
+        public static Size NormalizeSize(Size size, int maxSize)
+        {
+            int width = size.Width;
+            int height = size.Height;
+
+            // Calculate the total number of pixels
+            int totalPixels = width * height;
+
+            // Check if the image exceeds the maximum total pixels
+            if (totalPixels > (maxSize * maxSize))
+            {
+                // Calculate the aspect ratio
+                double aspectRatio = (double)width / height;
+
+                // Calculate the new width and height while maintaining the aspect ratio and limiting the total pixels
+                double scaleFactor = Math.Sqrt((double)(maxSize * maxSize) / totalPixels);
+                width = (int)(width * scaleFactor);
+                height = (int)(height * scaleFactor);
+            }
+
+            // Adjust the size to be a multiple of 8
+            width = (width / 8) * 8;
+            height = (height / 8) * 8;
+
+            return new Size(width, height);
+        }
+
+
+        public static Bitmap GenerateGradientMask(Size size, int fillPercentage)
+        {
+            int width = size.Width;
+            int height = size.Height;
+
+            Bitmap gradientMask = new Bitmap(width, height);
+
+            using (Graphics graphics = Graphics.FromImage(gradientMask))
+            {
+                graphics.FillRectangle(Brushes.White, 0, 0, width, height);
+                int fillHeight = height * fillPercentage / 100;
+                graphics.FillRectangle(Brushes.Black, 0, 0, width, fillHeight);
+            }
+
+            return gradientMask;
+        }
+
+
+
         public void ProcessResult(Bitmap bmp)
         {
+
             string imagename = DateTime.Now.ToFileTime().ToString().Substring(0, 12) + ".png";
 
-            oldimage = newImage;
+            oldimage = (Bitmap)newImage.Clone();
             newImage = bmp;
             opacity = 0;
-
+            pictureBox1.Image = bmp;
             if (isSaveFramesEnabled)
             {
                 string name = DateTime.Now.ToFileTime().ToString() + ".png";
@@ -276,7 +359,23 @@ namespace Redream
         }
 
 
+        public static Bitmap ResizeImage(Image image, Size size)
+        {
+            // Create a new Bitmap with the desired width and height
+            Bitmap resizedImage = new Bitmap(size.Width, size.Height);
 
+            // Create a Graphics object from the resized image
+            using (Graphics graphics = Graphics.FromImage(resizedImage))
+            {
+                // Set the interpolation mode to high quality
+                graphics.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
+
+                // Draw the original image onto the resized image
+                graphics.DrawImage(image, 0, 0, size.Width, size.Height);
+            }
+
+            return resizedImage;
+        }
 
         public class json_ControlNet
         {
@@ -288,12 +387,36 @@ namespace Redream
         private async Task ControlNet_Txt2Img(string IP, Bitmap initimage, string module, string model, float guidanceStart = 0, float guidanceEnd = 1)
         {
             using var client = new HttpClient();
-            var url = $"http://{IP}/controlnet/img2img";
-            string base64Image = "data:image/png;base64," + Convert.ToBase64String(ImageToBytes(initimage));
+            var url = $"http://{IP}/sdapi/v1/img2img";
 
-            List<string> init_images = new List<string> { base64Image };
-            string mask = null;
-            // Set request body
+            List<string> init_images = new List<string>();
+
+            Size size = formSC.Size;
+
+            if (isNormSize)
+            {
+                size = NormalizeSize(size, 512);
+                initimage = ResizeImage((Bitmap)initimage.Clone(), size);
+            }
+
+
+            string base64Image = "data:image/png;base64," + Convert.ToBase64String(ImageToBytes(initimage));
+            init_images.Add(base64Image);
+
+            Bitmap msk = GenerateGradientMask(size, 40);
+            msk.Save("mask.jpg");
+
+            string denoising_strength = strength.ToString("0.00").Replace(",", ".");
+
+
+            string base64Mask = null;
+            if (isMaskEnabled)
+            {
+                base64Mask = "data:image/png;base64," + Convert.ToBase64String(ImageToBytes(msk));
+                denoising_strength = "1";
+            }
+
+
 
 
             if (module == null)
@@ -304,7 +427,8 @@ namespace Redream
             var requestBody = new
             {
                 init_images = init_images,
-                denoising_strength = strength.ToString("0.00").Replace(",", "."),
+                mask = base64Mask,
+                denoising_strength = denoising_strength,
                 prompt = textBoxPrompt.Text,
                 negative_prompt = textBoxPromptN.Text,
                 seed = buttonSeed.Text,
@@ -312,9 +436,25 @@ namespace Redream
                 cfg_scale = cfgScale.ToString("0.00").Replace(",", "."),
                 batch_size = 1,
                 n_iter = 1,
-                width = formSC.Width.ToString(),
-                height = formSC.Height.ToString(),
+                width = size.Width,
+                height = size.Height,
                 sampler_index = samplers[samplerIndex],
+                alwayson_scripts = new
+                {
+                    controlnet = new
+                    {
+                        args = new[]
+            {
+                new
+                {
+                    module = module,
+                    model = model,
+                    control_mode = "ControlNet is more important"
+                }
+            }
+                    }
+                },
+                /*
                 controlnet_units = new[] {
                     new {
                         input_image = init_images[0],
@@ -332,6 +472,7 @@ namespace Redream
                         guessmode = false
                     }
                 }
+                */
             };
             var requestBodyString = Newtonsoft.Json.JsonConvert.SerializeObject(requestBody);
 
@@ -536,8 +677,8 @@ namespace Redream
 
             if (opacity < 1)
             {
-                Image img = LerpImages(oldimage, newImage, opacity);
-                pictureBox1.Image = img;
+                //Image img = LerpImages(oldimage, newImage, opacity);
+                pictureBox1.Image = newImage;
                 opacity += 0.25f;
             }
             else
@@ -601,9 +742,16 @@ namespace Redream
                 g.DrawImage(img2, new Rectangle(0, 0, img2.Width, img2.Height), 0, 0, img2.Width, img2.Height, GraphicsUnit.Pixel, attributes);
             }
 
-            using (Graphics g = Graphics.FromImage(img1))
-                g.DrawImage(bmp, 0, 0, img2.Width, img2.Height);
-            return img1;
+            Bitmap img = (Bitmap)img1.Clone();
+            using (Graphics g = Graphics.FromImage(img))
+            {
+                g.DrawImage(bmp, 0, 0, bmp.Width, bmp.Height);
+            }
+
+            // Dispose of the Graphics objects
+            bmp.Dispose();
+
+            return img;
         }
 
 
@@ -756,12 +904,12 @@ namespace Redream
 
             if (loop)
             {
-                if (strength > 0.98f)
+                if (strength > 1.00f)
                     strength = 0.02f;
                 else if (strength < 0.02f)
-                    strength = 0.98f;
+                    strength = 1.00f;
             }
-            strength = Math.Clamp(strength, 0.02f, 0.98f);
+            strength = Math.Clamp(strength, 0.02f, 1.00f);
             buttonStrength.Text = strength.ToString("0.00");
             control_Settings.Strength = strength.ToString("0.00");
         }
@@ -981,39 +1129,31 @@ namespace Redream
             textBoxPromptN.Text = "";
         }
 
-
-        bool isDefaultSettings = false;
+        bool isMaskEnabled = false;
+        int maskPercentage = 40;
         private void buttonDefaultSettings_Click(object sender, EventArgs e)
         {
-            isDefaultSettings = !isDefaultSettings;
+            isMaskEnabled = !isMaskEnabled;
 
             Color disabledColor = Color.FromArgb(40, 20, 40);
-            if (isDefaultSettings)
+
+            if (isMaskEnabled)
             {
                 buttonDefaultSettings.BackColor = Color.FromArgb(25, 85, 35);
-                buttonSeed.Enabled = false;
-                buttonSteps.Enabled = false;
                 buttonStrength.Enabled = false;
-                buttonCFGScale.Enabled = false;
-
-                buttonSeed.BackColor = disabledColor;
-                buttonSteps.BackColor = disabledColor;
                 buttonStrength.BackColor = disabledColor;
-                buttonCFGScale.BackColor = disabledColor;
+                formSC.Percentage = maskPercentage;
+
             }
             else
             {
                 buttonDefaultSettings.BackColor = Color.FromArgb(85, 35, 25);
-                buttonSeed.Enabled = true;
-                buttonSteps.Enabled = true;
                 buttonStrength.Enabled = true;
-                buttonCFGScale.Enabled = true;
-
-                buttonSeed.BackColor = Color.FromArgb(60, 30, 60);
-                buttonSteps.BackColor = Color.FromArgb(60, 30, 60);
                 buttonStrength.BackColor = Color.FromArgb(60, 30, 60);
-                buttonCFGScale.BackColor = Color.FromArgb(60, 30, 60);
+                formSC.Percentage = 0;
             }
+
+
         }
         bool isMenuSettingsOpen = false;
 
@@ -1035,47 +1175,22 @@ namespace Redream
             }
         }
 
+        bool isNormSize = false;
+        private void buttonNormSize_Click(object sender, EventArgs e)
+        {
+            isNormSize = !isNormSize;
 
+            Color disabledColor = Color.FromArgb(40, 20, 40);
 
+            if (isNormSize)
+            {
+                buttonNormSize.BackColor = Color.FromArgb(25, 85, 35);
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+            }
+            else
+            {
+                buttonNormSize.BackColor = Color.FromArgb(85, 35, 25);
+            }
+        }
     }
 }

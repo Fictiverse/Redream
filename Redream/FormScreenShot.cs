@@ -93,6 +93,19 @@ namespace Redream
         int formSize = 32;
         int ratioX = 16;
         int ratioY = 16;
+        int percentage = 0;
+        public int Percentage
+        {
+            get
+            {
+                return percentage;
+            }
+            set
+            {
+                ChangePercentage(value);
+            }
+        }
+
         // change brush size
         private void form_MouseWheel(object sender, MouseEventArgs e)
         {
@@ -137,7 +150,7 @@ namespace Redream
                 {
                     isClicked = !isClicked;
                     if (isClicked)
-                        this.BackColor = Color.White;
+                        this.BackColor = Color.Green;
                     else
                         this.BackColor = Color.Red;
                 }
@@ -157,7 +170,7 @@ namespace Redream
 
             this.Opacity = 0;
             g.CopyFromScreen(this.Location.X, this.Location.Y, 0, 0, new Size(this.Width, this.Height));
-            this.Opacity = 0.2;
+            this.Opacity = 0.3;
             return bmpScreenshot;
             //Bitmap resized = ResizeImage(bmpScreenshot, new Size(512, 512));
             //Form1 parent = (Form1)this.Owner;
@@ -175,6 +188,38 @@ namespace Redream
             this.Size = new Size((int)w, (int)h);
 
             label1.Text = Size.Width.ToString() + "x" + Size.Height.ToString();
+
+
+        }
+
+
+        private void panel2_Paint(object sender, PaintEventArgs e)
+        {
+            Point l = new Point(-10, 0);
+            Rectangle r = new Rectangle(l, new Size(5000, 5000));
+            Pen p = new Pen(Color.Black);
+            e.Graphics.DrawRectangle(p, r);
+            ControlPaint.DrawBorder(e.Graphics, r, Color.Red, ButtonBorderStyle.Dotted);
+        }
+
+        public void ChangePercentage(int p)
+        {
+            percentage = p;
+            if (percentage == 0)
+                panel2.BackColor = panel1.BackColor;
+            else
+                panel2.BackColor = Color.Red;
+
+            int fillHeight = this.Size.Height - (this.Size.Height * percentage / 100);
+
+            panel2.Size = new Size(this.Size.Width, fillHeight);
+            panel2.Refresh();
+
+        }
+
+        private void FormScreenShot_SizeChanged(object sender, EventArgs e)
+        {
+            ChangePercentage(percentage);
         }
     }
 }

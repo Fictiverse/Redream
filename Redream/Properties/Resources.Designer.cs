@@ -103,6 +103,16 @@ namespace Redream.Properties {
         /// <summary>
         ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap _16_resize {
+            get {
+                object obj = ResourceManager.GetObject("16_resize", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap _16_scale {
             get {
                 object obj = ResourceManager.GetObject("16_scale", resourceCulture);
@@ -386,6 +396,16 @@ namespace Redream.Properties {
         internal static System.Drawing.Bitmap text {
             get {
                 object obj = ResourceManager.GetObject("text", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap utilisateur {
+            get {
+                object obj = ResourceManager.GetObject("utilisateur", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

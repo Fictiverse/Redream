@@ -50,9 +50,5 @@ Prompt:
 
 
 ## Contact
-[
-  ![Donate with PayPal]
-  (https://raw.githubusercontent.com/stefan-niedermann/paypal-donate-button/master/paypal-donate-button.png)
-]
-[Paypal](https://www.paypal.com/donate/?hosted_button_id=MSXYHF2E7YXZG)
+[Paypal](https://www.paypal.com/donate/?hosted_button_id=MSXYHF2E7YXZG)   
 [Discord](https://discord.gg/UYgRnhj8PR) - [Twitter](https://twitter.com/Fictiverse)

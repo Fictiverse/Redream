@@ -11,7 +11,7 @@ Make sure```--xformers``` and ```--api``` commandline arguments are set in your 
 ```set COMMANDLINE_ARGS=--xformers --api``` 
 - [ControlNet Extension](https://github.com/Mikubill/sd-webui-controlnet)
 - [.NET 6.0 Framework](https://dotnet.microsoft.com/en-us/download/dotnet/6.0)
-- [Redream 1.1](https://github.com/Fictiverse/Redream/releases)   
+- Last [Redream](https://github.com/Fictiverse/Redream/releases/latest) Release       
 Or compile this repo with [Visual Studio](https://visualstudio.microsoft.com/en/downloads/)
 
 https://user-images.githubusercontent.com/111762798/208230356-3e1272a1-60f9-4a12-9996-ea8431cd0017.mp4

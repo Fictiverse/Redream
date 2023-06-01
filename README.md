@@ -26,8 +26,8 @@ Starting with Redream :
 - Start to press ![image](https://user-images.githubusercontent.com/111762798/207306165-315287c6-e337-46fa-9d80-19c4eb782226.png)   
 Place the ```Capture area``` where you want.  
 `Right click` to move, 
-`Left click` to paint, 
-`Middle click` to erase, 
+`Left click` to paint mask, 
+`Middle click` to erase mask, 
 `Mouse Scroll` to change brush size,
 `Right click + Mouse  Scroll` to resize capture zone   
 

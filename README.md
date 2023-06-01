@@ -48,6 +48,7 @@ Presets will start blinking
 Prompt:   
 - ![image](https://user-images.githubusercontent.com/111762798/207310573-321321d8-d735-463b-8ec3-28a8bb53ffd8.png) ```Click``` to interrogate the last captured image
 
+Licence:MIT
 
 ## Contact
 [Paypal](https://www.paypal.com/donate/?hosted_button_id=MSXYHF2E7YXZG)   

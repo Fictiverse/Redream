@@ -71,13 +71,20 @@ namespace Redream
             set { selectedControlNetPreprossessor = value; }
         }
 
+        int fitSize = 512;
+        public int FitSize
+        {
+            get { return fitSize; }
+            set { fitSize = value; }
+        }
+
 
 
         List<(string, string, string)> ControlNetList = new List<(string, string, string)>
             {
                 ("none", "none", "None"),
                 ("control_v11p_sd15_canny", "canny","Canny"),
-                ("control_v11p_sd15_mlsd", "mlsd", "mlsd"),
+                ("control_v11p_sd15_mlsd", "mlsd", "Mlsd"),
                 //("control_v11f1p_sd15_depth", "depth_midas"),
                 //("control_v11f1p_sd15_depth", "depth_leres"),
                 ("control_v11f1p_sd15_depth", "depth_zoe", "Depth"),
@@ -85,7 +92,7 @@ namespace Redream
                 //("control_v11p_sd15_seg", "seg_ofade20k"),
                 //("control_v11p_sd15_seg", "seg_ofcoco"),
                 ("control_v11p_sd15_seg", "seg_ufade20k", "Segmentation"),
-                //("control_v11p_sd15_inpaint", "inpaint_global_harmonious"),
+                ("control_v11p_sd15_inpaint", "inpaint_global_harmonious", "Inpainting"),
                 //("control_v11p_sd15_lineart", "lineart_standard", "Linerart"),
                 //("control_v11p_sd15_lineart", "lineart_realistic"),
                 ("control_v11p_sd15_lineart", "lineart_coarse", "Linerart"),
@@ -100,6 +107,7 @@ namespace Redream
                 //("control_v11p_sd15_softedge", "softedge_pidinet"),
                 //("control_v11p_sd15_softedge", "softedge_pidisafe"),
                 ("control_v11p_sd15_softedge", "softedge_hed", "SoftEdge"),
+                ("control_v11u_sd15_tile", "tile_resample", "Tile"),
                 //("control_v11p_sd15_softedge", "softedge_hed_safe")
             };
         string[] ControlNetModels = new string[] { };
@@ -479,6 +487,72 @@ namespace Redream
                 }
 
             }
+        }
+        public bool PositiveMask { get; set; }
+
+        private void buttonMask_Click(object sender, EventArgs e)
+        {
+            PositiveMask = !PositiveMask;
+            if (PositiveMask)
+            {
+                buttonMask.Text = "+";
+                buttonMask.BackColor = Color.FromArgb(25, 85, 35);
+            }
+            else
+            {
+                buttonMask.Text = "-";
+                buttonMask.BackColor = Color.FromArgb(85, 35, 25);
+            }
+        }
+
+        public bool FaceDetection { get; set; }
+        private void buttonFace_Click(object sender, EventArgs e)
+        {
+            FaceDetection = !FaceDetection;
+            if (FaceDetection)
+            {
+                buttonFace.BackColor = Color.FromArgb(25, 85, 35);
+            }
+            else
+            {
+                buttonFace.BackColor = Color.FromArgb(85, 35, 25);
+            }
+        }
+
+
+
+        private void buttonFitSize_Click(object sender, EventArgs e)
+        {
+            if (fitSize == 768)
+                fitSize = 512;
+            else
+                fitSize = 768;
+
+            buttonFitSize.Text = "Max = " + fitSize;
+        }
+
+        private void buttonDiscord_Click(object sender, EventArgs e)
+        {
+            Process pr = new Process();
+            pr.StartInfo.UseShellExecute = true;
+            pr.StartInfo.FileName = "https://discord.gg/d5WzbctxuP";
+            pr.Start();
+        }
+
+        private void buttonGit_Click(object sender, EventArgs e)
+        {
+            Process pr = new Process();
+            pr.StartInfo.UseShellExecute = true;
+            pr.StartInfo.FileName = "https://github.com/Fictiverse/Redream/releases";
+            pr.Start();
+        }
+
+        private void buttonTips_Click(object sender, EventArgs e)
+        {
+            Process pr = new Process();
+            pr.StartInfo.UseShellExecute = true;
+            pr.StartInfo.FileName = "https://www.paypal.com/donate/?hosted_button_id=MSXYHF2E7YXZG";
+            pr.Start();
         }
     }
 }

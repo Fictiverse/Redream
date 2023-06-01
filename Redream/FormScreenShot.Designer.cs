@@ -31,54 +31,40 @@
         private void InitializeComponent()
         {
             label1 = new Label();
-            panel1 = new Panel();
-            panel2 = new Panel();
-            panel1.SuspendLayout();
-            panel2.SuspendLayout();
+            pictureBox1 = new PictureBox();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
             // label1
             // 
+            label1.AutoSize = true;
+            label1.BackColor = Color.FromArgb(21, 21, 21);
             label1.Cursor = Cursors.Hand;
-            label1.Dock = DockStyle.Fill;
-            label1.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            label1.Font = new Font("Segoe UI", 8F, FontStyle.Regular, GraphicsUnit.Point);
             label1.ForeColor = Color.White;
-            label1.Location = new Point(0, 40);
+            label1.Location = new Point(1, 1);
             label1.Name = "label1";
-            label1.Size = new Size(510, 427);
+            label1.Size = new Size(48, 13);
             label1.TabIndex = 0;
             label1.Text = "512x512";
-            label1.TextAlign = ContentAlignment.MiddleCenter;
-            label1.MouseClick += FormScreenShot_MouseClick;
             // 
-            // panel1
+            // pictureBox1
             // 
-            panel1.BackColor = Color.FromArgb(21, 21, 21);
-            panel1.Controls.Add(panel2);
-            panel1.Cursor = Cursors.Hand;
-            panel1.Dock = DockStyle.Fill;
-            panel1.Location = new Point(1, 1);
-            panel1.Name = "panel1";
-            panel1.Padding = new Padding(0, 40, 0, 0);
-            panel1.Size = new Size(510, 510);
-            panel1.TabIndex = 1;
-            panel1.MouseClick += FormScreenShot_MouseClick;
-            // 
-            // panel2
-            // 
-            panel2.BackColor = Color.Maroon;
-            panel2.Controls.Add(label1);
-            panel2.Cursor = Cursors.Hand;
-            panel2.Dock = DockStyle.Bottom;
-            panel2.ForeColor = Color.Orange;
-            panel2.Location = new Point(0, 43);
-            panel2.Margin = new Padding(0);
-            panel2.Name = "panel2";
-            panel2.Padding = new Padding(0, 40, 0, 0);
-            panel2.Size = new Size(510, 467);
-            panel2.TabIndex = 2;
-            panel2.Paint += panel2_Paint;
-            panel2.MouseClick += FormScreenShot_MouseClick;
+            pictureBox1.BackColor = Color.FromArgb(50, 50, 50);
+            pictureBox1.Dock = DockStyle.Fill;
+            pictureBox1.Location = new Point(1, 1);
+            pictureBox1.Margin = new Padding(0);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(510, 510);
+            pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureBox1.TabIndex = 2;
+            pictureBox1.TabStop = false;
+            pictureBox1.Paint += pictureBox1_Paint;
+            pictureBox1.MouseDown += FormScreenShot_MouseDown;
+            pictureBox1.MouseEnter += pictureBox1_MouseEnter;
+            pictureBox1.MouseLeave += pictureBox1_MouseLeave;
+            pictureBox1.MouseMove += FormScreenShot_MouseMove;
+            pictureBox1.MouseUp += FormScreenShot_MouseUp;
             // 
             // FormScreenShot
             // 
@@ -86,23 +72,24 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.Red;
             ClientSize = new Size(512, 512);
-            Controls.Add(panel1);
+            Controls.Add(label1);
+            Controls.Add(pictureBox1);
             FormBorderStyle = FormBorderStyle.None;
             Name = "FormScreenShot";
-            Opacity = 0.3D;
+            Opacity = 0.1D;
             Padding = new Padding(1);
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "FormScreenShot";
+            LocationChanged += FormScreenShot_LocationChanged;
             SizeChanged += FormScreenShot_SizeChanged;
-            MouseClick += FormScreenShot_MouseClick;
-            panel1.ResumeLayout(false);
-            panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
 
         private Label label1;
-        private Panel panel1;
-        private Panel panel2;
+        private PictureBox pictureBox1;
     }
 }

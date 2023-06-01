@@ -1,8 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
+using System.Drawing.Imaging;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Emgu.CV;
+using Emgu.CV.CvEnum;
+using Emgu.CV.Structure;
+
 
 namespace Redream
 {
@@ -88,6 +94,34 @@ namespace Redream
             byte[] xByte = (byte[])_imageConverter.ConvertTo(x, typeof(byte[]));
             return xByte;
         }
+
+
+
+        public static Rectangle[] DetectAndApplyMask(Bitmap img)
+        {
+            Mat mat = img.ToMat();
+
+            img.Save("temp.jpg");
+            // Load the image using Emgu.CV
+            Image<Bgr, byte> image = new Image<Bgr, byte>("temp.jpg");
+
+            // Load the pre-trained face cascade classifier
+            CascadeClassifier faceCascade = new CascadeClassifier("haarcascade_frontalface_alt.xml");
+            //CascadeClassifier faceCascade = new CascadeClassifier("haarcascade_fullbody.xml");
+            //CascadeClassifier faceCascade = new CascadeClassifier("haarcascade_upperbody.xml");
+
+
+            Rectangle[] faces = new Rectangle[] { Rectangle.Empty };
+            // Convert the image to grayscale for face detection
+            using (var grayImage = image.Convert<Gray, byte>())
+            {
+                faces = faceCascade.DetectMultiScale(grayImage, 1.5, 3, Size.Empty);
+            }
+            //Bitmap maskOut = image.ToBitmap();
+
+            return faces;
+        }
+
 
     }
 }

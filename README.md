@@ -32,7 +32,7 @@ Place the ```Capture area``` where you want.
 
 - ![image](https://user-images.githubusercontent.com/111762798/207306554-a15944a1-3acd-41c0-8054-b2ab6a441265.png) ```Click``` to Start/Stop.
 - ![image](https://user-images.githubusercontent.com/111762798/207307399-d24b97ca-4ef0-4fc3-b62a-290e82c3acc8.png) ```Click``` to save every generated frames
-- ![image](https://user-images.githubusercontent.com/111762798/207307617-5af3735b-eda3-48dc-b426-f93db18809a6.png) ```Click``` to change aspect ratio
+- ![image](https://user-images.githubusercontent.com/111762798/207307617-5af3735b-eda3-48dc-b426-f93db18809a6.png) ```Click/MouseScroll``` to change aspect ratio
 
 Changing diffusion settings :
 - ![image](https://user-images.githubusercontent.com/111762798/207307725-a0c2fea1-3f04-4e5d-8504-1004f610be72.png) ```Click/MouseScroll``` to change the seed value (-1 for random)

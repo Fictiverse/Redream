@@ -1,7 +1,7 @@
 # Fictiverse : Redream
 
 (Kind of) Realtime Stable Diffusion from a screen area using [Automatic1111](https://github.com/AUTOMATIC1111/stable-diffusion-webui)'s API.
-![image](https://github.com/Fictiverse/Redream/assets/111762798/92d5d1e8-8d14-443c-823a-56cfd632cf84)
+![screen](https://github.com/Fictiverse/Redream/assets/111762798/b408591d-3150-48bb-8f22-9d054726389c)
 
 
 ## Requirement

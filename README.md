@@ -21,9 +21,8 @@ https://user-images.githubusercontent.com/111762798/208230356-3e1272a1-60f9-4a12
 - First, start **Automatic1111 stable-diffusion-webui** and wait until it is ready.   
 
 Starting with Redream :   
-![image](https://user-images.githubusercontent.com/111762798/207682985-39ae0ce5-d2bf-4067-b136-5a2dd5fdaf6b.png)
 
-- Start to press ![image](https://user-images.githubusercontent.com/111762798/207306165-315287c6-e337-46fa-9d80-19c4eb782226.png)   
+- Press ![image](https://user-images.githubusercontent.com/111762798/207306165-315287c6-e337-46fa-9d80-19c4eb782226.png)   
 Place the ```Capture area``` where you want.  
 `Right click` to move, 
 `Left click` to paint mask, 

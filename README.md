@@ -53,6 +53,9 @@ Prompt:
 
 Licence:MIT
 
-## Contact
-[Paypal](https://www.paypal.com/donate/?hosted_button_id=MSXYHF2E7YXZG)   
+## Contact  
 [Discord](https://discord.gg/UYgRnhj8PR) - [Twitter](https://twitter.com/Fictiverse)
+
+## Tips
+[Paypal](https://www.paypal.com/donate/?hosted_button_id=MSXYHF2E7YXZG) 
+[ko-fi](https://ko-fi.com/fictiverse) 

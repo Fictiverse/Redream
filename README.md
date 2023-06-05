@@ -1,7 +1,7 @@
 # Fictiverse : Redream
 
 (Kind of) Realtime Stable Diffusion from a screen area using [Automatic1111](https://github.com/AUTOMATIC1111/stable-diffusion-webui)'s API.
-![image](https://github.com/Fictiverse/Redream/assets/111762798/92d5d1e8-8d14-443c-823a-56cfd632cf84)
+![screen](https://github.com/Fictiverse/Redream/assets/111762798/b408591d-3150-48bb-8f22-9d054726389c)
 
 
 ## Requirement
@@ -21,15 +21,18 @@ https://user-images.githubusercontent.com/111762798/208230356-3e1272a1-60f9-4a12
 - First, start **Automatic1111 stable-diffusion-webui** and wait until it is ready.   
 
 Starting with Redream :   
-![image](https://user-images.githubusercontent.com/111762798/207682985-39ae0ce5-d2bf-4067-b136-5a2dd5fdaf6b.png)
 
-- Start to press ![image](https://user-images.githubusercontent.com/111762798/207306165-315287c6-e337-46fa-9d80-19c4eb782226.png)   
-Place the ```Capture area``` where you want and lock the position with ```left click```.  
-
+- Press ![image](https://user-images.githubusercontent.com/111762798/207306165-315287c6-e337-46fa-9d80-19c4eb782226.png)   
+Place the ```Capture area``` where you want.  
+`Right click` to move, 
+`Left click` to paint mask, 
+`Middle click` to erase mask, 
+`Mouse Scroll` to change brush size,
+`Right click + Mouse  Scroll` to resize capture zone   
 
 - ![image](https://user-images.githubusercontent.com/111762798/207306554-a15944a1-3acd-41c0-8054-b2ab6a441265.png) ```Click``` to Start/Stop.
 - ![image](https://user-images.githubusercontent.com/111762798/207307399-d24b97ca-4ef0-4fc3-b62a-290e82c3acc8.png) ```Click``` to save every generated frames
-- ![image](https://user-images.githubusercontent.com/111762798/207307617-5af3735b-eda3-48dc-b426-f93db18809a6.png) ```Click``` to change aspect ratio
+- ![image](https://user-images.githubusercontent.com/111762798/207307617-5af3735b-eda3-48dc-b426-f93db18809a6.png) ```Click/MouseScroll``` to change aspect ratio
 
 Changing diffusion settings :
 - ![image](https://user-images.githubusercontent.com/111762798/207307725-a0c2fea1-3f04-4e5d-8504-1004f610be72.png) ```Click/MouseScroll``` to change the seed value (-1 for random)
@@ -48,6 +51,7 @@ Presets will start blinking
 Prompt:   
 - ![image](https://user-images.githubusercontent.com/111762798/207310573-321321d8-d735-463b-8ec3-28a8bb53ffd8.png) ```Click``` to interrogate the last captured image
 
+Licence:MIT
 
 ## Contact
 [Paypal](https://www.paypal.com/donate/?hosted_button_id=MSXYHF2E7YXZG)   

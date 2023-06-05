@@ -217,7 +217,6 @@ namespace Redream
             if (ParentForm.control_Settings.FaceDetection)
             {
                 Rectangle[] faces = MyFunctions.DetectAndApplyMask(bmpScreenshot);
-
                 if (faces.Length > 0)
                 {
                     using (Graphics graphics = Graphics.FromImage(mask))

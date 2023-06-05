@@ -40,9 +40,9 @@ namespace Redream
         {
             set { buttonSteps.Text = value; }
         }
-        public string Strength
+        public float Strength
         {
-            set { buttonStrength.Text = value; }
+            set { buttonStrength.Text = value.ToString("0.00"); }
         }
         public string CFGScale
         {
@@ -71,12 +71,6 @@ namespace Redream
             set { selectedControlNetPreprossessor = value; }
         }
 
-        int fitSize = 512;
-        public int FitSize
-        {
-            get { return fitSize; }
-            set { fitSize = value; }
-        }
 
 
 
@@ -148,13 +142,13 @@ namespace Redream
         internal async void InitModel()
         {
 
-            await API_RefreshModels(MainForm.url_API);
-            JArray jArray = await API_GetModels(MainForm.url_API);
+            await API_RefreshModels(textBoxIP.Text);
+            JArray jArray = await API_GetModels(textBoxIP.Text);
 
             if (jArray == null)
                 return;
 
-            currentModelName = await API_GetCurrentModel(MainForm.url_API);
+            currentModelName = await API_GetCurrentModel(textBoxIP.Text);
             previousModelName = currentModelName;
             int modelIndex = -1;
             if (jArray != null)
@@ -241,7 +235,7 @@ namespace Redream
                 selectedModel = dataModels.SelectedRows[0].Cells[3].Value.ToString();
                 currentModelName = dataModels.SelectedRows[0].Cells[1].Value.ToString();
 
-                await API_SetModel(MainForm.url_API, selectedModel);
+                await API_SetModel(textBoxIP.Text, selectedModel);
             }
         }
 
@@ -451,8 +445,7 @@ namespace Redream
 
         internal async void GetControletModels()
         {
-            string IP = MainForm.url_API;
-            ControlNetModels = await Get_ControlNet_ModelList(IP);
+            ControlNetModels = await Get_ControlNet_ModelList(textBoxIP.Text);
         }
 
 
@@ -470,8 +463,18 @@ namespace Redream
 
                     if (model != null)
                     {
-                        SelectedControlNetModel = FindBestMatch(model, ControlNetModels);
-                        SelectedControlNetPreprossessor = selectedRow.Cells[2].Value.ToString();
+                        string found = FindBestMatch(model, ControlNetModels);
+                        if (found != null)
+                        {
+                            SelectedControlNetModel = found;
+                            SelectedControlNetPreprossessor = selectedRow.Cells[2].Value.ToString();
+                        }
+                        else
+                        {
+                            SelectedControlNetModel = "None";
+                            SelectedControlNetPreprossessor = "None";
+                        }
+
                     }
                     else
                     {
@@ -505,29 +508,43 @@ namespace Redream
             }
         }
 
-        public bool FaceDetection { get; set; }
+        bool faceDetection;
+        public bool FaceDetection
+        {
+            get { return faceDetection; }
+            set { SwitchFaceButton(value); }
+        }
         private void buttonFace_Click(object sender, EventArgs e)
         {
-            FaceDetection = !FaceDetection;
-            if (FaceDetection)
-            {
+            SwitchFaceButton(!faceDetection);
+        }
+        private void SwitchFaceButton(bool value)
+        {
+            faceDetection = value;
+            if (faceDetection)
                 buttonFace.BackColor = Color.FromArgb(25, 85, 35);
-            }
             else
-            {
                 buttonFace.BackColor = Color.FromArgb(85, 35, 25);
-            }
         }
 
 
-
+        int fitSize = 512;
+        public int FitSize
+        {
+            get { return fitSize; }
+            set { SwitchFitSizeButton(value); }
+        }
         private void buttonFitSize_Click(object sender, EventArgs e)
         {
             if (fitSize == 768)
-                fitSize = 512;
+                SwitchFitSizeButton(512);
             else
-                fitSize = 768;
+                SwitchFitSizeButton(768);
 
+        }
+        private void SwitchFitSizeButton(int value)
+        {
+            fitSize = value;
             buttonFitSize.Text = "Max = " + fitSize;
         }
 
@@ -553,6 +570,11 @@ namespace Redream
             pr.StartInfo.UseShellExecute = true;
             pr.StartInfo.FileName = "https://www.paypal.com/donate/?hosted_button_id=MSXYHF2E7YXZG";
             pr.Start();
+        }
+
+        private void buttonIP_Click(object sender, EventArgs e)
+        {
+            textBoxIP.Text = "127.0.0.1:7860";
         }
     }
 }

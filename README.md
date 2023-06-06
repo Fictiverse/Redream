@@ -1,4 +1,4 @@
-# Fictiverse : Redream
+# Fictiverse: Redream
 
 (Kind of) Realtime Stable Diffusion from a screen area using [Automatic1111](https://github.com/AUTOMATIC1111/stable-diffusion-webui)'s API.
 ![screen](https://github.com/Fictiverse/Redream/assets/111762798/b408591d-3150-48bb-8f22-9d054726389c)
@@ -20,7 +20,7 @@ https://user-images.githubusercontent.com/111762798/208230356-3e1272a1-60f9-4a12
 ## How to use
 - First, start **Automatic1111 stable-diffusion-webui** and wait until it is ready.   
 
-Starting with Redream :   
+Starting with Redream:   
 
 - Press ![image](https://user-images.githubusercontent.com/111762798/207306165-315287c6-e337-46fa-9d80-19c4eb782226.png)   
 Place the ```Capture area``` where you want.  

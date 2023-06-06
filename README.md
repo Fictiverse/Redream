@@ -52,7 +52,8 @@ Presets will start blinking
 Prompt:   
 - ![image](https://user-images.githubusercontent.com/111762798/207310573-321321d8-d735-463b-8ec3-28a8bb53ffd8.png) ```Click``` to interrogate the last captured image
 
-Licence:MIT
+## License
+This repository is licensed under the [Apache License 2.0](https://github.com/Fictiverse/Redream/blob/master/LICENSE.txt).
 
 ## Contact  
 [Discord](https://discord.gg/UYgRnhj8PR) - [Twitter](https://twitter.com/Fictiverse)

@@ -4,7 +4,7 @@
 ![screen](https://github.com/Fictiverse/Redream/assets/111762798/b408591d-3150-48bb-8f22-9d054726389c)
 
 
-## Requirement
+## Requirements
 - Windows OS
 - [Automatic1111 stable-diffusion-webui](https://github.com/AUTOMATIC1111/stable-diffusion-webui)   
 Make sure```--xformers``` and ```--api``` commandline arguments are set in your "webui-user.bat":   

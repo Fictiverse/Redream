@@ -483,7 +483,7 @@
             textBoxPromptN.Name = "textBoxPromptN";
             textBoxPromptN.Size = new Size(467, 16);
             textBoxPromptN.TabIndex = 0;
-            textBoxPromptN.Text = "cartoon,3d,((disfigured)),((bad art)),((deformed)),((poorly drawn)),((extra limbs)),((b&w)),weird colors,blurry";
+            textBoxPromptN.Text = "blurry";
             // 
             // panelPrompt
             // 
@@ -508,7 +508,7 @@
             textBoxPrompt.Name = "textBoxPrompt";
             textBoxPrompt.Size = new Size(467, 16);
             textBoxPrompt.TabIndex = 0;
-            textBoxPrompt.Text = "natural lighting,(sharp focus),film grain,Masterpiece,award winning photo,extremely detailed,amazing,fine detail";
+            textBoxPrompt.Text = "<lora:lcm_sd15:1> detailed";
             // 
             // buttonClearPrompt
             // 

@@ -1,10 +1,11 @@
-# Fictiverse : Redream
+# Fictiverse: Redream
 
 (Kind of) Realtime Stable Diffusion from a screen area using [Automatic1111](https://github.com/AUTOMATIC1111/stable-diffusion-webui)'s API.
+
 ![screen](https://github.com/Fictiverse/Redream/assets/111762798/b408591d-3150-48bb-8f22-9d054726389c)
 
 
-## Requirement
+## Requirements
 - Windows OS
 - [Automatic1111 stable-diffusion-webui](https://github.com/AUTOMATIC1111/stable-diffusion-webui)   
 Make sure```--xformers``` and ```--api``` commandline arguments are set in your "webui-user.bat":   
@@ -20,7 +21,7 @@ https://user-images.githubusercontent.com/111762798/208230356-3e1272a1-60f9-4a12
 ## How to use
 - First, start **Automatic1111 stable-diffusion-webui** and wait until it is ready.   
 
-Starting with Redream :   
+Starting with Redream:   
 
 - Press ![image](https://user-images.githubusercontent.com/111762798/207306165-315287c6-e337-46fa-9d80-19c4eb782226.png)   
 Place the ```Capture area``` where you want.  
@@ -51,8 +52,12 @@ Presets will start blinking
 Prompt:   
 - ![image](https://user-images.githubusercontent.com/111762798/207310573-321321d8-d735-463b-8ec3-28a8bb53ffd8.png) ```Click``` to interrogate the last captured image
 
-Licence:MIT
+## License
+This repository is licensed under the [Apache License 2.0](https://github.com/Fictiverse/Redream/blob/master/LICENSE.txt).
 
-## Contact
-[Paypal](https://www.paypal.com/donate/?hosted_button_id=MSXYHF2E7YXZG)   
+## Contact  
 [Discord](https://discord.gg/UYgRnhj8PR) - [Twitter](https://twitter.com/Fictiverse)
+
+## Tips
+- [Paypal](https://www.paypal.com/donate/?hosted_button_id=MSXYHF2E7YXZG) 
+- [ko-fi](https://ko-fi.com/fictiverse) 

@@ -17,13 +17,21 @@ using Button = System.Windows.Forms.Button;
 using static Redream.MyFunctions;
 using static Redream.API;
 using System.Collections.Specialized;
+using Emgu.CV.Dai;
+using Emgu.CV.OCR;
 
 namespace Redream
 {
-
+    public enum DeviceType
+    {
+        Screenshot,
+        Webcam
+    }
 
     public partial class Form1 : Form
     {
+        public string version = "1.16";
+
         List<Button> buttonList = new List<Button>();
         List<string> favPromptList = new List<string>();
         List<string> favNPromptList = new List<string>();
@@ -46,6 +54,7 @@ namespace Redream
         public Form1()
         {
             InitializeComponent();
+            this.Text = "Fictiverse : Redream " + version;
             Directory.CreateDirectory(FramesPath);
 
             buttonList.Add(button1);
@@ -219,9 +228,11 @@ namespace Redream
 
         private async void buttonStart_Click(object sender, EventArgs e)
         {
+
             if (formSC != null && !formSC.IsDisposed)
             {
                 isStarted = !isStarted;
+                panelPlayer.Enabled = !isStarted;
                 ClearMemory();
                 TogglePlayer(false);
                 SaveSettings();
@@ -231,19 +242,13 @@ namespace Redream
                 {
                     frames.Clear();
                     //timerFadeOut.Enabled = true;
-
+                    last64Image = null;
                     buttonStart.BackColor = Color.FromArgb(25, 85, 35);
                     buttonStart.Image = Resources.pause_button;
 
                     while (isStarted && formSC != null)
                     {
-                        Bitmap bmp = formSC.TakeScreeenShot();
-                        CurrentCapture = bmp;
-
-                        string module = control_Settings.SelectedControlNetPreprossessor;
-                        string model = control_Settings.SelectedControlNetModel;
-
-                        await AutomaticAsync(bmp, module, model);
+                        await AutomaticAsync();
                     }
                 }
                 else
@@ -267,29 +272,48 @@ namespace Redream
             UpdatePlayer();
         }
 
-
-        private async Task AutomaticAsync(Image initimage, string module, string model)
+        string last64Image = null;
+        private async Task AutomaticAsync()
         {
-            string script = "http://" + control_Settings.textBoxIP.Text + "/sdapi/v1/img2img";
+            Image initimage = null;
 
+            if (control_Settings.CaptureDevice == DeviceType.Webcam)
+                initimage = await formSC.CaptureWebcam();
+            else
+                initimage = await formSC.TakeScreeenShot();
 
-            Bitmap msk = formSC.Mask;
+            CurrentCapture = (Bitmap)initimage;
 
-            Size size = formSC.Size;
-            if (isNormSize)
+            if (initimage != null)
             {
-                size = NormalizeSize(size, control_Settings.FitSize);
+                string script = "http://" + control_Settings.textBoxIP.Text + "/sdapi/v1/img2img";
+
+
+                Bitmap msk = formSC.Mask;
+
+                Size size = initimage.Size;
+                size.Width = size.Width / 8 * 8;
+                size.Height = size.Height / 8 * 8;
+
+
+                if (isNormSize)
+                    size = NormalizeSize(size, control_Settings.FitSize);
+
                 initimage = ResizeImage((Bitmap)initimage.Clone(), size);
                 msk = ResizeImage((Bitmap)msk.Clone(), size);
-            }
-            string base64Image = "data:image/png;base64," + Convert.ToBase64String(ImageToBytes(initimage));
-            List<string> init_images = new List<string> { base64Image };
 
-            string base64Mask = "data:image/png;base64," + Convert.ToBase64String(ImageToBytes(msk));
+                string base64Image = "data:image/png;base64," + Convert.ToBase64String(ImageToBytes(initimage));
 
-            int inpainting_fill = strength >= 0.98 ? 3 : 1;
+                if (last64Image == null)
+                    last64Image = base64Image;
 
-            var requestBody = new Dictionary<string, object>
+                List<string> init_images = new List<string> { base64Image };
+
+                string base64Mask = "data:image/png;base64," + Convert.ToBase64String(ImageToBytes(msk));
+
+                int inpainting_fill = strength >= 0.98 ? 3 : 1;
+
+                var requestBody = new Dictionary<string, object>
             {
                 { "init_images", init_images },
                 { "mask", base64Mask },
@@ -308,9 +332,12 @@ namespace Redream
                 { "sampler_index", samplers[samplerIndex] }
             };
 
-            if (module.ToLower() != "none" || model.ToLower() != "none")
-            {
-                var alwaysonScripts = new Dictionary<string, object>
+                string module = control_Settings.SelectedControlNetPreprossessor;
+                string model = control_Settings.SelectedControlNetModel;
+
+                if (module.ToLower() != "none" || model.ToLower() != "none")
+                {
+                    var alwaysonScripts = new Dictionary<string, object>
                 {
                     {
                         "controlnet", new Dictionary<string, object>
@@ -320,59 +347,74 @@ namespace Redream
                                 {
                                     new Dictionary<string, object>
                                     {
+                                        { "image", init_images[0] },
                                         { "module", module },
                                         { "model", model },
-                                        { "control_mode", "ControlNet is more important" }
+                                        { "weight", 0.7f },       // Set weight as float (0.7f)
+                                        { "guidance", 1.0f },      // Set guidance as float (1.0f)
+                                        { "processor_res", 512 },
+                                    },
+                                    /*
+                                    new Dictionary<string, object>
+                                    {
+                                        { "image", last64Image },
+                                        { "module", "none" },
+                                        { "model", "diff_control_sd15_temporalnet_fp16 [adc6bd97]" },
+                                        { "weight", 0.7f },       // Set weight as float (0.7f)
+                                        { "guidance", 1.0f }      // Set guidance as float (1.0f)
                                     }
+                                    */
                                 }
                             }
                         }
                     }
                 };
-                requestBody.Add("alwayson_scripts", alwaysonScripts);
-            }
+                    requestBody.Add("alwayson_scripts", alwaysonScripts);
+                }
 
-            try
-            {
-                string json = JsonConvert.SerializeObject(requestBody);
-                var client = new HttpClient();
-                var content = new StringContent(json, Encoding.UTF8, "application/json");
-                var request = new HttpRequestMessage
+                try
                 {
-                    RequestUri = new Uri(script),
-                    Method = HttpMethod.Post,
-                    Content = content
-                };
-                var response = await client.SendAsync(request);
-                dynamic AutomaticResponse = JsonConvert.DeserializeObject(await response.Content.ReadAsStringAsync());
+                    string json = JsonConvert.SerializeObject(requestBody);
+                    var client = new HttpClient();
+                    var content = new StringContent(json, Encoding.UTF8, "application/json");
+                    var request = new HttpRequestMessage
+                    {
+                        RequestUri = new Uri(script),
+                        Method = HttpMethod.Post,
+                        Content = content
+                    };
+                    var response = await client.SendAsync(request);
+                    dynamic AutomaticResponse = JsonConvert.DeserializeObject(await response.Content.ReadAsStringAsync());
 
-                string imgStr = AutomaticResponse.images[0].ToString();
-                var imgB64 = Convert.FromBase64String(imgStr);
-                Bitmap bmp;
-                using (var ms = new MemoryStream(imgB64))
-                    bmp = new Bitmap(Bitmap.FromStream(ms));
+                    string imgStr = AutomaticResponse.images[0].ToString();
+                    var imgB64 = Convert.FromBase64String(imgStr);
+                    Bitmap bmp;
+                    using (var ms = new MemoryStream(imgB64))
+                        bmp = new Bitmap(Bitmap.FromStream(ms));
 
-                ProcessResult(bmp);
-            }
-            catch (HttpRequestException ex)
-            {
-                Stop();
-                MessageBox.Show("HttpRequestException occurred: " + ex.Message);
-                API_failRoutine();
-                // Handle the exception caused by network or HTTP-related issues
-            }
-            catch (UriFormatException ex)
-            {
-                Stop();
-                MessageBox.Show("UriFormatException occurred: " + ex.Message);
-                API_failRoutine();
-                // Handle the exception caused by an invalid URL format
-            }
-            catch (Exception ex)
-            {
-                Stop();
-                //MessageBox.Show("Other exception occurred: " + ex.Message);
-                // Handle other types of exceptions
+                    last64Image = base64Image;
+                    ProcessResult(bmp);
+                }
+                catch (HttpRequestException ex)
+                {
+                    Stop();
+                    MessageBox.Show("HttpRequestException occurred: " + ex.Message);
+                    API_failRoutine();
+                    // Handle the exception caused by network or HTTP-related issues
+                }
+                catch (UriFormatException ex)
+                {
+                    Stop();
+                    MessageBox.Show("UriFormatException occurred: " + ex.Message);
+                    API_failRoutine();
+                    // Handle the exception caused by an invalid URL format
+                }
+                catch (Exception ex)
+                {
+                    Stop();
+                    //MessageBox.Show("Other exception occurred: " + ex.Message);
+                    // Handle other types of exceptions
+                }
             }
         }
 
@@ -716,9 +758,9 @@ namespace Redream
         private void buttonCFGScale_MouseWheel(object? sender, MouseEventArgs e)
         {
             if (e.Delta > 0)
-                SwitchCFGScale(0.5f);
+                SwitchCFGScale(0.1f);
             else if (e.Delta < 0)
-                SwitchCFGScale(-0.5f);
+                SwitchCFGScale(-0.1f);
         }
 
         public void SwitchCFGScale(float value, bool loop = false)
@@ -797,7 +839,7 @@ namespace Redream
         string[] samplers = new string[] {
           "Euler a",
           "Euler",
-          "LMS",
+          "LCM",
           "Heun",
           "DPM2",
           "DPM2 a",
@@ -813,8 +855,6 @@ namespace Redream
           "DPM++ 2M Karras",
           "DPM++ SDE Karras",
           "DDIM",
-          //"PLMS",
-          //"UniPC"
         };
 
         private void buttonSampler_Click(object sender, EventArgs e)
@@ -880,7 +920,7 @@ namespace Redream
 
 
         bool isMaskEnabled = true;
-        private void buttonDefaultSettings_Click(object sender, EventArgs e)
+        private void buttonMask_Click(object sender, EventArgs e)
         {
             SwitchMaskButton(!isMaskEnabled);
         }
@@ -889,9 +929,9 @@ namespace Redream
             isMaskEnabled = value;
 
             if (isMaskEnabled)
-                buttonDefaultSettings.BackColor = Color.FromArgb(25, 85, 35);
+                buttonMask.BackColor = Color.FromArgb(25, 85, 35);
             else
-                buttonDefaultSettings.BackColor = Color.FromArgb(85, 35, 25);
+                buttonMask.BackColor = Color.FromArgb(85, 35, 25);
 
             if (formSC != null)
                 formSC.IsMaskEnabled = isMaskEnabled;
@@ -985,6 +1025,8 @@ namespace Redream
 
 
 
+
+
         bool isPlaying;
         int currentFrame = 0;
         private void buttonPlay_Click(object sender, EventArgs e)
@@ -1041,9 +1083,64 @@ namespace Redream
             }
         }
 
-        private void buttonSaveFrames_Click(object sender, EventArgs e)
+        private async void buttonSaveFrames_Click(object sender, EventArgs e)
         {
+            buttonSaveFrames.Image = Resources.hourglass24;
+            if (frames.Count > 0)
+            {
+                // Create and configure the FolderBrowserDialog
+                FolderBrowserDialog folderBrowserDialog = new FolderBrowserDialog();
+                folderBrowserDialog.Description = "Select Saving Path";
+
+                // Show the dialog and check if the user selected a folder
+                if (folderBrowserDialog.ShowDialog() == DialogResult.OK)
+                {
+                    string savingPath = folderBrowserDialog.SelectedPath;
+                    string folderName = "Redream_" + DateTime.Now.ToFileTime().ToString().Substring(0, 12);
+                    // Create the folder if it doesn't exist
+                    string folderPath = Path.Combine(savingPath, folderName);
+                    Directory.CreateDirectory(folderPath);
+
+                    await SaveFrames(folderPath);
+
+                    Process.Start("explorer.exe", folderPath);
+                }
+            }
+            buttonSaveFrames.Image = Resources.save1;
+        }
+
+        private Task SaveFrames(string path)
+        {
+            for (int i = 0; i < frames.Count; i++)
+            {
+                string fileName = (i + 1).ToString("0000") + ".jpg";
+                string filePath = Path.Combine(path, fileName);
+                frames[i].Save(filePath);
+            }
+            return Task.CompletedTask;
+        }
+
+        private void buttonBrowse_Click(object sender, EventArgs e)
+        {
+            Process.Start("explorer.exe", FramesPath);
+        }
+
+        bool isWebcamEnabled;
+        public void ToggleDevice(DeviceType value)
+        {
+            //isWebcamEnabled = value;
+            if (value == DeviceType.Screenshot)
+            {
+                buttonScreenshot.Image = Resources.selection;
+            }
+            else
+            {
+                buttonScreenshot.Image = Resources.webcam;
+                SwitchMaskButton(true);
+            }
 
         }
+
+
     }
 }

@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Emgu.CV;
 using Redream;
-
+using static Redream.MyFunctions;
 
 namespace Redream
 {
@@ -71,10 +71,10 @@ namespace Redream
         bool isMaskEnabled = true;
         public bool IsMaskEnabled
         {
-            get  { return isMaskEnabled;  }
-            set  {ToggleMask(value); }
+            get { return isMaskEnabled; }
+            set { ToggleMask(value); }
         }
-        public bool IsMaskInit{ get; set; }
+        public bool IsMaskInit { get; set; }
         Color colorMaskB = Color.White;
         Color colorMaskF = Color.Black;
 
@@ -200,9 +200,10 @@ namespace Redream
 
 
 
-        public Bitmap TakeScreeenShot()
+        public Task<Bitmap> TakeScreeenShot()
         {
-
+            defaultOpacity = 0.25f;
+            //pictureBox1.Image = null;
             Bitmap bmpScreenshot = new Bitmap(this.Width, this.Height);
 
             Graphics g = Graphics.FromImage(bmpScreenshot);
@@ -227,26 +228,6 @@ namespace Redream
 
                             Rectangle rec = new Rectangle(face.X, face.Y - face.Width / 4, face.Height, face.Height + face.Height / 3);
 
-                            /*
-                            Point center = new Point(rec.X + rec.Width/2, rec.Y + rec.Height/2);
-                            Point top = new Point(rec.X + rec.Width / 2, rec.Height);
-
-
-                            graphics.SmoothingMode = SmoothingMode.AntiAlias;
-                            using (var ellipsePath = new GraphicsPath())
-                            {
-                                ellipsePath.AddEllipse(face);
-                                using (var b = new PathGradientBrush(ellipsePath))
-                                {
-                                    b.CenterPoint = center;
-                                    b.CenterColor = Color.Black;
-                                    b.SurroundColors = new[] { Color.White };
-                                    b.FocusScales = new PointF(0,0);
-                                    graphics.FillEllipse(b, face);
-                                }
-                            }
-                            */
-
                             graphics.FillEllipse(new SolidBrush(colorMaskF), rec);
 
 
@@ -258,31 +239,25 @@ namespace Redream
 
             }
 
-         pictureBox1.Refresh();
+            pictureBox1.Refresh();
+
+            return Task.FromResult(bmpScreenshot);
+        }
 
 
-         return bmpScreenshot;
-         //Bitmap resized = ResizeImage(bmpScreenshot, new Size(512, 512));
-         //Form1 parent = (Form1)this.Owner;
-         //parent.SetInitImage(bmpScreenshot);
-         // Clipboard.SetImage(bmpScreenshot);
+        public void ChangeRatio(int rX, int rY)
+        {
+            ratioX = rX;
+            ratioY = rY;
+            float w = formSize * ratioX;
+            float h = formSize * ratioY;
+            this.Size = new Size((int)w, (int)h);
 
-     }
+            label1.Text = Size.Width.ToString() + "x" + Size.Height.ToString();
+            img = null;
+            CreateMaskBitmap();
 
-
-         public void ChangeRatio(int rX, int rY)
-         {
-             ratioX = rX;
-             ratioY = rY;
-             float w = formSize * ratioX;
-             float h = formSize * ratioY;
-             this.Size = new Size((int)w, (int)h);
-
-             label1.Text = Size.Width.ToString() + "x" + Size.Height.ToString();
-             img = null;
-             CreateMaskBitmap();
-
-         }
+        }
 
 
         private void panelMask_Paint(object sender, PaintEventArgs e)
@@ -576,5 +551,19 @@ namespace Redream
             isMouseInsideinitImage = false;
             pictureBox1.Refresh();
         }
+
+        private VideoCapture _capture = new VideoCapture(); // Create a new VideoCapture instance
+
+        public async Task<Bitmap> CaptureWebcam()
+        {
+            Mat frame = new Mat();
+            _capture.Read(frame);
+            pictureBox1.Image = frame.ToBitmap();
+            this.Size = pictureBox1.Image.Size;
+            defaultOpacity = 1;
+            label1.Text = Size.Width.ToString() + "x" + Size.Height.ToString();
+            return (Bitmap)pictureBox1.Image;
+        }
+
     }
 }

@@ -309,6 +309,16 @@ namespace Redream
                 && (result.Scheme == Uri.UriSchemeHttp || result.Scheme == Uri.UriSchemeHttps);
         }
 
+        public static async Task<Bitmap> LoadImageAsync(string filePath)
+        {
+            return await Task.Run(() =>
+            {
+                // Load the image synchronously
+                Bitmap image = new Bitmap(filePath);
 
+                // Return the loaded image
+                return image;
+            });
+        }
     }
 }

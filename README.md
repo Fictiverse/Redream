@@ -52,6 +52,9 @@ Presets will start blinking
 Prompt:   
 - ![image](https://user-images.githubusercontent.com/111762798/207310573-321321d8-d735-463b-8ec3-28a8bb53ffd8.png) ```Click``` to interrogate the last captured image
 
+Hide interface:   
+-```Click``` on the image to hide/show interface
+
 ## License
 This repository is licensed under the [Apache License 2.0](https://github.com/Fictiverse/Redream/blob/master/LICENSE.txt).
 

@@ -17,13 +17,19 @@ using System.Xml.Linq;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using static Redream.API;
 using static Redream.MyFunctions;
+using Emgu.CV;
+using System.Resources;
+
 namespace Redream
 {
+
+
     public partial class userControl_Settings : UserControl
     {
         public userControl_Settings()
         {
             InitializeComponent();
+
         }
 
 
@@ -110,6 +116,8 @@ namespace Redream
 
         private void userControl_Settings_Load(object sender, EventArgs e)
         {
+            toolTip1.SetToolTip(buttonGit, "Check for Update (Current version : " + MainForm.version + ")");
+
             buttonShape.MouseWheel += new MouseEventHandler(buttonShape_MouseWheel);
             buttonSeed.MouseWheel += new MouseEventHandler(buttonSeed_MouseWheel);
             buttonSteps.MouseWheel += new MouseEventHandler(buttonSteps_MouseWheel);
@@ -125,16 +133,8 @@ namespace Redream
                 dataControlNet.Rows.Add(name, null, pre, model);
             }
 
-
-
-
-
-
             InitModel();
             GetControletModels();
-
-
-
         }
 
 
@@ -211,13 +211,6 @@ namespace Redream
 
         public Form1 MainForm { get; set; }
 
-
-        string FramesPath = Application.StartupPath + "Frames";
-
-        private void buttonBrowse_Click(object sender, EventArgs e)
-        {
-            Process.Start("explorer.exe", FramesPath);
-        }
 
 
 
@@ -491,20 +484,38 @@ namespace Redream
 
             }
         }
-        public bool PositiveMask { get; set; }
 
-        private void buttonMask_Click(object sender, EventArgs e)
+
+        private DeviceType captureDevice;
+        public DeviceType CaptureDevice
         {
-            PositiveMask = !PositiveMask;
-            if (PositiveMask)
+            get { return captureDevice; }
+            set
             {
-                buttonMask.Text = "+";
-                buttonMask.BackColor = Color.FromArgb(25, 85, 35);
+                captureDevice = value;
+                MainForm.ToggleDevice(value);
             }
-            else
+        }
+
+        private void buttonDevice_Click(object sender, EventArgs e)
+        {
+            ToggleDevice();
+        }
+
+
+        private void ToggleDevice()
+        {
+
+
+            if (captureDevice == DeviceType.Screenshot)
             {
-                buttonMask.Text = "-";
-                buttonMask.BackColor = Color.FromArgb(85, 35, 25);
+                CaptureDevice = DeviceType.Webcam;
+                buttonDevice.Image = Resources.selection;
+            }
+            else if (captureDevice == DeviceType.Webcam)
+            {
+                CaptureDevice = DeviceType.Screenshot;
+                buttonDevice.Image = Resources.webcam;
             }
         }
 
@@ -576,5 +587,7 @@ namespace Redream
         {
             textBoxIP.Text = "127.0.0.1:7860";
         }
+
+
     }
 }

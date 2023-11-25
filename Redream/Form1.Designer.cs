@@ -39,7 +39,7 @@
             buttonSeed = new Button();
             buttonNormSize = new Button();
             buttonShape = new Button();
-            buttonDefaultSettings = new Button();
+            buttonMask = new Button();
             buttonScreenshot = new Button();
             buttonStart = new Button();
             buttonSettings = new Button();
@@ -56,6 +56,7 @@
             buttonResize = new Button();
             buttonSave = new Button();
             buttonCopy = new Button();
+            buttonBrowse = new Button();
             panelCenter = new TableLayoutPanel();
             panelImage = new Panel();
             pictureBox1 = new PictureBox();
@@ -71,7 +72,7 @@
             button3 = new Button();
             button2 = new Button();
             button1 = new Button();
-            tableLayoutPanel1 = new TableLayoutPanel();
+            panelPlayer = new TableLayoutPanel();
             buttonPlay = new Button();
             colorTrackBarPlayer = new ColorTrackBar();
             buttonSaveFrames = new Button();
@@ -91,7 +92,7 @@
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             panelBottom.SuspendLayout();
             panelM.SuspendLayout();
-            tableLayoutPanel1.SuspendLayout();
+            panelPlayer.SuspendLayout();
             SuspendLayout();
             // 
             // panelMain
@@ -124,21 +125,22 @@
             // 
             panelLeft.ColumnCount = 1;
             panelLeft.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
-            panelLeft.Controls.Add(buttonSampler, 0, 14);
-            panelLeft.Controls.Add(buttonCFGScale, 0, 12);
-            panelLeft.Controls.Add(buttonStrength, 0, 10);
-            panelLeft.Controls.Add(buttonSteps, 0, 8);
-            panelLeft.Controls.Add(buttonSeed, 0, 6);
-            panelLeft.Controls.Add(buttonNormSize, 0, 4);
-            panelLeft.Controls.Add(buttonShape, 0, 3);
-            panelLeft.Controls.Add(buttonDefaultSettings, 0, 1);
+            panelLeft.Controls.Add(buttonSampler, 0, 15);
+            panelLeft.Controls.Add(buttonCFGScale, 0, 13);
+            panelLeft.Controls.Add(buttonStrength, 0, 11);
+            panelLeft.Controls.Add(buttonSteps, 0, 9);
+            panelLeft.Controls.Add(buttonSeed, 0, 7);
+            panelLeft.Controls.Add(buttonNormSize, 0, 5);
+            panelLeft.Controls.Add(buttonShape, 0, 4);
+            panelLeft.Controls.Add(buttonMask, 0, 2);
             panelLeft.Controls.Add(buttonScreenshot, 0, 0);
             panelLeft.Dock = DockStyle.Fill;
             panelLeft.Location = new Point(0, 83);
             panelLeft.Margin = new Padding(0, 3, 0, 3);
             panelLeft.Name = "panelLeft";
-            panelLeft.RowCount = 15;
+            panelLeft.RowCount = 16;
             panelLeft.RowStyles.Add(new RowStyle(SizeType.Absolute, 40F));
+            panelLeft.RowStyles.Add(new RowStyle(SizeType.Absolute, 3F));
             panelLeft.RowStyles.Add(new RowStyle(SizeType.Absolute, 40F));
             panelLeft.RowStyles.Add(new RowStyle(SizeType.Absolute, 6F));
             panelLeft.RowStyles.Add(new RowStyle(SizeType.Absolute, 40F));
@@ -166,10 +168,10 @@
             buttonSampler.Font = new Font("Segoe UI", 11F, FontStyle.Bold, GraphicsUnit.Point);
             buttonSampler.ForeColor = Color.Silver;
             buttonSampler.Image = Properties.Resources.network;
-            buttonSampler.Location = new Point(0, 472);
+            buttonSampler.Location = new Point(0, 475);
             buttonSampler.Margin = new Padding(0);
             buttonSampler.Name = "buttonSampler";
-            buttonSampler.Size = new Size(40, 43);
+            buttonSampler.Size = new Size(40, 40);
             buttonSampler.TabIndex = 112;
             buttonSampler.TextAlign = ContentAlignment.BottomCenter;
             toolTip1.SetToolTip(buttonSampler, "Sampler : Euler");
@@ -187,7 +189,7 @@
             buttonCFGScale.ForeColor = Color.Silver;
             buttonCFGScale.Image = Properties.Resources._16_scale;
             buttonCFGScale.ImageAlign = ContentAlignment.TopCenter;
-            buttonCFGScale.Location = new Point(0, 395);
+            buttonCFGScale.Location = new Point(0, 398);
             buttonCFGScale.Margin = new Padding(0, 1, 0, 0);
             buttonCFGScale.Name = "buttonCFGScale";
             buttonCFGScale.Padding = new Padding(0, 6, 0, 6);
@@ -210,7 +212,7 @@
             buttonStrength.ForeColor = Color.Silver;
             buttonStrength.Image = Properties.Resources._16_blur;
             buttonStrength.ImageAlign = ContentAlignment.TopCenter;
-            buttonStrength.Location = new Point(0, 323);
+            buttonStrength.Location = new Point(0, 326);
             buttonStrength.Margin = new Padding(0, 1, 0, 1);
             buttonStrength.Name = "buttonStrength";
             buttonStrength.Padding = new Padding(0, 6, 0, 6);
@@ -233,7 +235,7 @@
             buttonSteps.ForeColor = Color.Silver;
             buttonSteps.Image = Properties.Resources.level2;
             buttonSteps.ImageAlign = ContentAlignment.TopCenter;
-            buttonSteps.Location = new Point(0, 251);
+            buttonSteps.Location = new Point(0, 254);
             buttonSteps.Margin = new Padding(0, 1, 0, 1);
             buttonSteps.Name = "buttonSteps";
             buttonSteps.Padding = new Padding(0, 6, 0, 6);
@@ -256,7 +258,7 @@
             buttonSeed.ForeColor = Color.Silver;
             buttonSeed.Image = Properties.Resources._16_dice;
             buttonSeed.ImageAlign = ContentAlignment.TopCenter;
-            buttonSeed.Location = new Point(0, 178);
+            buttonSeed.Location = new Point(0, 181);
             buttonSeed.Margin = new Padding(0, 0, 0, 1);
             buttonSeed.Name = "buttonSeed";
             buttonSeed.Padding = new Padding(0, 6, 0, 6);
@@ -278,7 +280,7 @@
             buttonNormSize.Font = new Font("Segoe UI", 11F, FontStyle.Bold, GraphicsUnit.Point);
             buttonNormSize.ForeColor = Color.Silver;
             buttonNormSize.Image = Properties.Resources._16_resize;
-            buttonNormSize.Location = new Point(0, 127);
+            buttonNormSize.Location = new Point(0, 130);
             buttonNormSize.Margin = new Padding(0, 1, 0, 0);
             buttonNormSize.Name = "buttonNormSize";
             buttonNormSize.Size = new Size(40, 39);
@@ -298,7 +300,7 @@
             buttonShape.Font = new Font("Segoe UI", 11F, FontStyle.Bold, GraphicsUnit.Point);
             buttonShape.ForeColor = Color.Silver;
             buttonShape.Image = Properties.Resources.rounded_black_square_shapeS_1;
-            buttonShape.Location = new Point(0, 86);
+            buttonShape.Location = new Point(0, 89);
             buttonShape.Margin = new Padding(0, 0, 0, 1);
             buttonShape.Name = "buttonShape";
             buttonShape.Size = new Size(40, 39);
@@ -308,25 +310,25 @@
             buttonShape.UseVisualStyleBackColor = false;
             buttonShape.Click += buttonShape_Click;
             // 
-            // buttonDefaultSettings
+            // buttonMask
             // 
-            buttonDefaultSettings.BackColor = Color.FromArgb(25, 85, 35);
-            buttonDefaultSettings.Cursor = Cursors.Hand;
-            buttonDefaultSettings.Dock = DockStyle.Fill;
-            buttonDefaultSettings.FlatAppearance.BorderSize = 0;
-            buttonDefaultSettings.FlatStyle = FlatStyle.Flat;
-            buttonDefaultSettings.Font = new Font("Segoe UI", 11F, FontStyle.Bold, GraphicsUnit.Point);
-            buttonDefaultSettings.ForeColor = Color.Silver;
-            buttonDefaultSettings.Image = Properties.Resources.mask;
-            buttonDefaultSettings.Location = new Point(0, 41);
-            buttonDefaultSettings.Margin = new Padding(0, 1, 0, 0);
-            buttonDefaultSettings.Name = "buttonDefaultSettings";
-            buttonDefaultSettings.Size = new Size(40, 39);
-            buttonDefaultSettings.TabIndex = 111;
-            buttonDefaultSettings.TextAlign = ContentAlignment.BottomCenter;
-            toolTip1.SetToolTip(buttonDefaultSettings, "Inpaint Mask");
-            buttonDefaultSettings.UseVisualStyleBackColor = false;
-            buttonDefaultSettings.Click += buttonDefaultSettings_Click;
+            buttonMask.BackColor = Color.FromArgb(25, 85, 35);
+            buttonMask.Cursor = Cursors.Hand;
+            buttonMask.Dock = DockStyle.Fill;
+            buttonMask.FlatAppearance.BorderSize = 0;
+            buttonMask.FlatStyle = FlatStyle.Flat;
+            buttonMask.Font = new Font("Segoe UI", 11F, FontStyle.Bold, GraphicsUnit.Point);
+            buttonMask.ForeColor = Color.Silver;
+            buttonMask.Image = Properties.Resources.mask;
+            buttonMask.Location = new Point(0, 43);
+            buttonMask.Margin = new Padding(0);
+            buttonMask.Name = "buttonMask";
+            buttonMask.Size = new Size(40, 40);
+            buttonMask.TabIndex = 111;
+            buttonMask.TextAlign = ContentAlignment.BottomCenter;
+            toolTip1.SetToolTip(buttonMask, "Inpaint Mask");
+            buttonMask.UseVisualStyleBackColor = false;
+            buttonMask.Click += buttonMask_Click;
             // 
             // buttonScreenshot
             // 
@@ -339,9 +341,9 @@
             buttonScreenshot.ForeColor = Color.Silver;
             buttonScreenshot.Image = Properties.Resources.selection;
             buttonScreenshot.Location = new Point(0, 0);
-            buttonScreenshot.Margin = new Padding(0, 0, 0, 1);
+            buttonScreenshot.Margin = new Padding(0);
             buttonScreenshot.Name = "buttonScreenshot";
-            buttonScreenshot.Size = new Size(40, 39);
+            buttonScreenshot.Size = new Size(40, 40);
             buttonScreenshot.TabIndex = 103;
             buttonScreenshot.TextAlign = ContentAlignment.BottomCenter;
             toolTip1.SetToolTip(buttonScreenshot, "Capture Selector");
@@ -483,7 +485,7 @@
             textBoxPromptN.Name = "textBoxPromptN";
             textBoxPromptN.Size = new Size(467, 16);
             textBoxPromptN.TabIndex = 0;
-            textBoxPromptN.Text = "blurry";
+            textBoxPromptN.Text = "deformed, bad art, ugly, disfigured";
             // 
             // panelPrompt
             // 
@@ -508,7 +510,7 @@
             textBoxPrompt.Name = "textBoxPrompt";
             textBoxPrompt.Size = new Size(467, 16);
             textBoxPrompt.TabIndex = 0;
-            textBoxPrompt.Text = "<lora:lcm_sd15:1> detailed";
+            textBoxPrompt.Text = "<lora:lcm_sd15:1> cartoon 3d pixar disney character, miniature, model, claymation";
             // 
             // buttonClearPrompt
             // 
@@ -534,14 +536,16 @@
             // 
             panelRight.ColumnCount = 1;
             panelRight.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
-            panelRight.Controls.Add(buttonResize, 0, 2);
+            panelRight.Controls.Add(buttonResize, 0, 3);
             panelRight.Controls.Add(buttonSave, 0, 1);
             panelRight.Controls.Add(buttonCopy, 0, 0);
+            panelRight.Controls.Add(buttonBrowse, 0, 2);
             panelRight.Dock = DockStyle.Fill;
             panelRight.Location = new Point(558, 80);
             panelRight.Margin = new Padding(0);
             panelRight.Name = "panelRight";
-            panelRight.RowCount = 3;
+            panelRight.RowCount = 4;
+            panelRight.RowStyles.Add(new RowStyle(SizeType.Absolute, 43F));
             panelRight.RowStyles.Add(new RowStyle(SizeType.Absolute, 43F));
             panelRight.RowStyles.Add(new RowStyle(SizeType.Absolute, 43F));
             panelRight.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
@@ -558,10 +562,10 @@
             buttonResize.Font = new Font("Segoe UI", 11F, FontStyle.Bold, GraphicsUnit.Point);
             buttonResize.ForeColor = Color.Silver;
             buttonResize.Image = Properties.Resources.flip;
-            buttonResize.Location = new Point(0, 89);
+            buttonResize.Location = new Point(0, 132);
             buttonResize.Margin = new Padding(0, 3, 0, 3);
             buttonResize.Name = "buttonResize";
-            buttonResize.Size = new Size(40, 429);
+            buttonResize.Size = new Size(40, 386);
             buttonResize.TabIndex = 12;
             toolTip1.SetToolTip(buttonResize, "Resize");
             buttonResize.UseVisualStyleBackColor = false;
@@ -592,7 +596,7 @@
             // 
             // buttonCopy
             // 
-            buttonCopy.BackColor = Color.FromArgb(85, 35, 25);
+            buttonCopy.BackColor = Color.FromArgb(30, 50, 60);
             buttonCopy.Cursor = Cursors.Hand;
             buttonCopy.Dock = DockStyle.Fill;
             buttonCopy.FlatAppearance.BorderSize = 0;
@@ -609,6 +613,24 @@
             toolTip1.SetToolTip(buttonCopy, "Copy image to Clipboard");
             buttonCopy.UseVisualStyleBackColor = false;
             buttonCopy.Click += buttonCopy_Click;
+            // 
+            // buttonBrowse
+            // 
+            buttonBrowse.BackColor = Color.FromArgb(30, 50, 60);
+            buttonBrowse.Cursor = Cursors.Hand;
+            buttonBrowse.FlatAppearance.BorderSize = 0;
+            buttonBrowse.FlatStyle = FlatStyle.Flat;
+            buttonBrowse.Font = new Font("Segoe UI", 11F, FontStyle.Bold, GraphicsUnit.Point);
+            buttonBrowse.ForeColor = Color.Silver;
+            buttonBrowse.Image = Properties.Resources.search;
+            buttonBrowse.Location = new Point(0, 89);
+            buttonBrowse.Margin = new Padding(0, 3, 0, 0);
+            buttonBrowse.Name = "buttonBrowse";
+            buttonBrowse.Size = new Size(40, 39);
+            buttonBrowse.TabIndex = 112;
+            buttonBrowse.TextAlign = ContentAlignment.BottomCenter;
+            buttonBrowse.UseVisualStyleBackColor = false;
+            buttonBrowse.Click += buttonBrowse_Click;
             // 
             // panelCenter
             // 
@@ -658,7 +680,7 @@
             panelBottom.ColumnCount = 1;
             panelBottom.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
             panelBottom.Controls.Add(panelM, 0, 1);
-            panelBottom.Controls.Add(tableLayoutPanel1, 0, 0);
+            panelBottom.Controls.Add(panelPlayer, 0, 0);
             panelBottom.Dock = DockStyle.Fill;
             panelBottom.Location = new Point(43, 601);
             panelBottom.Margin = new Padding(3, 0, 3, 0);
@@ -891,25 +913,26 @@
             button1.UseVisualStyleBackColor = false;
             button1.Click += buttonM_Click;
             // 
-            // tableLayoutPanel1
+            // panelPlayer
             // 
-            tableLayoutPanel1.ColumnCount = 4;
-            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 40F));
-            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
-            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 40F));
-            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 40F));
-            tableLayoutPanel1.Controls.Add(buttonPlay, 0, 0);
-            tableLayoutPanel1.Controls.Add(colorTrackBarPlayer, 1, 0);
-            tableLayoutPanel1.Controls.Add(buttonSaveFrames, 3, 0);
-            tableLayoutPanel1.Controls.Add(buttonDelete, 2, 0);
-            tableLayoutPanel1.Dock = DockStyle.Fill;
-            tableLayoutPanel1.Location = new Point(0, 0);
-            tableLayoutPanel1.Margin = new Padding(0, 0, 0, 3);
-            tableLayoutPanel1.Name = "tableLayoutPanel1";
-            tableLayoutPanel1.RowCount = 1;
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
-            tableLayoutPanel1.Size = new Size(512, 37);
-            tableLayoutPanel1.TabIndex = 10;
+            panelPlayer.ColumnCount = 4;
+            panelPlayer.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 40F));
+            panelPlayer.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
+            panelPlayer.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 40F));
+            panelPlayer.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 40F));
+            panelPlayer.Controls.Add(buttonPlay, 0, 0);
+            panelPlayer.Controls.Add(colorTrackBarPlayer, 1, 0);
+            panelPlayer.Controls.Add(buttonSaveFrames, 3, 0);
+            panelPlayer.Controls.Add(buttonDelete, 2, 0);
+            panelPlayer.Dock = DockStyle.Fill;
+            panelPlayer.Enabled = false;
+            panelPlayer.Location = new Point(0, 0);
+            panelPlayer.Margin = new Padding(0, 0, 0, 3);
+            panelPlayer.Name = "panelPlayer";
+            panelPlayer.RowCount = 1;
+            panelPlayer.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
+            panelPlayer.Size = new Size(512, 37);
+            panelPlayer.TabIndex = 10;
             // 
             // buttonPlay
             // 
@@ -1035,7 +1058,7 @@
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             panelBottom.ResumeLayout(false);
             panelM.ResumeLayout(false);
-            tableLayoutPanel1.ResumeLayout(false);
+            panelPlayer.ResumeLayout(false);
             ResumeLayout(false);
         }
 
@@ -1079,17 +1102,18 @@
         private TableLayoutPanel panelRight;
         private Button buttonSettings;
         private Button buttonResize;
-        private Button buttonDefaultSettings;
+        private Button buttonMask;
         private Button buttonSampler;
         private Button buttonCopy;
         private TableLayoutPanel panelCenter;
         private ColorTrackBar colorTrackBarPlayer;
         private TableLayoutPanel panelBottom;
         private TableLayoutPanel panelLeft;
-        private TableLayoutPanel tableLayoutPanel1;
+        private TableLayoutPanel panelPlayer;
         private Button buttonPlay;
         private Button buttonSaveFrames;
         private System.Windows.Forms.Timer timerPlayer;
         private Button buttonDelete;
+        private Button buttonBrowse;
     }
 }

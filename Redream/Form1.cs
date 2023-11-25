@@ -679,7 +679,7 @@ namespace Redream
         }
 
 
-        int steps = 16;
+        int steps = 5;
         private void buttonSteps_Click(object sender, EventArgs e)
         {
             SwitchSteps(5, true);
@@ -749,10 +749,10 @@ namespace Redream
         }
 
 
-        float cfgScale = 7.5f;
+        float cfgScale = 1.1f;
         private void buttonCFGScale_Click(object sender, EventArgs e)
         {
-            SwitchCFGScale(4.0f, true);
+            SwitchCFGScale(1.0f, true);
         }
 
         private void buttonCFGScale_MouseWheel(object? sender, MouseEventArgs e)
@@ -837,6 +837,7 @@ namespace Redream
 
         int samplerIndex = 0;
         string[] samplers = new string[] {
+          "LCM",
           "Euler a",
           "Euler",
           "LCM",

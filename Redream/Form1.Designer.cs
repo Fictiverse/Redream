@@ -510,7 +510,7 @@
             textBoxPrompt.Name = "textBoxPrompt";
             textBoxPrompt.Size = new Size(467, 16);
             textBoxPrompt.TabIndex = 0;
-            textBoxPrompt.Text = "cartoon 3d pixar disney character, miniature, model, claymation";
+            textBoxPrompt.Text = "<lora:lcm_sd15:1> cartoon 3d pixar disney character, miniature, model, claymation";
             // 
             // buttonClearPrompt
             // 
